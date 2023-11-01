@@ -3,6 +3,7 @@
 use App\Livewire\Users;
 use App\Livewire\HomePage;
 use App\Livewire\EditUserForm;
+use App\Livewire\Roles;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -29,5 +30,6 @@ Route::view('profile', 'profile')
 Route::get('/homepage', HomePage::class)->name('homepage');
 Route::get('/users', Users::class)->name('users');
 Route::get('/user/{user}/edit', EditUserForm::class)->name('edituser');
+Route::get('/roles', Roles::class)->name('roles');
 
 require __DIR__.'/auth.php';

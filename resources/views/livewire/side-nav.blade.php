@@ -38,7 +38,7 @@
         <a  href="/users" wire:navigate class="cursor-pointer p-2 hover:bg-sky-600 rounded-md mt-1 bg-gray-800 block" >
             Корисници
         </a>
-        <a wire:navigate class="cursor-pointer p-2 hover:bg-sky-600 rounded-md mt-1 bg-gray-800 block"  href="#">
+        <a href="/roles" wire:navigate class="cursor-pointer p-2 hover:bg-sky-600 rounded-md mt-1 bg-gray-800 block"  href="#">
             Улоги (Roles)
         </a>
         <a wire:navigate class="cursor-pointer p-2 hover:bg-sky-600 rounded-md mt-1 bg-gray-800 block" href="#">
