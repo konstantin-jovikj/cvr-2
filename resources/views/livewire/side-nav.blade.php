@@ -36,13 +36,13 @@
     </div>
     <div class="text-left text-sm mt-2 w-4/5 mx-auto text-gray-200 font-bold " id="userSubmenu">
         <a  href="/users" wire:navigate class="cursor-pointer p-2 hover:bg-sky-600 rounded-md mt-1 bg-gray-800 block" >
-            Управувај со Корисници
+            Корисници
         </a>
         <a wire:navigate class="cursor-pointer p-2 hover:bg-sky-600 rounded-md mt-1 bg-gray-800 block"  href="#">
-            Управувај со Улоги (Roles)
+            Улоги (Roles)
         </a>
         <a wire:navigate class="cursor-pointer p-2 hover:bg-sky-600 rounded-md mt-1 bg-gray-800 block" href="#">
-            Управувај со Пермисии
+            Пермисии (Дозволи)
         </a>
 
     </div>
