@@ -24,6 +24,7 @@ class Roles extends Component
     }
 
 
+
     public function togglePermission($roleId, $permissionId)
     {
         $rolePermissions = $this->rolePermissions;
@@ -48,11 +49,29 @@ class Roles extends Component
         // Synchronize permissions for the specific role
         $role->permisions()->sync($rolePermissions[$roleId]);
 
-        session()->flash('message', 'Permissions updated successfully');
     }
 
 
+    public function deleteRole($id)
+    {
+        $role = Role::find($id);
 
+        if ($role) {
+            if ($role->permisions()->count() > 0) {
+                session()->flash('danger', 'Улогата не може да се избрише затоа што им припаѓа на одредени корисници');
+                // $this->js("alert('Улогата не може да се избрише затоа што им припаѓа на одредени корисници!')");
+            } else {
+                $role->delete();
+                session()->flash('success', 'Улогата е успешно избришана');
+                // $this->js("alert('Улогата е успешно избришана!')");
+            }
+        } else {
+            // session()->flash('warning', 'Улогата не постои');
+            $this->js("alert('Улогата не постои')");
+        }
+
+        return redirect(route('roles'));
+    }
 
 
 

@@ -12,7 +12,7 @@
 
 
     <div class="p-2.5 mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-sky-600 text-white">
-        <a wire:navigate class="text-[15px] ml-4 text-gray-200 font-bold">Home</a>
+        <a wire:navigate class="text-[15px] ml-4 text-gray-200 font-bold" href="{{route('homepage')}}">Почетна</a>
     </div>
 
     {{-- KORISNICI --}}
@@ -42,7 +42,7 @@
             Улоги (Roles)
         </a>
         <a wire:navigate class="cursor-pointer p-2 hover:bg-sky-600 rounded-md mt-1 bg-gray-800 block" href="#">
-            Пермисии (Дозволи)
+            Овластувања (Дозволи)
         </a>
 
     </div>
