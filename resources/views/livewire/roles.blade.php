@@ -35,10 +35,12 @@
                         <td class="px-6 py-1 text-sm text-gray-800">
                             @foreach ($permissions as $permision)
                                 <div class="flex items-center">
-                                    <input wire:model='selectedPermissions[]' {{ $role->permisions->contains('id', $permision->id) ? 'checked' : '' }}
-                                        id="permisions_{{ $permision->id }}" type="checkbox"
-                                        value="{{ $permision->id }}"
-                                        class="px-2 py-2 text-sm text-gray-800 w-4 h-4 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2 ">
+                                    <input wire:click="togglePermission({{ $role->id }}, {{ $permision->id }})"
+                                            {{ $role->permisions->contains('id', $permision->id) ? 'checked' : '' }}
+                                            id="permisions_{{ $permision->id }}"
+                                            type="checkbox"
+                                            value="{{ $permision->id }}"
+                                            class="px-2 py-2 text-sm text-gray-800 w-4 h-4 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2 ">
                                     <label for="permissions_{{ $permision->id }}"
                                         class="ml-2 text-sm font-medium text-gray-900 ">{{ $permision->permision_name }}</label>
                                 </div>

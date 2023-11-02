@@ -12,27 +12,49 @@ class Roles extends Component
     public $roles;
     public $permissions;
     public  $permissionIds = [];
-    public $selectedPermissions = [];
+    public array $selectedPermissions = [];
+    public array $rolePermissions;
+
 
     public function mount(Role $roles, Permision $permissions)
     {
         $this->roles = Role::all();
         $this->permissions = Permision::all();
-        $this->selectedPermissions = $roles->permisions->pluck('id')->toArray();
+        // $this->selectedPermissions = $roles->permisions->pluck('id')->toArray();
     }
 
-    public function savePermissions(Role $role)
+
+    public function togglePermission($roleId, $permissionId)
     {
-        $role->permisions()->detach();
-        // Update the permissions for the role in the pivot table
+        $rolePermissions = $this->rolePermissions;
 
-        foreach ($this->selectedPermissions as $selectedPermission) {
-            $role->permisions()->attach($selectedPermission);
+        if (!isset($rolePermissions[$roleId])) {
+            $rolePermissions[$roleId] = [];
         }
-        // $role->permisions()->sync($this->selectedPermissions);
 
-        session()->flash('message', 'Permissions updated successfully.');
+        $role = Role::find($roleId);
+        $existingPermissions = $role->permisions->pluck('id')->all();
+        $rolePermissions[$roleId] = $existingPermissions;
+
+        if (in_array($permissionId, $rolePermissions[$roleId], true)) {
+            // Uncheck the permission
+            $rolePermissions[$roleId] = array_diff($rolePermissions[$roleId], [$permissionId]);
+        } else {
+            array_push($rolePermissions[$roleId], $permissionId);
+        }
+        // Update the rolePermissions property
+        $this->rolePermissions = $rolePermissions;
+
+        // Synchronize permissions for the specific role
+        $role->permisions()->sync($rolePermissions[$roleId]);
+
+        session()->flash('message', 'Permissions updated successfully');
     }
+
+
+
+
+
 
     public function render()
     {
