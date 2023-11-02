@@ -1,5 +1,6 @@
 <?php
 
+use App\Livewire\AddRole;
 use App\Livewire\Users;
 use App\Livewire\HomePage;
 use App\Livewire\EditUserForm;
@@ -31,5 +32,6 @@ Route::get('/homepage', HomePage::class)->name('homepage');
 Route::get('/users', Users::class)->name('users');
 Route::get('/user/{user}/edit', EditUserForm::class)->name('edituser');
 Route::get('/roles', Roles::class)->name('roles');
+Route::get('/role/add', AddRole::class)->name('role.add');
 
 require __DIR__.'/auth.php';

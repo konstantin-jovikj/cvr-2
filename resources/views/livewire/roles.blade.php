@@ -6,7 +6,7 @@
             <h2 class="text-xl uppercase font-bold text-sky-700">Улоги</h2>
         </div>
         <div>
-            <a href="{{ route('register') }}"
+            <a href="{{ route('role.add') }}"
                 class="bg-sky-800 px-4 py-2 rounded-md text-white text-sm hover:bg-sky-400 hover:text-sky-900 transition-all">Додади Нова Улога</a>
         </div>
     </div>
