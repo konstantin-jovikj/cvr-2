@@ -22,17 +22,53 @@
         </div>
     </div>
     <script>
-        function dropdown() {
-            document.querySelector("#submenu").classList.toggle("hidden");
-            document.querySelector("#arrow").classList.toggle("rotate-90");
+        function dropdownSopstvenici() {
+            document.querySelector("#submenuSopstvenici").classList.toggle("hidden");
+            document.querySelector("#arrowSopstvenici").classList.toggle("rotate-90");
         }
-        dropdown();
+        dropdownSopstvenici();
 
         function dropdownUser() {
             document.querySelector("#userSubmenu").classList.toggle("hidden");
             document.querySelector("#userArrow").classList.toggle("rotate-90");
         }
         dropdownUser();
+
+        function dropdownBaranja() {
+            document.querySelector("#baranjaSubmenu").classList.toggle("hidden");
+            document.querySelector("#baranjaArrow").classList.toggle("rotate-90");
+        }
+        dropdownBaranja();
+
+        function dropdownOdobrenija() {
+            document.querySelector("#odobrenijaSubmenu").classList.toggle("hidden");
+            document.querySelector("#odobrenijaArrow").classList.toggle("rotate-90");
+        }
+        dropdownOdobrenija();
+
+        function dropdownPregledi() {
+            document.querySelector("#preglediSubmenu").classList.toggle("hidden");
+            document.querySelector("#preglediArrow").classList.toggle("rotate-90");
+        }
+        dropdownPregledi();
+
+        function dropdownOsnovniPodatoci() {
+            document.querySelector("#osnovniPodatociSubmenu").classList.toggle("hidden");
+            document.querySelector("#osnovniPodatociArrow").classList.toggle("rotate-90");
+        }
+        dropdownOsnovniPodatoci();
+
+        function dropdownBiroBaranja() {
+            document.querySelector("#biroBaranjaSubmenu").classList.toggle("hidden");
+            document.querySelector("#biroBaranjaArrow").classList.toggle("rotate-90");
+        }
+        dropdownBiroBaranja();
+
+        function dropdownFinansiskiPregledi() {
+            document.querySelector("#finansiskiPreglediSubmenu").classList.toggle("hidden");
+            document.querySelector("#finansiskiPreglediArrow").classList.toggle("rotate-90");
+        }
+        dropdownFinansiskiPregledi();
     </script>
 
     @livewireScripts
