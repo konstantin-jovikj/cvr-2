@@ -5,6 +5,7 @@ namespace App\Livewire;
 use App\Models\Role;
 use App\Models\User;
 use Livewire\Component;
+use Illuminate\Support\Facades\Gate;
 
 class EditUserForm extends Component
 {
@@ -32,11 +33,17 @@ class EditUserForm extends Component
 
     public function mount(User $user)
     {
-        $this->fetchRoles();
-        $this->user = $user;
-        $this->name = $user->name;
-        $this->email = $user->email;
-        $this->role_id = $user->role_id;
+        $activeRole = auth()->user()->role->role_name;
+        if(! Gate::allows('edit_user', $activeRole)){
+            abort(403);
+        }else{
+
+            $this->fetchRoles();
+            $this->user = $user;
+            $this->name = $user->name;
+            $this->email = $user->email;
+            $this->role_id = $user->role_id;
+        }
 
     }
 
