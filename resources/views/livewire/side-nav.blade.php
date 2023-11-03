@@ -129,11 +129,11 @@
     {{-- Edinecni Odobrenija --}}
 
 
-    <div class="p-2.5 mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-blue-600 text-white"
+    <div class="py-1 my-1 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-blue-600 text-white"
         onclick="dropdownOdobrenija()">
         <div class="flex justify-between w-full items-center">
-            <span class="text-[15px] ml-4 text-gray-200 font-bold">Единечни Одобренија</span>
-            <span class="text-sm rotate-180" id="odobrenijaArrow">
+            <span class="text-[13px] ml-4 text-gray-200 font-bold">Единечни одобренија</span>
+            <span class="text-xs rotate-180" id="odobrenijaArrow">
                 <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512">
                     <style>
                         svg {
@@ -146,7 +146,7 @@
             </span>
         </div>
     </div>
-    <div class="text-left text-sm mt-2 w-4/5 mx-auto text-gray-200 font-bold " id="odobrenijaSubmenu">
+    <div class="text-left text-xs mt-2 w-4/5 mx-auto text-gray-200 font-bold " id="odobrenijaSubmenu">
         <a wire:navigate href="" class="cursor-pointer p-2 hover:bg-sky-600 rounded-md mt-1 bg-gray-800 block">
             Неевидентирани
         </a>
@@ -160,11 +160,11 @@
 
     {{-- Periodicni Pregledi --}}
 
-    <div class="p-2.5 mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-blue-600 text-white"
+    <div class="py-1 my-1 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-blue-600 text-white"
         onclick="dropdownPregledi()">
         <div class="flex justify-between w-full items-center">
-            <span class="text-[15px] ml-4 text-gray-200 font-bold">Периодични прегледи</span>
-            <span class="text-sm rotate-180" id="preglediArrow">
+            <span class="text-[13px] ml-4 text-gray-200 font-bold">Периодични прегледи</span>
+            <span class="text-xs rotate-180" id="preglediArrow">
                 <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512">
                     <style>
                         svg {
@@ -177,7 +177,7 @@
             </span>
         </div>
     </div>
-    <div class="text-left text-sm mt-2 w-4/5 mx-auto text-gray-200 font-bold " id="preglediSubmenu">
+    <div class="text-left text-xs mt-2 w-4/5 mx-auto text-gray-200 font-bold " id="preglediSubmenu">
         <a wire:navigate href="" class="cursor-pointer p-2 hover:bg-sky-600 rounded-md mt-1 bg-gray-800 block">
             Издадени Потврди
         </a>
@@ -196,11 +196,11 @@
     {{-- Osnovni Podatoci --}}
 
 
-    <div class="p-2.5 mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-blue-600 text-white"
+    <div class="py-1 my-1 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-blue-600 text-white"
         onclick="dropdownOsnovniPodatoci()">
         <div class="flex justify-between w-full items-center">
-            <span class="text-[15px] ml-4 text-gray-200 font-bold">Основни Податоци</span>
-            <span class="text-sm rotate-180" id="osnovniPodatociArrow">
+            <span class="text-[13px] ml-4 text-gray-200 font-bold">Основни Податоци</span>
+            <span class="text-xs rotate-180" id="osnovniPodatociArrow">
                 <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512">
                     <style>
                         svg {
@@ -213,7 +213,7 @@
             </span>
         </div>
     </div>
-    <div class="text-left text-sm mt-2 w-4/5 mx-auto text-gray-200 font-bold " id="osnovniPodatociSubmenu">
+    <div class="text-left text-xs mt-2 w-4/5 mx-auto text-gray-200 font-bold " id="osnovniPodatociSubmenu">
         <a wire:navigate href="" class="cursor-pointer p-2 hover:bg-sky-600 rounded-md mt-1 bg-gray-800 block">
             Производител на возила
         </a>
@@ -257,11 +257,11 @@
 
     {{-- Baranja do Biro --}}
 
-    <div class="p-2.5 mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-blue-600 text-white"
+    <div class="py-1 my-1 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-blue-600 text-white"
         onclick="dropdownBiroBaranja()">
         <div class="flex justify-between w-full items-center">
-            <span class="text-[15px] ml-4 text-gray-200 font-bold">Барања до биро</span>
-            <span class="text-sm rotate-180" id="biroBaranjaArrow">
+            <span class="text-[13px] ml-4 text-gray-200 font-bold">Барања до биро</span>
+            <span class="text-xs rotate-180" id="biroBaranjaArrow">
                 <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512">
                     <style>
                         svg {
@@ -274,7 +274,7 @@
             </span>
         </div>
     </div>
-    <div class="text-left text-sm mt-2 w-4/5 mx-auto text-gray-200 font-bold " id="biroBaranjaSubmenu">
+    <div class="text-left text-xs mt-2 w-4/5 mx-auto text-gray-200 font-bold " id="biroBaranjaSubmenu">
         <a wire:navigate href="" class="cursor-pointer p-2 hover:bg-sky-600 rounded-md mt-1 bg-gray-800 block">
             Неплатени Барања - Биро
         </a>
@@ -288,11 +288,11 @@
 
     {{-- Finansiski pregledi --}}
 
-    <div class="p-2.5 mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-blue-600 text-white"
+    <div class="py-1 my-1 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-blue-600 text-white"
         onclick="dropdownFinansiskiPregledi()">
         <div class="flex justify-between w-full items-center">
-            <span class="text-[15px] ml-4 text-gray-200 font-bold">Финансиски прегледи</span>
-            <span class="text-sm rotate-180" id="finansiskiPreglediArrow">
+            <span class="text-[13px] ml-4 text-gray-200 font-bold">Финансиски прегледи</span>
+            <span class="text-xs rotate-180" id="finansiskiPreglediArrow">
                 <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512">
                     <style>
                         svg {
@@ -305,7 +305,7 @@
             </span>
         </div>
     </div>
-    <div class="text-left text-sm mt-2 w-4/5 mx-auto text-gray-200 font-bold " id="finansiskiPreglediSubmenu">
+    <div class="text-left text-xs mt-2 w-4/5 mx-auto text-gray-200 font-bold " id="finansiskiPreglediSubmenu">
         <a wire:navigate href="" class="cursor-pointer p-2 hover:bg-sky-600 rounded-md mt-1 bg-gray-800 block">
             Преглед - Наплата
         </a>
