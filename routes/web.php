@@ -28,6 +28,8 @@ Route::view('profile', 'profile')
     ->middleware(['auth'])
     ->name('profile');
 
+Route::view('errors.not-authorized', 'not-authorized');
+
 Route::get('/homepage', HomePage::class)->name('homepage');
 Route::get('/users', Users::class)->name('users');
 Route::get('/user/{user}/edit', EditUserForm::class)->name('edituser');

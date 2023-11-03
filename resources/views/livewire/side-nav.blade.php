@@ -20,7 +20,7 @@
     {{-- KORISNICI --}}
 
     {{-- @if (auth()->check()) --}}
-    @if (Auth::check() && Auth::user()->role()->where('role_name', 'Admin')->exists())
+    {{-- @if (Auth::check() && Auth::user()->role()->where('role_name', 'Admin')->exists()) --}}
             <div class="py-1 my-1 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-blue-600 text-white"
                 onclick="dropdownUser()">
                 <div class="flex justify-between w-full items-center">
@@ -51,7 +51,7 @@
             </div>
 
             <div class="my-2 bg-gray-600 h-[1px]"></div>
-        @endif
+        {{-- @endif --}}
     {{-- @endIf --}}
 
 

@@ -14,19 +14,19 @@ class PermisionSeeder extends Seeder
     public function run(): void
     {
         Permision::create([
-            'permision_name' => 'view_user'
+            'permision_name' => 'погледни-корисник'
         ]);
         Permision::create([
-            'permision_name' => 'edit_user'
+            'permision_name' => 'едитирај-корисник'
+        ]);
+        // Permision::create([
+        //     'permision_name' => 'update_user'
+        // ]);
+        Permision::create([
+            'permision_name' => 'бриши-корисник'
         ]);
         Permision::create([
-            'permision_name' => 'update_user'
-        ]);
-        Permision::create([
-            'permision_name' => 'delete_user'
-        ]);
-        Permision::create([
-            'permision_name' => 'add_user'
+            'permision_name' => 'додај-корисник'
         ]);
 
 

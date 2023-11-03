@@ -34,7 +34,7 @@ class EditUserForm extends Component
     public function mount(User $user)
     {
         $activeRole = auth()->user()->role->role_name;
-        if(! Gate::allows('edit_user', $activeRole)){
+        if(! Gate::allows('едитирај-корисник', $activeRole)){
             abort(403);
         }else{
 

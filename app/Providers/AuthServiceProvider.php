@@ -23,16 +23,20 @@ class AuthServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        Gate::define('delete_user', function(User $user) {
-            return $user->role->permisions->contains('permision_name', 'delete_user');
+        Gate::define('бриши-корисник', function(User $user) {
+            return $user->role->permisions->contains('permision_name', 'бриши-корисник');
         });
 
-        Gate::define('edit_user', function(User $user) {
-            return $user->role->permisions->contains('permision_name', 'edit_user');
+        Gate::define('едитирај-корисник', function(User $user) {
+            return $user->role->permisions->contains('permision_name', 'едитирај-корисник');
         });
 
-        Gate::define('add_user', function(User $user) {
-            return $user->role->permisions->contains('permision_name', 'add_user');
+        Gate::define('додај-корисник', function(User $user) {
+            return $user->role->permisions->contains('permision_name', 'додај-корисник');
+        });
+
+        Gate::define('погледни-корисник', function(User $user) {
+            return $user->role->permisions->contains('permision_name', 'погледни-корисник');
         });
     }
 }
