@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>{{ $title ?? 'Page Title' }}</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    {{-- <script src="https://cdn.tailwindcss.com"></script> --}}
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @livewireStyles
 </head>
@@ -22,17 +22,23 @@
         </div>
     </div>
     <script>
+        function dropdownUser() {
+            const userSubmenu = document.querySelector("#userSubmenu");
+            const userArrow = document.querySelector("#userArrow");
+
+            if (userSubmenu && userArrow) {
+                userSubmenu.classList.toggle("hidden");
+                userArrow.classList.toggle("rotate-90");
+            }
+        }
+        dropdownUser();
+
         function dropdownSopstvenici() {
             document.querySelector("#submenuSopstvenici").classList.toggle("hidden");
             document.querySelector("#arrowSopstvenici").classList.toggle("rotate-90");
         }
         dropdownSopstvenici();
 
-        function dropdownUser() {
-            document.querySelector("#userSubmenu").classList.toggle("hidden");
-            document.querySelector("#userArrow").classList.toggle("rotate-90");
-        }
-        dropdownUser();
 
         function dropdownBaranja() {
             document.querySelector("#baranjaSubmenu").classList.toggle("hidden");
@@ -70,6 +76,7 @@
         }
         dropdownFinansiskiPregledi();
     </script>
+
 
     @livewireScripts
 </body>
