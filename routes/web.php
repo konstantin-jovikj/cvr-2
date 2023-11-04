@@ -4,7 +4,9 @@ use App\Livewire\AddRole;
 use App\Livewire\Users;
 use App\Livewire\HomePage;
 use App\Livewire\EditUserForm;
+use App\Livewire\Errors\NotAuthorized;
 use App\Livewire\Roles;
+use App\Models\Role;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -28,7 +30,9 @@ Route::view('profile', 'profile')
     ->middleware(['auth'])
     ->name('profile');
 
-Route::view('errors.not-authorized', 'not-authorized');
+// Route::view('errors.not-authorized', 'not-authorized');
+
+Route::get('/notauthorised', NotAuthorized::class)->name('not.authorised');
 
 Route::get('/homepage', HomePage::class)->name('homepage');
 Route::get('/users', Users::class)->name('users');

@@ -35,7 +35,8 @@ class EditUserForm extends Component
     {
         $activeRole = auth()->user()->role->role_name;
         if(! Gate::allows('едитирај-корисник', $activeRole)){
-            abort(403);
+            // abort(403);
+            return redirect(route('not.authorised'));
         }else{
 
             $this->fetchRoles();
