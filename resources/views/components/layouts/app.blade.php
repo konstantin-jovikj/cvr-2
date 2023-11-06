@@ -21,7 +21,8 @@
             </div>
         </div>
     </div>
-    <script>
+    <script src="{{asset('custom_js/sideMenu.js')}}" ></script>
+    {{-- <script>
         function dropdownUser() {
             const userSubmenu = document.querySelector("#userSubmenu");
             const userArrow = document.querySelector("#userArrow");
@@ -75,7 +76,7 @@
             document.querySelector("#finansiskiPreglediArrow").classList.toggle("rotate-90");
         }
         dropdownFinansiskiPregledi();
-    </script>
+    </script> --}}
 
 
     @livewireScripts
