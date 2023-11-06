@@ -13,7 +13,8 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('role_id')->default(0)->nullable();
+            $table->unsignedBigInteger('local_department_id')->nullable();
+            $table->unsignedBigInteger('role_id')->default(4)->nullable();
             $table->string('name');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
@@ -22,6 +23,7 @@ return new class extends Migration
             $table->timestamps();
 
             $table->foreign('role_id')->references('id')->on('roles');
+            $table->foreign('local_department_id')->references('id')->on('local_departments');
         });
     }
 

@@ -18,9 +18,9 @@ class Roles extends Component
 
     public function mount(Role $roles, Permision $permissions)
     {
-        $this->roles = Role::all();
+        // $this->roles = Role::all();
+        $this->roles = Role::where('role_name', '!=', 'SuperAdmin')->get();
         $this->permissions = Permision::all();
-        // $this->selectedPermissions = $roles->permisions->pluck('id')->toArray();
     }
 
 
