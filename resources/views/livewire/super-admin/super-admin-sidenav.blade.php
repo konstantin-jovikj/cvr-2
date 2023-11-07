@@ -12,7 +12,7 @@
 
 
     <div class="py-1 mt-1 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-sky-600 text-white">
-        <a wire:navigate class="text-[13px] ml-4 text-gray-200 font-bold" href="{{ route('register') }}">Регистрирај Админ</a>
+        <a wire:navigate class="text-[13px] ml-4 text-gray-200 font-bold" href="{{ route('admin.register') }}">Регистрирај Админ</a>
     </div>
     <div class="my-2 bg-gray-600 h-[1px]"></div>
 

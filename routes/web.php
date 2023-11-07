@@ -1,11 +1,14 @@
 <?php
 
 use App\Livewire\AddRole;
+use App\Livewire\AdminRegister\AdminRegister;
 use App\Livewire\Users;
 use App\Livewire\HomePage;
 use App\Livewire\EditUserForm;
 use App\Livewire\Errors\NotAuthorized;
 use App\Livewire\Roles;
+use App\Livewire\SuperAdmin\MvrSuperAdminDashboard;
+use App\Livewire\SuperAdmin\StpSuperAdminDashboard;
 use App\Livewire\SuperAdmin\SuperAdminDashboard;
 use App\Models\Role;
 use Illuminate\Support\Facades\Route;
@@ -43,5 +46,9 @@ Route::get('/role/add', AddRole::class)->name('role.add');
 
 
 Route::get('/superadmin/dashboard',SuperAdminDashboard::class)->name('superadmin.dashboard');
+Route::get('/mvr/superadmin/dashboard',MvrSuperAdminDashboard::class)->name('mvrsuperadmin.dashboard');
+Route::get('/stp/superadmin/dashboard',StpSuperAdminDashboard::class)->name('stpsuperadmin.dashboard');
+
+Route::get('/register/admin/', AdminRegister::class)->name('admin.register');
 
 require __DIR__.'/auth.php';

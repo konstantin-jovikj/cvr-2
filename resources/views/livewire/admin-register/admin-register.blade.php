@@ -1,55 +1,5 @@
-<?php
-
-use App\Models\User;
-use App\Providers\RouteServiceProvider;
-use Illuminate\Auth\Events\Registered;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Validation\Rules;
-
-use function Livewire\Volt\layout;
-use function Livewire\Volt\rules;
-use function Livewire\Volt\state;
-
-layout('layouts.guest');
-
-state([
-    'name' => '',
-    'email' => '',
-    'password' => '',
-    'password_confirmation' => '',
-    'role_id' => 3,
-    'department_id' => '',
-    'local_department_id' => '',
-
-]);
-
-rules([
-    'name' => ['required', 'string', 'max:255'],
-    'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
-    'password' => ['required', 'string', 'confirmed', Rules\Password::defaults()],
-    'role_id' => ['required'],
-    'department_id' => ['required'],
-    'local_department_id' => ['required'],
-]);
-
-$register = function () {
-
-    $validated = $this->validate();
-
-    $validated['password'] = Hash::make($validated['password']);
-
-    event(new Registered($user = User::create($validated)));
-
-    // Auth::login($user);
-
-    $this->redirect(route('users'));
-};
-
-?>
-
-<div>
-    <form wire:submit="register">
+<div class="flex justify-center items-center mx-auto w-full sm:max-w-md h-auto  mt-6   ">
+    <form wire:submit="registerAdmin" class="bg-white w-full shadow-md overflow-hidden sm:rounded-lg px-6 py-4">
         <!-- Name -->
         <div>
             <x-input-label for="name" :value="__('Name')" />
@@ -65,16 +15,22 @@ $register = function () {
         </div>
 
         {{-- Department --}}
-        {{-- <div class="mt-4">
-            <x-input-label for="department_id" :value="__('Department')" />
-            <select name="department_id" id="" class="block mt-1 w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
-                <option value="1">1</option>
-                <option value="1">2</option>
-            </select> --}}
+
+        <div class="mt-4">
+            <x-input-label for="local_department_id" :value="__('Department')" />
+            <select wire:model="local_department_id" name="local_department_id" id="" class="block mt-1 w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
+                @foreach ($localDepartments as $localDepartment)
+                    
+                    <option value="{{$localDepartment->id}}">{{$localDepartment->local_department_name}}</option>
+                @endforeach
+
+            </select>
 
 
             <x-input-error :messages="$errors->get('email')" class="mt-2" />
         </div>
+
+
 
         <!-- Password -->
         <div class="mt-4">
