@@ -18,6 +18,8 @@ $login = function () {
 
     Session::regenerate();
 
+
+
     $this->redirect(
         session('url.intended', route('homepage')),
         navigate: true
