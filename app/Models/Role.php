@@ -2,8 +2,11 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\User;
+use App\Models\Permision;
+use App\Models\LocalDepartment;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Role extends Model
 {
@@ -15,11 +18,16 @@ class Role extends Model
 
     public function users()
     {
-        return $this->hasMany(User::class);
+        return $this->belongsToMany(User::class);
     }
 
     public function permisions()
     {
         return $this->belongsToMany(Permision::class);
+    }
+
+    public function localDepartments()
+    {
+        return $this->belongsToMany(LocalDepartment::class);
     }
 }

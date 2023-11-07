@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\City;
+use App\Models\Role;
 use App\Models\User;
 use App\Models\Department;
 use Illuminate\Database\Eloquent\Model;
@@ -33,6 +34,11 @@ class LocalDepartment extends Model
     public function users()
     {
         return $this->hasMany(User::class);
+    }
+
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class);
     }
 
 }
