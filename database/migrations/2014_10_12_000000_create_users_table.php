@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('department_id')->nullable();
             $table->unsignedBigInteger('local_department_id')->nullable();
             $table->unsignedBigInteger('role_id')->default(4)->nullable();
             $table->string('name');
@@ -24,6 +25,7 @@ return new class extends Migration
 
             $table->foreign('role_id')->references('id')->on('roles');
             $table->foreign('local_department_id')->references('id')->on('local_departments');
+            $table->foreign('department_id')->references('id')->on('departments');
         });
     }
 

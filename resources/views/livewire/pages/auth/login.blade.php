@@ -18,6 +18,11 @@ $login = function () {
 
     Session::regenerate();
 
+
+    if(Auth::user()->role_id == 1){
+    return redirect(route('superadmin.dashboard'));
+}
+
     $this->redirect(
         session('url.intended', route('homepage')),
         navigate: true

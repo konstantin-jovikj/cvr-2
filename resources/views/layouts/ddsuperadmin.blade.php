@@ -16,13 +16,12 @@
         <livewire:layout.navigation />
         <div class="flex flex-col md:flex-row h-screen ">
             {{-- <livewire:side-nav /> --}}
-            <livewire:super-admin.super-admin-sidenav />
             <div class="flex w-full">
                 {{ $slot }}
             </div>
         </div>
     </div>
-    <script src="{{asset('custom_js/adminSideNav.js')}}" ></script>
+    {{-- <script src="{{asset('custom_js/sideMenu.js')}}" ></script> --}}
     @livewireScripts
 </body>
 

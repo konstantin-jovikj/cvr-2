@@ -6,6 +6,7 @@ use App\Livewire\HomePage;
 use App\Livewire\EditUserForm;
 use App\Livewire\Errors\NotAuthorized;
 use App\Livewire\Roles;
+use App\Livewire\SuperAdmin\SuperAdminDashboard;
 use App\Models\Role;
 use Illuminate\Support\Facades\Route;
 
@@ -39,5 +40,8 @@ Route::get('/users', Users::class)->name('users');
 Route::get('/user/{user}/edit', EditUserForm::class)->name('edituser');
 Route::get('/roles', Roles::class)->name('roles');
 Route::get('/role/add', AddRole::class)->name('role.add');
+
+
+Route::get('/superadmin/dashboard',SuperAdminDashboard::class)->name('superadmin.dashboard');
 
 require __DIR__.'/auth.php';

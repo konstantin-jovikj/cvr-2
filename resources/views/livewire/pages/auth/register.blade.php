@@ -19,16 +19,22 @@ state([
     'password' => '',
     'password_confirmation' => '',
     'role_id' => 3,
+    'department_id' => '',
+    'local_department_id' => '',
+
 ]);
 
 rules([
     'name' => ['required', 'string', 'max:255'],
     'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
     'password' => ['required', 'string', 'confirmed', Rules\Password::defaults()],
-    'role_id' => ['required']
+    'role_id' => ['required'],
+    'department_id' => ['required'],
+    'local_department_id' => ['required'],
 ]);
 
 $register = function () {
+
     $validated = $this->validate();
 
     $validated['password'] = Hash::make($validated['password']);
@@ -55,6 +61,18 @@ $register = function () {
         <div class="mt-4">
             <x-input-label for="email" :value="__('Email')" />
             <x-text-input wire:model="email" id="email" class="block mt-1 w-full" type="email" name="email" required autocomplete="username" />
+            <x-input-error :messages="$errors->get('email')" class="mt-2" />
+        </div>
+
+        {{-- Department --}}
+        <div class="mt-4">
+            <x-input-label for="department_id" :value="__('Department')" />
+            <select name="department_id" id="" class="block mt-1 w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
+                <option value="1">1</option>
+                <option value="1">2</option>
+            </select>
+
+
             <x-input-error :messages="$errors->get('email')" class="mt-2" />
         </div>
 
