@@ -18,26 +18,37 @@ class AdminRegister extends Component
     public $department;
     public $user;
 
-    #[Rule('required')] 
+    #[Rule('required')]
     public $name = '';
+
+    // #[Rule('required')]
+    // public $role_id = 2;
 
     #[Rule('required|email|unique:users,email')]
     public $email = '';
 
-    #[Rule('required|min:8|confirmed')] 
+    #[Rule('required|min:8|confirmed')]
     public $password = '';
 
-    #[Rule('required')] 
+    #[Rule('required')]
     public $password_confirmation = '';
 
-    #[Rule('required|int')] 
-    public $local_department_id = '';
+    #[Rule('required|int')]
+    public $local_department_id;
 
 
     public function getLocalDepartment()
     {
         $this->user = Auth::user()->department_id;
         $this->localDepartments = LocalDepartment::where('department_id', $this->user)->get();
+
+        // Set $local_department_id to the first option if available
+        if (!$this->localDepartments->isEmpty()) {
+            $this->local_department_id = $this->localDepartments[0]->id;
+        } else {
+            // Set $local_department_id to an empty string if no options are available
+            $this->local_department_id = '';
+        }
     }
 
     public function mount()
@@ -51,13 +62,24 @@ class AdminRegister extends Component
 
         User::create([
             'name' => $this->name,
-            'email' =>$this->email,
+            'email' => $this->email,
             'password' => Hash::make($this->password),
             'department_id' => $this->user,
+            'role_id' => 2,
             'local_department_id' => $this->local_department_id
         ]);
 
         session()->flash('message', 'Registration successful!');
+
+        if (Auth::user()->role_id == 1 && Auth::user()->department_id == 1) {
+            return redirect(route('mvrsuperadmin.dashboard'));
+        }
+        if (Auth::user()->role_id == 1 && Auth::user()->department_id == 2) {
+            return redirect(route('superadmin.dashboard'));
+        }
+        if (Auth::user()->role_id == 1 && Auth::user()->department_id == 3) {
+            return redirect(route('stpsuperadmin.dashboard'));
+        }
         $this->reset();
     }
 
