@@ -19,15 +19,15 @@ $login = function () {
     Session::regenerate();
 
 
-    if(Auth::user()->role_id == 1 && Auth::user()->department_id == 1){
-    return redirect(route('mvrsuperadmin.dashboard'));
-    }
-    if(Auth::user()->role_id == 1 && Auth::user()->department_id == 2){
+    // if(Auth::user()->role_id == 1 && Auth::user()->department_id == 1){
+    // return redirect(route('mvrsuperadmin.dashboard'));
+    // }
+    if(Auth::user()->role_id == 1 && Auth::user()->department_id == null){
     return redirect(route('superadmin.dashboard'));
     }
-    if(Auth::user()->role_id == 1 && Auth::user()->department_id == 3){
-    return redirect(route('stpsuperadmin.dashboard'));
-    }
+    // if(Auth::user()->role_id == 1 && Auth::user()->department_id == 3){
+    // return redirect(route('stpsuperadmin.dashboard'));
+    // }
 
     $this->redirect(
         session('url.intended', route('homepage')),

@@ -16,44 +16,48 @@
             <x-input-error :messages="$errors->get('email')" class="mt-2" />
         </div>
 
-        {{-- Department --}}
 
+        <!-- Department -->
         <div class="mt-4">
-            <x-input-label for="local_department_id" :value="__('Department')" />
-            <select wire:model="local_department_id" name="local_department_id" id="local_department_id"
-                class="block mt-1 w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
-                @if (!is_null($localDepartments))
-                    @foreach ($localDepartments as $localDepartment)
-                        <option value="{{ $localDepartment->id }}">{{ $localDepartment->local_department_name }}
-                        </option>
-                    @endforeach
-                @endif
-
+            <x-input-label for="selectedDepartment" :value="__('Department')" />
+            <select wire:model="selectedDepartment" class="block mt-1 w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
+                <option value="" selected> -- Choose Department -- </option>
+                @foreach ($departments as $department)
+                    <option value="{{ $department->id }}">{{ $department->department_name }}</option>
+                @endforeach
             </select>
-
-
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
+            <x-input-error :messages="$errors->get('selectedDepartment')" class="mt-2" />
         </div>
+
+        <!-- Local Department -->
+        @if (!is_null($localDepartments))
+            <div class="mt-4">
+                <x-input-label for="local_department_id" :value="__('Local Department')" />
+                <select wire:model="local_department_id" class="block mt-1 w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
+                    <option value="" selected> -- Choose Local Department -- </option>
+                    @foreach ($localDepartments as $localDepartment)
+                        <option value="{{ $localDepartment->id }}">{{ $localDepartment->local_department_name }}</option>
+                    @endforeach
+                </select>
+                <x-input-error :messages="$errors->get('local_department_id')" class="mt-2" />
+            </div>
+        @endif
 
 
 
         <!-- Password -->
         <div class="mt-4">
             <x-input-label for="password" :value="__('Password')" />
-
             <x-text-input wire:model="password" id="password" class="block mt-1 w-full" type="password" name="password"
                 required autocomplete="new-password" />
-
             <x-input-error :messages="$errors->get('password')" class="mt-2" />
         </div>
 
         <!-- Confirm Password -->
         <div class="mt-4">
             <x-input-label for="password_confirmation" :value="__('Confirm Password')" />
-
             <x-text-input wire:model="password_confirmation" id="password_confirmation" class="block mt-1 w-full"
                 type="password" name="password_confirmation" required autocomplete="new-password" />
-
             <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
         </div>
 
