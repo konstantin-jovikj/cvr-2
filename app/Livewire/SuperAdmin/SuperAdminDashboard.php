@@ -60,6 +60,19 @@ class SuperAdminDashboard extends Component
         $this->loadUsers();
     }
 
+    public function deleteAdmin(User $user)
+    {
+
+        if ($user) {
+            $user->delete();
+            session()->flash('success', 'Администраторот е успешно избришан');
+            $this->redirect(route('superadmin.dashboard'));
+        } else {
+            session()->flash('error', 'Не може да се избрише администраторот');
+            $this->redirect(route('superadmin.dashboard'));
+        }
+    }
+
     #[Layout('components.layouts.superadmin')]
     public function render()
     {

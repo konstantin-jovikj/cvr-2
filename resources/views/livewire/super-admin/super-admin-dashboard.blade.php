@@ -110,8 +110,9 @@
                             <a wire:navigate href="{{ route('edit.admin', $user->id) }}"
                                 class="px-4 py-1 text-xs text-white bg-emerald-600 hover:bg-emerald-800 rounded-full">Измени</a>
 
-                            <a href="#"
-                                class="px-4 py-1 text-xs text-white bg-red-600 hover-bg-red-800 rounded-full">Избриши</a>
+                            <button wire:click="deleteAdmin({{$user->id}})"
+                                wire:confirm="Дали сте сигурен дека сакате да го избришете овој Администратор?"
+                                class="px-4 py-1 text-xs text-white bg-red-600 hover-bg-red-800 rounded-full">Избриши</button>
                         </td>
                     </tr>
                 @endforeach

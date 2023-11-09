@@ -5,7 +5,7 @@
         </div>
     @endif
 
-    @if (session()->has('danger'))
+    @if (session()->has('error'))
         <div class="bg-red-300 text-red-800 px-6 py-2 rounded shadow" wire:poll.3s="hideAlert('danger')">
             {{ session()->get('danger') }}
         </div>

@@ -1,5 +1,5 @@
 <div class="flex justify-center items-center mx-auto w-full sm:max-w-md h-auto  mt-6   ">
-    <form wire:submit="registerAdmin" class="bg-white w-full shadow-md overflow-hidden sm:rounded-lg px-6 py-4">
+    <form wire:submit="updateAdmin" class="bg-white w-full shadow-md overflow-hidden sm:rounded-lg px-6 py-4">
         <!-- Name -->
         <div>
             <x-input-label for="name" :value="__('Име и Презиме')" />
@@ -45,13 +45,9 @@
         @endif
 
         <div class="flex items-center justify-end mt-4">
-            <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                href="{{ route('login') }}" wire:navigate>
-                {{ __('Already registered?') }}
-            </a>
 
             <x-primary-button class="ml-4">
-                {{ __('Додај') }}
+                {{ __('Ажурирај') }}
             </x-primary-button>
         </div>
     </form>
