@@ -7,6 +7,7 @@ use App\Livewire\HomePage;
 use App\Livewire\EditUserForm;
 use App\Livewire\Errors\NotAuthorized;
 use App\Livewire\Roles;
+use App\Livewire\SuperAdmin\EditAdmin;
 use App\Livewire\SuperAdmin\MvrSuperAdminDashboard;
 use App\Livewire\SuperAdmin\StpSuperAdminDashboard;
 use App\Livewire\SuperAdmin\SuperAdminDashboard;
@@ -50,5 +51,6 @@ Route::get('/mvr/superadmin/dashboard',MvrSuperAdminDashboard::class)->name('mvr
 Route::get('/stp/superadmin/dashboard',StpSuperAdminDashboard::class)->name('stpsuperadmin.dashboard');
 
 Route::get('/register/admin/', AdminRegister::class)->name('admin.register');
+Route::get('/admin/{user}/edit', EditAdmin::class)->name('edit.admin');
 
 require __DIR__.'/auth.php';

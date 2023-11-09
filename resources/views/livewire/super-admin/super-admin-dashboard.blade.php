@@ -3,17 +3,16 @@
 
         <div class="">
             <h2 class="text-xl uppercase font-bold text-sky-700">Администратори</h2>
+            <span class="text-sm font-light text-sky-800">Супер-Администраторот може да ги менаџира само администраторите во сите сектори и локални оддели.</span>
         </div>
         <div>
-            {{-- <a href="{{ route('register') }}"
-                class="bg-sky-800 px-4 py-2 rounded-md text-white text-sm hover:bg-sky-400 hover:text-sky-900 transition-all">Регистрирај
-                Нов Корисник</a> --}}
             <livewire:alerts.alert-message />
         </div>
+
     </div>
     {{-- Filter po Sektor --}}
-    <div class="container flex justify-center mx-auto bg-sky-100 my-4">
-        <div class="mt-4">
+    <div class="container flex justify-space mx-auto bg-sky-100 my-4 items-center">
+        <div class="my-4 mx-4">
             <x-input-label for="filterDepartment" :value="__('Филтрирај по Сектор')" />
             <select wire:model.live="filterDepartment"
                 class="block mt-1 w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
@@ -27,7 +26,7 @@
 
         {{-- Filter po Oddel --}}
     @if(!is_null($filterDepartment))
-        <div class="mt-4">
+        <div class="my-4 mx-4">
             <x-input-label for="filterLocalDepartment" :value="__('Филтрирај по Оддел')" />
             <select wire:model.live="filterLocalDepartment"
                 class="block mt-1 w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
@@ -38,6 +37,12 @@
             </select>
             <x-input-error :messages="$errors->get('selectedDepartment')" class="mt-2" />
         </div>
+    @endif
+
+    @if(!is_null($filterDepartment))
+    <div class="my-4 mx-4">
+        <button wire:click='resetFilter()' class="bg-sky-800 px-4 py-2 rounded-md text-white text-sm hover:bg-sky-400 hover:text-sky-900 transition-all">Ресетирај филтер</б>
+    </div>
     @endif
     </div>
 
@@ -102,7 +107,7 @@
                             {{ $user->created_at }}
                         </td>
                         <td class="px-6 py-1">
-                            <a wire:navigate href="{{ route('edituser', $user->id) }}"
+                            <a wire:navigate href="{{ route('edit.admin', $user->id) }}"
                                 class="px-4 py-1 text-xs text-white bg-emerald-600 hover:bg-emerald-800 rounded-full">Измени</a>
 
                             <a href="#"

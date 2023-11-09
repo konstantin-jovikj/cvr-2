@@ -28,7 +28,7 @@ class SuperAdminDashboard extends Component
 
     public function loadUsers()
     {
-        $query = User::where('role_id', '!=', 1);
+        $query = User::where('role_id',  2);
 
         if ($this->filterDepartment) {
             $query->where('department_id', $this->filterDepartment);
@@ -50,6 +50,13 @@ class SuperAdminDashboard extends Component
 
     public function updatedfilterLocalDepartment()
     {
+        $this->loadUsers();
+    }
+
+    public function resetFilter()
+    {
+        $this->filterDepartment = null;
+        $this->filterLocalDepartment = null;
         $this->loadUsers();
     }
 
