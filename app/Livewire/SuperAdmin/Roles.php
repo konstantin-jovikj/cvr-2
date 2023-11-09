@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\SuperAdmin;
 
-use App\Models\Permision;
 use App\Models\Role;
 use Livewire\Component;
+use App\Models\Permision;
+use Livewire\Attributes\Layout;
 
 class Roles extends Component
 {
@@ -48,17 +49,18 @@ class Roles extends Component
 
         // Synchronize permissions for the specific role
         $role->permisions()->sync($rolePermissions[$roleId]);
-
     }
 
 
-    public function deleteRole($id)
+    public function deleteRole(Role $role)
     {
-        $role = Role::find($id);
+        // $role = Role::find($id);
 
         if ($role) {
             if ($role->permisions()->count() > 0) {
-                session()->flash('danger', 'Улогата не може да се избрише затоа што им припаѓа на одредени корисници');
+                session()->flash('error', 'Улогата не може да се избрише. Улогата содржи овластувања');
+                $this->redirect(route('roles'));
+
                 // $this->js("alert('Улогата не може да се избрише затоа што им припаѓа на одредени корисници!')");
             } else {
                 $role->delete();
@@ -74,9 +76,9 @@ class Roles extends Component
     }
 
 
-
+#[Layout('components.layouts.superadmin')]
     public function render()
     {
-        return view('livewire.roles');
+        return view('livewire.super-admin.roles');
     }
 }

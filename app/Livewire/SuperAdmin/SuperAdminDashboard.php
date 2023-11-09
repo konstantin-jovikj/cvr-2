@@ -5,11 +5,14 @@ namespace App\Livewire\SuperAdmin;
 use App\Models\User;
 use Livewire\Component;
 use App\Models\Department;
+use Livewire\WithPagination;
 use App\Models\LocalDepartment;
 use Livewire\Attributes\Layout;
 
 class SuperAdminDashboard extends Component
 {
+
+    use WithPagination;
 
     public $users;
     public $departments;
@@ -38,6 +41,7 @@ class SuperAdminDashboard extends Component
         }
 
         $this->users = $query->get();
+        // $this->users = $query->paginate(10);
     }
 
 

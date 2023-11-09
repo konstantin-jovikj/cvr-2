@@ -1,12 +1,12 @@
 <?php
 
-use App\Livewire\AddRole;
+use App\Livewire\SuperAdmin\AddRole;
 use App\Livewire\AdminRegister\AdminRegister;
 use App\Livewire\Users;
 use App\Livewire\HomePage;
 use App\Livewire\EditUserForm;
 use App\Livewire\Errors\NotAuthorized;
-use App\Livewire\Roles;
+use App\Livewire\SuperAdmin\Roles;
 use App\Livewire\SuperAdmin\EditAdmin;
 use App\Livewire\SuperAdmin\MvrSuperAdminDashboard;
 use App\Livewire\SuperAdmin\StpSuperAdminDashboard;

@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
@@ -15,13 +16,13 @@
     <div class="min-h-screen bg-gray-100">
         <livewire:layout.navigation />
         <div class="flex flex-col md:flex-row h-screen ">
-            <livewire:super-admin.super-admin-sidenav />
+            <livewire:side-nav />
             <div class="flex w-full">
                 {{ $slot }}
             </div>
         </div>
     </div>
-    <script src="{{asset('custom_js/adminSideNav.js')}}" ></script>
+    <script src="{{asset('custom_js/sideMenu.js')}}" ></script>
     @livewireScripts
 </body>
 

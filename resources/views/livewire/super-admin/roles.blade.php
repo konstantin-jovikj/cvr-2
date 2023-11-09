@@ -6,9 +6,7 @@
             <h2 class="text-xl uppercase font-bold text-sky-700">Улоги</h2>
         </div>
         <div>
-<h3>
-    <livewire:alerts.alert-message />
-</h3>
+            <livewire:alerts.alert-message />
         </div>
         <div>
             <a href="{{ route('role.add') }}"
@@ -53,8 +51,8 @@
                         </td>
                         <td class="px-6 py-4">
                             <button  wire:click='deleteRole({{$role->id}})' type="button"
-                                class="px-3 py-2 mx-2 text-xs font-medium text-center text-white bg-red-700 rounded-lg hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">Избриши</button>
 
+                                class="px-3 py-2 mx-2 text-xs font-medium text-center text-white bg-red-700 rounded-lg hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">Избриши</button>
                         </td>
                     </tr>
                 </form>

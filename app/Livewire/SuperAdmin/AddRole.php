@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\SuperAdmin;
 
 use Livewire\Attributes\Rule;
 use App\Models\Role;
 use Livewire\Component;
+use Livewire\Attributes\Layout;
 
 class AddRole extends Component
 {
@@ -19,12 +20,13 @@ class AddRole extends Component
             'role_name' => $this->role_name
         ]);
 
+        session()->flash('success', 'Новата Улога е успешно додадена');
         $this->redirect(route('roles'));
-        session()->flash('message', 'Новата Улога е успешно додадена');
     }
 
+    #[Layout('components.layouts.superadmin')]
     public function render()
     {
-        return view('livewire.add-role');
+        return view('livewire.super-admin.add-role');
     }
 }

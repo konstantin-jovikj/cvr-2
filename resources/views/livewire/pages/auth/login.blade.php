@@ -25,6 +25,16 @@ $login = function () {
     if(Auth::user()->role_id == 1 && Auth::user()->department_id == null){
     return redirect(route('superadmin.dashboard'));
     }
+    if(Auth::user()->role_id == 2) {
+        if (Auth::user()->department_id == 1) {
+            return redirect(route('superadmin.dashboard'));# code...
+        }elseif (Auth::user()->department_id == 2) {
+            return redirect(route('homepage'));
+        }else {
+            return redirect(route('homepage'));
+        }
+    return redirect(route('superadmin.dashboard'));
+    }
     // if(Auth::user()->role_id == 1 && Auth::user()->department_id == 3){
     // return redirect(route('stpsuperadmin.dashboard'));
     // }
