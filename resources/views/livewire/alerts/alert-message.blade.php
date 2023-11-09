@@ -12,7 +12,7 @@
     @endif
 
     @if (session()->has('warning'))
-        <div class="bg-yellow-300 text-yellow-800 px-6 py-2 rounded shadow" wire:poll.3s="hideAlert('warning')>
+        <div class="bg-yellow-300 text-yellow-800 px-6 py-2 rounded shadow" wire:poll.3s="hideAlert('warning')">
             {{ session()->get('warning') }}
         </div>
     @endif

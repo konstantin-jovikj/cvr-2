@@ -57,25 +57,21 @@ class AdminRegister extends Component
     {
         $this->validate();
 
+        // dd($this->selectedDepartment,$this->local_department_id );
+
         User::create([
             'name' => $this->name,
             'email' => $this->email,
             'password' => Hash::make($this->password),
-            'department_id' => $this->user,
+            'department_id' => $this->selectedDepartment,
             'role_id' => 2,
             'local_department_id' => $this->local_department_id
         ]);
 
-        session()->flash('message', 'Registration successful!');
+        session()->flash('success', 'Корисникот е успешно додаден!');
 
-        if (Auth::user()->role_id == 1 && Auth::user()->department_id == 1) {
-            return redirect(route('mvrsuperadmin.dashboard'));
-        }
-        if (Auth::user()->role_id == 1 && Auth::user()->department_id == 2) {
+        if (Auth::user()->role_id == 1 && Auth::user()->department_id == null) {
             return redirect(route('superadmin.dashboard'));
-        }
-        if (Auth::user()->role_id == 1 && Auth::user()->department_id == 3) {
-            return redirect(route('stpsuperadmin.dashboard'));
         }
         $this->reset();
     }

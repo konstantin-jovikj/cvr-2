@@ -18,7 +18,7 @@ class Role extends Model
 
     public function users()
     {
-        return $this->belongsToMany(User::class);
+        return $this->hasMany(User::class);
     }
 
     public function permisions()
@@ -26,8 +26,8 @@ class Role extends Model
         return $this->belongsToMany(Permision::class);
     }
 
-    public function localDepartments()
-    {
-        return $this->belongsToMany(LocalDepartment::class);
-    }
+    // public function localDepartments()
+    // {
+    //     return $this->belongsToMany(LocalDepartment::class);
+    // }
 }

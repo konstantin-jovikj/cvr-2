@@ -20,4 +20,9 @@ class Department extends Model
     {
         return $this->hasMany(LocalDepartment::class);
     }
+
+    public function user()
+    {
+        return $this->hasMany(User::class);
+    }
 }
