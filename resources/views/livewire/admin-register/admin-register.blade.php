@@ -20,7 +20,7 @@
         <!-- Department -->
         <div class="mt-4">
             <x-input-label for="selectedDepartment" :value="__('Department')" />
-            <select wire:model="selectedDepartment" class="block mt-1 w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
+            <select wire:model.live="selectedDepartment" class="block mt-1 w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
                 <option value="" selected> -- Choose Department -- </option>
                 @foreach ($departments as $department)
                     <option value="{{ $department->id }}">{{ $department->department_name }}</option>

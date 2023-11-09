@@ -53,37 +53,33 @@ class AdminRegister extends Component
 
 
 
-    // public function registerAdmin()
-    // {
-    //     $this->validate();
+    public function registerAdmin()
+    {
+        $this->validate();
 
-    //     User::create([
-    //         'name' => $this->name,
-    //         'email' => $this->email,
-    //         'password' => Hash::make($this->password),
-    //         'department_id' => $this->user,
-    //         'role_id' => 2,
-    //         'local_department_id' => $this->local_department_id
-    //     ]);
+        User::create([
+            'name' => $this->name,
+            'email' => $this->email,
+            'password' => Hash::make($this->password),
+            'department_id' => $this->user,
+            'role_id' => 2,
+            'local_department_id' => $this->local_department_id
+        ]);
 
-    //     session()->flash('message', 'Registration successful!');
+        session()->flash('message', 'Registration successful!');
 
-    //     if (Auth::user()->role_id == 1 && Auth::user()->department_id == 1) {
-    //         return redirect(route('mvrsuperadmin.dashboard'));
-    //     }
-    //     if (Auth::user()->role_id == 1 && Auth::user()->department_id == 2) {
-    //         return redirect(route('superadmin.dashboard'));
-    //     }
-    //     if (Auth::user()->role_id == 1 && Auth::user()->department_id == 3) {
-    //         return redirect(route('stpsuperadmin.dashboard'));
-    //     }
-    //     $this->reset();
-    // }
+        if (Auth::user()->role_id == 1 && Auth::user()->department_id == 1) {
+            return redirect(route('mvrsuperadmin.dashboard'));
+        }
+        if (Auth::user()->role_id == 1 && Auth::user()->department_id == 2) {
+            return redirect(route('superadmin.dashboard'));
+        }
+        if (Auth::user()->role_id == 1 && Auth::user()->department_id == 3) {
+            return redirect(route('stpsuperadmin.dashboard'));
+        }
+        $this->reset();
+    }
 
-    // public function updatedSelectedDepartment($selectedDepartment)
-    // {
-    //         $this->localDepartments = LocalDepartment::where('department_id', $selectedDepartment)->get();
-    // }
 
 
 
