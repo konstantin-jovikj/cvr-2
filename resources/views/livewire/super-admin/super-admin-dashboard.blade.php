@@ -77,7 +77,7 @@
             </thead>
             <tbody class="bg-white divide-y divide-gray-300 text-center">
                 @foreach ($users as $user)
-                    <tr class="whitespace-nowrap">
+                    <tr class="whitespace-wrap">
                         <td class="px-6 py-1 text-sm text-gray-800">
                             {{ $user->name }}
                         </td>

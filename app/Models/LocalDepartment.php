@@ -18,7 +18,13 @@ class LocalDepartment extends Model
         'department_id',
         'local_department_name',
         'local_department_prefix',
-        'department_address'
+        'department_address',
+        'cert_no',
+        'phone',
+        'email',
+        'loc_dep_dsc',
+        'start_date',
+        'end_date',
     ];
 
     public function department()
@@ -40,5 +46,7 @@ class LocalDepartment extends Model
     {
         return $this->belongsToMany(Role::class);
     }
+
+
 
 }
