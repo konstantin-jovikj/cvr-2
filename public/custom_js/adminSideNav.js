@@ -1,10 +1,10 @@
 function dropdownUser() {
-    const userSubmenu = document.querySelector("#adminRegisterSubmenu");
-    const userArrow = document.querySelector("#adminRegisterArrow");
+    const sektoriSubmenu = document.querySelector("#sektoriSubmenu");
+    const sektoriArrow = document.querySelector("#sektoriArrow");
 
-    if (userSubmenu && userArrow) {
-        userSubmenu.classList.toggle("hidden");
-        userArrow.classList.toggle("rotate-90");
+    if (sektoriSubmenu && sektoriArrow) {
+        sektoriSubmenu.classList.toggle("hidden");
+        sektoriArrow.classList.toggle("rotate-90");
     }
 }
 dropdownUser();
