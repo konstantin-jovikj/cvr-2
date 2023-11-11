@@ -43,6 +43,8 @@ Route::view('profile', 'profile')
 Route::get('/notauthorised', NotAuthorized::class)->name('not.authorised');
 
 Route::get('/homepage', HomePage::class)->name('homepage');
+
+// SUPERADMIN START
 Route::get('/users', Users::class)->name('users');
 Route::get('/user/{user}/edit', EditUserForm::class)->name('edituser');
 Route::get('/roles', Roles::class)->name('roles');
@@ -60,4 +62,12 @@ Route::get('/superadmin/it', ItLocalDep::class)->name('inspekciski.tela');
 
 Route::get('/it/{localDepartment}/edit', EditIt::class)->name('edit.it');
 Route::get('/it/create', AddIt::class)->name('add.it');
+
+// SUPERADMIN END
+
+
+
+
+
+
 require __DIR__.'/auth.php';
