@@ -15,7 +15,7 @@ class ItLocalDep extends Component
 
     public function mount()
     {
-        $this->localDepartments = LocalDepartment::where('department_id', 2)->get();
+        $this->localDepartments = LocalDepartment::where('department_id', 2)->orderByDesc('created_at')->get();
     }
 
 
@@ -32,10 +32,10 @@ class ItLocalDep extends Component
         if ($localDepartment) {
             $localDepartment->delete();
             session()->flash('success', 'Инспекциското тело е успешно избришано');
-            $this->redirect(route('superadmin.dashboard'));
+            $this->redirect(route('inspekciski.tela'));
         } else {
             session()->flash('error', 'Инспекциското тело не може да се избрише');
-            $this->redirect(route('superadmin.dashboard'));
+            $this->redirect(route('inspekciski.tela'));
         }
     }
 }

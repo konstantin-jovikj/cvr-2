@@ -1,5 +1,5 @@
 <div class="flex justify-center items-center mx-auto w-full sm:max-w-3xl h-auto  mt-6">
-    <form wire:submit="saveIt" class="bg-white w-full shadow-md overflow-hidden sm:rounded-lg px-6 py-4">
+    <form wire:submit="updateIt" class="bg-white w-full shadow-md overflow-hidden sm:rounded-lg px-6 py-4">
         <!-- Name -->
         <div>
             <x-input-label for="itName" :value="__('Акредитирано Тело ')" />

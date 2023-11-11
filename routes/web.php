@@ -9,6 +9,7 @@ use App\Livewire\Errors\NotAuthorized;
 use App\Livewire\SuperAdmin\AddIt;
 use App\Livewire\SuperAdmin\Roles;
 use App\Livewire\SuperAdmin\EditAdmin;
+use App\Livewire\SuperAdmin\EditIt;
 use App\Livewire\SuperAdmin\ItLocalDep;
 use App\Livewire\SuperAdmin\MvrSuperAdminDashboard;
 use App\Livewire\SuperAdmin\StpSuperAdminDashboard;
@@ -57,7 +58,6 @@ Route::get('/admin/{user}/edit', EditAdmin::class)->name('edit.admin');
 
 Route::get('/superadmin/it', ItLocalDep::class)->name('inspekciski.tela');
 
-Route::get('/it/{localDepartment}/edit', ItLocalDep::class)->name('edit.it');
+Route::get('/it/{localDepartment}/edit', EditIt::class)->name('edit.it');
 Route::get('/it/create', AddIt::class)->name('add.it');
-
 require __DIR__.'/auth.php';

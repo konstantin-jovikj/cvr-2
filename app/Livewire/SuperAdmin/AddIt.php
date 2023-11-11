@@ -39,10 +39,10 @@ class AddIt extends Component
 
     public $locDepDesc = '';
 
-    #[Rule('date')]
+    #[Rule('required|date|before:endDate')]
     public $startDate = '';
 
-    #[Rule('date')]
+    #[Rule('required|date|after:startDate')]
     public $endDate = '';
 
     public $country = null;
@@ -76,9 +76,21 @@ class AddIt extends Component
     public function saveIt()
     {
         $this->validate();
-        dd(  $this->validate());
         LocalDepartment::create([
-            'itName' => $this->itName,
+            'department_id' => 2,
+            'local_department_name' => $this->itName,
+            'cert_no' => $this->certNo,
+            'local_department_prefix' => $this->localDepartmentPrefix,
+            'email' => $this->email,
+            'phone' => $this->phone,
+            'department_address' => $this->localDepartmentAddress,
+            'city_id ' => $this->cityId,
+            'start_date'=>$this->startDate,
+            'end_date'=> $this->endDate,
+            'loc_dep_dsc' => $this->locDepDesc
         ]);
+        session()->flash('success', 'Инспекциското тело е успешно додадено!');
+        return redirect(route('inspekciski.tela'));
+        $this->reset();
     }
 }

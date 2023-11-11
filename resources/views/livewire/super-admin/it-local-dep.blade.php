@@ -122,7 +122,7 @@
                                 class="px-4 py-1 text-xs text-white bg-emerald-600 hover:bg-emerald-800 rounded-full">Измени</a>
 
                             <button wire:click="deleteIt({{$localDepartment->id}})"
-                                wire:confirm="Дали сте сигурен дека сакате да го избришете овој Администратор?"
+                                wire:confirm="Дали сте сигурен дека сакате да го избришете ова Инспекциско тело?"
                                 class="px-4 py-1 text-xs text-white bg-red-600 hover-bg-red-800 rounded-full">Избриши</button>
                         </td>
                     </tr>
