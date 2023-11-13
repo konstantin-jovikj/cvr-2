@@ -11,12 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('attachment_documents', function (Blueprint $table) {
+        Schema::create('application_types', function (Blueprint $table) {
             $table->id();
-            $table->boolean('is_available')->default(0);
-            $table->string('number')->nullable();
-            $table->text('desc')->nullable();
-            $table->string('doc_path')->nullable();
+            $table->string('app_type_name');
             $table->timestamps();
         });
     }
@@ -26,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('attachment_documents');
+        Schema::dropIfExists('application_types');
     }
 };
