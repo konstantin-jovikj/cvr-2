@@ -31,7 +31,7 @@ return new class extends Migration
             $table->string('engine_type');
             $table->string('engine_number');
             $table->boolean('is_correction');
-            $table->string('is_chenge')->nullable();
+            $table->string('is_change')->nullable();
             $table->string('note')->nullable();
             $table->string('agreed_price')->nullable();
             $table->string('reg_number');
