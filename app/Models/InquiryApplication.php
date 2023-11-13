@@ -19,10 +19,11 @@ use App\Models\ConfirmationType;
 use App\Models\ModificationType;
 use App\Models\ModifiedOrRepaired;
 use App\Models\AttachmentDocuments;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Application extends Model
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+class InquiryApplication extends Model
 {
     use HasFactory;
 
@@ -145,6 +146,4 @@ class Application extends Model
     {
         return $this->belongsTo(Note::class);
     }
-
-
 }

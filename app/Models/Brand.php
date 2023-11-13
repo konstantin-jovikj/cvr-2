@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\Application;
 use App\Models\Manufacturer;
+use App\Models\InquiryApplication;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -25,8 +26,8 @@ class Brand extends Model
 
 
 
-    public function applications()
+    public function inquiryApplications()
     {
-        return $this->hasMany(Application::class);
+        return $this->hasMany(InquiryApplication::class);
     }
 }

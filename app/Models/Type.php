@@ -26,7 +26,7 @@ class Type extends Model
         return $this->belongsTo(Manufacturer::class);
     }
 
-    public function applications()
+    public function inquiryApplications()
     {
         return $this->hasMany(Application::class);
     }

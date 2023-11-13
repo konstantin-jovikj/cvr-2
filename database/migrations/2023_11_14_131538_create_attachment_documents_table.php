@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('doc_path')->nullable();
             $table->timestamps();
 
-            $table->foreign('application_id')->references('id')->on('applications');
+            $table->foreign('application_id')->references('id')->on('inquiry_applications');
         });
     }
 

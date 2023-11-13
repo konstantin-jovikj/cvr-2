@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('applications', function (Blueprint $table) {
+        Schema::create('inquiry_applications', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('app_type_id');
             $table->unsignedBigInteger('user_id');
@@ -67,7 +67,6 @@ return new class extends Migration
             $table->foreign('color_id')->references('id')->on('colors');
             $table->foreign('shape_id')->references('id')->on('shapes');
             $table->foreign('note_id')->references('id')->on('notes');
-
         });
     }
 
@@ -76,6 +75,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('applications');
+        Schema::dropIfExists('inquiry_applications');
     }
 };

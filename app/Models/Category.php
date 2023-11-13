@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\Application;
 use App\Models\FindingTable;
+use App\Models\InquiryApplication;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -16,9 +17,9 @@ class Category extends Model
         return $this->hasMany(FindingTable::class);
     }
 
-    public function applications()
+    public function inquiryApplications()
     {
-        return $this->hasMany(Application::class);
+        return $this->hasMany(InquiryApplication::class);
     }
 
 }

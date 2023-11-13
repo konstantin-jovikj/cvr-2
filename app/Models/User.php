@@ -9,6 +9,7 @@ use App\Models\Department;
 use App\Models\Application;
 use App\Models\LocalDepartment;
 use Laravel\Sanctum\HasApiTokens;
+use App\Models\InquiryApplication;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -73,8 +74,8 @@ class User extends Authenticatable
         return $this->belongsTo(Department::class);
     }
 
-    public function applications()
+    public function inquiryApplications()
     {
-        return $this->hasMany(Application::class);
+        return $this->hasMany(InquiryApplication::class);
     }
 }
