@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
+use App\Models\ApplicationType;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -27,5 +28,8 @@ class DatabaseSeeder extends Seeder
         $this->call([DepartmentSeeder::class]);
         $this->call([LocalDepartmentSeeder::class]);
         $this->call([SuperAdminSeeder::class]);
+
+        $this->call([ApplicationType::class]);
+        $this->call([VehicleTypeSeeder::class]);
     }
 }

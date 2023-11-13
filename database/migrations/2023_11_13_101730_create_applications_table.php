@@ -22,14 +22,18 @@ return new class extends Migration
             $table->unsignedBigInteger('brand_id');
             $table->unsignedBigInteger('type_id');
             $table->unsignedBigInteger('confirmation_id');
-            $table->unsignedBigInteger('attached_doc_id');
+            // $table->unsignedBigInteger('attached_doc_id');
             $table->unsignedBigInteger('modification_id');
             $table->unsignedBigInteger('mod_or_rep_id');
             $table->unsignedBigInteger('vehicle_type_id');
+            $table->unsignedBigInteger('fuel_id');
+            $table->unsignedBigInteger('color_id');
+            $table->unsignedBigInteger('shape_id');
+            $table->unsignedBigInteger('note_id');
 
-            $table->string('vin_number');
+            $table->string('vin_number')->unique();
             $table->string('engine_type');
-            $table->string('engine_number');
+            $table->string('engine_number')->unique();
             $table->boolean('is_correction');
             $table->string('is_change')->nullable();
             $table->string('note')->nullable();
@@ -55,10 +59,14 @@ return new class extends Migration
             $table->foreign('brand_id')->references('id')->on('brands');
             $table->foreign('type_id')->references('id')->on('types');
             $table->foreign('confirmation_id')->references('id')->on('confirmation_types');
-            $table->foreign('attached_doc_id')->references('id')->on('attachment_documents');
+            // $table->foreign('attached_doc_id')->references('id')->on('attachment_documents');
             $table->foreign('modification_id')->references('id')->on('modification_types');
             $table->foreign('mod_or_rep_id')->references('id')->on('modified_or_repaireds');
             $table->foreign('vehicle_type_id')->references('id')->on('vehicle_types');
+            $table->foreign('fuel_id')->references('id')->on('fuels');
+            $table->foreign('color_id')->references('id')->on('colors');
+            $table->foreign('shape_id')->references('id')->on('shapes');
+            $table->foreign('note_id')->references('id')->on('notes');
 
         });
     }

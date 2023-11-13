@@ -4,7 +4,9 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Models\Role;
+// use App\Models\User;
 use App\Models\Department;
+use App\Models\Application;
 use App\Models\LocalDepartment;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
@@ -71,5 +73,8 @@ class User extends Authenticatable
         return $this->belongsTo(Department::class);
     }
 
-
+    public function applications()
+    {
+        return $this->hasMany(Application::class);
+    }
 }

@@ -15,9 +15,9 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('customer_type_id');
             $table->unsignedBigInteger('city_id');
-            $table->string('embg')->nullable();
-            $table->string('embs')->nullable();
-            $table->string('id_number')->nullable();
+            $table->string('embg')->unique()->nullable();
+            $table->string('embs')->unique()->nullable();
+            $table->string('id_number')->unique()->nullable();
             $table->string('address')->nullable();
             $table->string('phone')->nullable();
             $table->decimal('discount', 5, 2)->nullable();
