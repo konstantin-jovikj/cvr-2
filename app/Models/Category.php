@@ -12,6 +12,13 @@ class Category extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'category_name',
+        'category_desc',
+        'appendix',
+        'note',
+    ];
+
     public function findingTables()
     {
         return $this->hasMany(FindingTable::class);

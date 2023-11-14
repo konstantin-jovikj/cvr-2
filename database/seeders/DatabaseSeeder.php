@@ -34,5 +34,12 @@ class DatabaseSeeder extends Seeder
         $this->call([VehicleTypeSeeder::class]);
         $this->call([ConfirmationTypeSeeder::class]);
         $this->call([ColorSeeder::class]);
+        $this->call([CustomerTypeSeeder::class]);
+        $this->call([FuelSeeder::class]);
+        $this->call([CategorySeeder::class]);
+        $this->call([ManufacturerSeeder::class]);
+        $this->call([BrandSeeder::class]);
+        $this->call([TypeSeeder::class]);
+        $this->call([MediatorSeeder::class]);
     }
 }
