@@ -1,11 +1,11 @@
-// function dropdownUser() {
-//     const userSubmenu = document.querySelector("#userSubmenu");
-//     const userArrow = document.querySelector("#userArrow");
+function dropdownPodatoci() {
+    const podatociSubmenu = document.querySelector("#podatociSubmenu");
+    const podatociArrow = document.querySelector("#podatociArrow");
 
-//     if (userSubmenu && userArrow) {
-//         userSubmenu.classList.toggle("hidden");
-//         userArrow.classList.toggle("rotate-90");
-//     }
-// }
-// dropdownUser();
+    if (podatociSubmenu && podatociArrow) {
+        podatociSubmenu.classList.toggle("hidden");
+        podatociArrow.classList.toggle("rotate-90");
+    }
+}
+dropdownPodatoci();
 

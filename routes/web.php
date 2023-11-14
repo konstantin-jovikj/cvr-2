@@ -2,6 +2,9 @@
 
 use App\Livewire\SuperAdmin\AddRole;
 use App\Livewire\AdminRegister\AdminRegister;
+use App\Livewire\BasicData\Manufacturers\AddManufacturer;
+use App\Livewire\BasicData\Manufacturers\EditManufacturer;
+use App\Livewire\BasicData\Manufacturers\ManufacturersTable;
 use App\Livewire\Users;
 use App\Livewire\HomePage;
 use App\Livewire\EditUserForm;
@@ -65,8 +68,10 @@ Route::get('/it/create', AddIt::class)->name('add.it');
 
 // SUPERADMIN END
 
-
-
+// Basic Data Routes
+Route::get('/it/manufacturers/all', ManufacturersTable::class)->name('manufacturers.all');
+Route::get('/it/manufacturers/add', AddManufacturer::class)->name('manufacturer.add');
+Route::get('/it/manufacturers/{manufacturer}/edit', EditManufacturer::class)->name('manufacturer.edit');
 
 
 
