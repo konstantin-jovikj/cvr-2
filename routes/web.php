@@ -2,6 +2,9 @@
 
 use App\Livewire\SuperAdmin\AddRole;
 use App\Livewire\AdminRegister\AdminRegister;
+use App\Livewire\BasicData\Brands\AddBrand;
+use App\Livewire\BasicData\Brands\BrandsTable;
+use App\Livewire\BasicData\Brands\EditBrand;
 use App\Livewire\BasicData\Manufacturers\AddManufacturer;
 use App\Livewire\BasicData\Manufacturers\EditManufacturer;
 use App\Livewire\BasicData\Manufacturers\ManufacturersTable;
@@ -73,6 +76,8 @@ Route::get('/it/manufacturers/all', ManufacturersTable::class)->name('manufactur
 Route::get('/it/manufacturers/add', AddManufacturer::class)->name('manufacturer.add');
 Route::get('/it/manufacturers/{manufacturer}/edit', EditManufacturer::class)->name('manufacturer.edit');
 
-
+Route::get('/it/brands/all', BrandsTable::class)->name('brands.all');
+Route::get('/it/brands/add', AddBrand::class)->name('brand.add');
+Route::get('/it/brand/{brand}/edit', EditBrand::class)->name('brand.edit');
 
 require __DIR__.'/auth.php';
