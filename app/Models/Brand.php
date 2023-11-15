@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Type;
 use App\Models\Application;
 use App\Models\Manufacturer;
 use App\Models\InquiryApplication;
@@ -29,5 +30,10 @@ class Brand extends Model
     public function inquiryApplications()
     {
         return $this->hasMany(InquiryApplication::class);
+    }
+
+    public function types()
+    {
+        return $this->hasMany(Type::class);
     }
 }

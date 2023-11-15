@@ -8,6 +8,8 @@ use App\Livewire\BasicData\Brands\EditBrand;
 use App\Livewire\BasicData\Manufacturers\AddManufacturer;
 use App\Livewire\BasicData\Manufacturers\EditManufacturer;
 use App\Livewire\BasicData\Manufacturers\ManufacturersTable;
+use App\Livewire\BasicData\Types\AddType;
+use App\Livewire\BasicData\Types\TypesTable;
 use App\Livewire\Users;
 use App\Livewire\HomePage;
 use App\Livewire\EditUserForm;
@@ -79,5 +81,11 @@ Route::get('/it/manufacturers/{manufacturer}/edit', EditManufacturer::class)->na
 Route::get('/it/brands/all', BrandsTable::class)->name('brands.all');
 Route::get('/it/brands/add', AddBrand::class)->name('brand.add');
 Route::get('/it/brand/{brand}/edit', EditBrand::class)->name('brand.edit');
+
+
+Route::get('/it/types/all', TypesTable::class)->name('types.all');
+Route::get('/it/types/add', AddType::class)->name('type.add');
+
+
 
 require __DIR__.'/auth.php';

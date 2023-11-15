@@ -30,4 +30,9 @@ class Type extends Model
     {
         return $this->hasMany(Application::class);
     }
+
+    public function brand()
+    {
+        return $this->belongsTo(Brand::class);
+    }
 }
