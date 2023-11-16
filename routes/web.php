@@ -11,6 +11,9 @@ use App\Livewire\BasicData\Categories\EditCategory;
 use App\Livewire\BasicData\Manufacturers\AddManufacturer;
 use App\Livewire\BasicData\Manufacturers\EditManufacturer;
 use App\Livewire\BasicData\Manufacturers\ManufacturersTable;
+use App\Livewire\BasicData\Shapes\AddShape;
+use App\Livewire\BasicData\Shapes\EditShape;
+use App\Livewire\BasicData\Shapes\ShapesTable;
 use App\Livewire\BasicData\Types\AddType;
 use App\Livewire\BasicData\Types\EditType;
 use App\Livewire\BasicData\Types\TypesTable;
@@ -94,9 +97,11 @@ Route::get('.it/types/{type}/edit', EditType::class)->name('type.edit');
 
 Route::get('/it/categories/all', CategoriesTable::class)->name('categories.all');
 Route::get('/it/categories/add', AddCategory::class)->name('category.add');
-Route::get('.it/categories/{category}/edit', EditCategory::class)->name('category.edit');
+Route::get('/it/categories/{category}/edit', EditCategory::class)->name('category.edit');
 
-
+Route::get('/it/shapes/all', ShapesTable::class)->name('shapes.all');
+Route::get('/it/shapes/add', AddShape::class)->name('shape.add');
+Route::get('/it/shapes/{shape}/edit', EditShape::class)->name('shape.edit');
 
 
 
