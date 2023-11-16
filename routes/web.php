@@ -8,6 +8,9 @@ use App\Livewire\BasicData\Brands\EditBrand;
 use App\Livewire\BasicData\Categories\AddCategory;
 use App\Livewire\BasicData\Categories\CategoriesTable;
 use App\Livewire\BasicData\Categories\EditCategory;
+use App\Livewire\BasicData\Fuel\AddFuel;
+use App\Livewire\BasicData\Fuel\EditFuel;
+use App\Livewire\BasicData\Fuel\FuelTable;
 use App\Livewire\BasicData\Manufacturers\AddManufacturer;
 use App\Livewire\BasicData\Manufacturers\EditManufacturer;
 use App\Livewire\BasicData\Manufacturers\ManufacturersTable;
@@ -103,6 +106,9 @@ Route::get('/it/shapes/all', ShapesTable::class)->name('shapes.all');
 Route::get('/it/shapes/add', AddShape::class)->name('shape.add');
 Route::get('/it/shapes/{shape}/edit', EditShape::class)->name('shape.edit');
 
+Route::get('/it/fuel/all', FuelTable::class)->name('fuel.all');
+Route::get('/it/fuel/add', AddFuel::class)->name('fuel.add');
+Route::get('/it/fuel/{fuel}/edit', EditFuel::class)->name('fuel.edit');
 
 
 require __DIR__.'/auth.php';

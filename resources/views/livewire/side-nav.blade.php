@@ -46,7 +46,7 @@ onclick="dropdownPodatoci()">
     <a wire:navigate href="{{route('types.all')}}" class="cursor-pointer p-2 hover:bg-sky-600 rounded-md mt-1 bg-gray-800 block">Тип</a>
     <a wire:navigate href="{{route('categories.all')}}" class="cursor-pointer p-2 hover:bg-sky-600 rounded-md mt-1 bg-gray-800 block">Категории</a>
     <a wire:navigate href="{{route('shapes.all')}}" class="cursor-pointer p-2 hover:bg-sky-600 rounded-md mt-1 bg-gray-800 block">Облик на Каросерија</a>
-    <a wire:navigate href="#" class="cursor-pointer p-2 hover:bg-sky-600 rounded-md mt-1 bg-gray-800 block">Гориво</a>
+    <a wire:navigate href="{{route('fuel.all')}}" class="cursor-pointer p-2 hover:bg-sky-600 rounded-md mt-1 bg-gray-800 block">Гориво</a>
     <a wire:navigate href="#" class="cursor-pointer p-2 hover:bg-sky-600 rounded-md mt-1 bg-gray-800 block">Боја</a>
     <a wire:navigate href="#" class="cursor-pointer p-2 hover:bg-sky-600 rounded-md mt-1 bg-gray-800 block">Прилог Документи</a>
     <a wire:navigate href="#" class="cursor-pointer p-2 hover:bg-sky-600 rounded-md mt-1 bg-gray-800 block">Наод - Табели</a>
