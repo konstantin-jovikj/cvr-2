@@ -85,11 +85,11 @@
                         </form>
 
                         <td class="px-6 py-1">
-                            <a wire:navigate href="{{ route('brand.edit', $type->id) }}"
+                            <a wire:navigate href="{{ route('type.edit', $type->id) }}"
                                 class="px-4 py-1 text-xs text-white bg-emerald-600 hover:bg-emerald-800 rounded-full">Измени</a>
 
-                            <button wire:click='deleteBrand({{ $type->id }})'
-                                wire:confirm="Дали сте сигурен дека сакате да ја избришете оваа марка на автомобил?"
+                            <button wire:click='deleteType({{ $type->id }})'
+                                wire:confirm="Дали сте сигурен дека сакате да го избришете типот на возило?"
                                 class="px-4 py-1 text-xs text-white bg-red-600 hover-bg-red-800 rounded-full">Избриши</button>
                         </td>
 

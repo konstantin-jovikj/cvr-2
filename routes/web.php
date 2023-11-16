@@ -9,6 +9,7 @@ use App\Livewire\BasicData\Manufacturers\AddManufacturer;
 use App\Livewire\BasicData\Manufacturers\EditManufacturer;
 use App\Livewire\BasicData\Manufacturers\ManufacturersTable;
 use App\Livewire\BasicData\Types\AddType;
+use App\Livewire\BasicData\Types\EditType;
 use App\Livewire\BasicData\Types\TypesTable;
 use App\Livewire\Users;
 use App\Livewire\HomePage;
@@ -85,6 +86,7 @@ Route::get('/it/brand/{brand}/edit', EditBrand::class)->name('brand.edit');
 
 Route::get('/it/types/all', TypesTable::class)->name('types.all');
 Route::get('/it/types/add', AddType::class)->name('type.add');
+Route::get('.it/types/{type}/edit', EditType::class)->name('type.edit');
 
 
 
