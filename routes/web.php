@@ -5,6 +5,9 @@ use App\Livewire\AdminRegister\AdminRegister;
 use App\Livewire\BasicData\Brands\AddBrand;
 use App\Livewire\BasicData\Brands\BrandsTable;
 use App\Livewire\BasicData\Brands\EditBrand;
+use App\Livewire\BasicData\Categories\AddCategory;
+use App\Livewire\BasicData\Categories\CategoriesTable;
+use App\Livewire\BasicData\Categories\EditCategory;
 use App\Livewire\BasicData\Manufacturers\AddManufacturer;
 use App\Livewire\BasicData\Manufacturers\EditManufacturer;
 use App\Livewire\BasicData\Manufacturers\ManufacturersTable;
@@ -87,6 +90,13 @@ Route::get('/it/brand/{brand}/edit', EditBrand::class)->name('brand.edit');
 Route::get('/it/types/all', TypesTable::class)->name('types.all');
 Route::get('/it/types/add', AddType::class)->name('type.add');
 Route::get('.it/types/{type}/edit', EditType::class)->name('type.edit');
+
+
+Route::get('/it/categories/all', CategoriesTable::class)->name('categories.all');
+Route::get('/it/categories/add', AddCategory::class)->name('category.add');
+Route::get('.it/categories/{category}/edit', EditCategory::class)->name('category.edit');
+
+
 
 
 
