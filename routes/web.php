@@ -17,6 +17,9 @@ use App\Livewire\BasicData\Fuel\FuelTable;
 use App\Livewire\BasicData\Manufacturers\AddManufacturer;
 use App\Livewire\BasicData\Manufacturers\EditManufacturer;
 use App\Livewire\BasicData\Manufacturers\ManufacturersTable;
+use App\Livewire\BasicData\Notes\AddNote;
+use App\Livewire\BasicData\Notes\EditNote;
+use App\Livewire\BasicData\Notes\NotesTable;
 use App\Livewire\BasicData\Shapes\AddShape;
 use App\Livewire\BasicData\Shapes\EditShape;
 use App\Livewire\BasicData\Shapes\ShapesTable;
@@ -116,5 +119,9 @@ Route::get('/it/fuel/{fuel}/edit', EditFuel::class)->name('fuel.edit');
 Route::get('/it/colors/all', ColorsTable::class)->name('colors.all');
 Route::get('/it/colors/add', AddColor::class)->name('color.add');
 Route::get('/it/colors/{color}/edit', EditColor::class)->name('color.edit');
+
+Route::get('/it/notes/all', NotesTable::class)->name('notes.all');
+Route::get('/it/notes/add', AddNote::class)->name('note.add');
+Route::get('/it/notes/{note}/edit', EditNote::class)->name('note.edit');
 
 require __DIR__.'/auth.php';

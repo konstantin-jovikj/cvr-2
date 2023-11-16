@@ -42,5 +42,6 @@ class DatabaseSeeder extends Seeder
         $this->call([TypeSeeder::class]);
         $this->call([MediatorSeeder::class]);
         $this->call([ShapeSeeder::class]);
+        $this->call([NoteSeeder::class]);
     }
 }
