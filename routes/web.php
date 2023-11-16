@@ -8,6 +8,9 @@ use App\Livewire\BasicData\Brands\EditBrand;
 use App\Livewire\BasicData\Categories\AddCategory;
 use App\Livewire\BasicData\Categories\CategoriesTable;
 use App\Livewire\BasicData\Categories\EditCategory;
+use App\Livewire\BasicData\Colors\AddColor;
+use App\Livewire\BasicData\Colors\ColorsTable;
+use App\Livewire\BasicData\Colors\EditColor;
 use App\Livewire\BasicData\Fuel\AddFuel;
 use App\Livewire\BasicData\Fuel\EditFuel;
 use App\Livewire\BasicData\Fuel\FuelTable;
@@ -110,5 +113,8 @@ Route::get('/it/fuel/all', FuelTable::class)->name('fuel.all');
 Route::get('/it/fuel/add', AddFuel::class)->name('fuel.add');
 Route::get('/it/fuel/{fuel}/edit', EditFuel::class)->name('fuel.edit');
 
+Route::get('/it/colors/all', ColorsTable::class)->name('colors.all');
+Route::get('/it/colors/add', AddColor::class)->name('color.add');
+Route::get('/it/colors/{color}/edit', EditColor::class)->name('color.edit');
 
 require __DIR__.'/auth.php';
