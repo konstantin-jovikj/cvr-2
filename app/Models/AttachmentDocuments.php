@@ -12,16 +12,8 @@ class AttachmentDocuments extends Model
 
 
     protected $fillable = [
-        'application_id',
-        'is_available',
-        'number',
         'desc',
-        'doc_path',
     ];
 
 
-    public function application()
-    {
-        return $this->belongsTo(Application::class);
-    }
 }

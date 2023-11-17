@@ -44,5 +44,6 @@ class DatabaseSeeder extends Seeder
         $this->call([ShapeSeeder::class]);
         $this->call([NoteSeeder::class]);
         $this->call([PictureSeeder::class]);
+        $this->call([AttachmentDocumentSeeder::class]);
     }
 }

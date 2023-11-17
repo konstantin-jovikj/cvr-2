@@ -11,14 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('application_picture', function (Blueprint $table) {
+        Schema::create('application_type_picture', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('application_id');
+            $table->unsignedBigInteger('application_type_id');
             $table->unsignedBigInteger('picture_id');
-            $table->string('picture_path');
+            $table->string('picture_path')->nullable();
             $table->timestamps();
 
-            $table->foreign('application_id')->references('id')->on('applications');
+            $table->foreign('application_type_id')->references('id')->on('application_types');
             $table->foreign('picture_id')->references('id')->on('pictures');
         });
     }
@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('application_image');
+        Schema::dropIfExists('application_type_picture');
     }
 };

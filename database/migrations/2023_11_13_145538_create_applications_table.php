@@ -59,7 +59,6 @@ return new class extends Migration
             $table->foreign('brand_id')->references('id')->on('brands');
             $table->foreign('type_id')->references('id')->on('types');
             $table->foreign('confirmation_id')->references('id')->on('confirmation_types');
-            // $table->foreign('attached_doc_id')->references('id')->on('attachment_documents');
             $table->foreign('modification_id')->references('id')->on('modification_types');
             $table->foreign('mod_or_rep_id')->references('id')->on('modified_or_repaireds');
             $table->foreign('vehicle_type_id')->references('id')->on('vehicle_types');
