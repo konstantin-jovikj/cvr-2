@@ -15,8 +15,8 @@ class ApplicationType extends Model
         'app_type_name',
     ];
 
-    public function inquiryApplications()
+    public function applications()
     {
-        return $this->hasMany(InquiryApplication::class);
+        return $this->hasMany(Application::class);
     }
 }

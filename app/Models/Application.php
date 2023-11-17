@@ -23,7 +23,7 @@ use App\Models\AttachmentDocuments;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class InquiryApplication extends Model
+class Application extends Model
 {
     use HasFactory;
 

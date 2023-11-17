@@ -16,8 +16,8 @@ class Note extends Model
         'note_text',
     ];
 
-    public function inquiryApplications()
+    public function Applications()
     {
-        return $this->hasMany(InquiryApplication::class);
+        return $this->hasMany(Application::class);
     }
 }

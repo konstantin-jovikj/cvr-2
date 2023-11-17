@@ -16,8 +16,8 @@ class Mediator extends Model
         'note',
     ];
 
-    public function inquiryApplications()
+    public function Applications()
     {
-        return $this->hasMany(InquiryApplication::class);
+        return $this->hasMany(Application::class);
     }
 }

@@ -11,16 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('attachment_documents', function (Blueprint $table) {
+        Schema::create('application_image', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('application_id');
-            $table->boolean('is_available')->default(0);
-            $table->string('number')->nullable();
-            $table->text('desc')->nullable();
-            $table->string('doc_path')->nullable();
+            $table->unsignedBigInteger('image_id');
+            $table->string('image_path');
             $table->timestamps();
 
             $table->foreign('application_id')->references('id')->on('applications');
+            $table->foreign('image_id')->references('id')->on('images');
         });
     }
 
@@ -29,8 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('attachment_documents');
+        Schema::dropIfExists('application_image');
     }
-
-
 };

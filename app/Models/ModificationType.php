@@ -15,8 +15,8 @@ class ModificationType extends Model
         'modification_name',
     ];
 
-    public function inquiryApplications()
+    public function Applications()
     {
-        return $this->hasMany(InquiryApplication::class);
+        return $this->hasMany(Application::class);
     }
 }
