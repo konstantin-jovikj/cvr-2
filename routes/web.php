@@ -2,6 +2,9 @@
 
 use App\Livewire\SuperAdmin\AddRole;
 use App\Livewire\AdminRegister\AdminRegister;
+use App\Livewire\BasicData\ApplicationTypes\AddApplicationType;
+use App\Livewire\BasicData\ApplicationTypes\ApplicationTypeTable;
+use App\Livewire\BasicData\ApplicationTypes\EditApplicationType;
 use App\Livewire\BasicData\Brands\AddBrand;
 use App\Livewire\BasicData\Brands\BrandsTable;
 use App\Livewire\BasicData\Brands\EditBrand;
@@ -131,5 +134,9 @@ Route::get('/it/notes/{note}/edit', EditNote::class)->name('note.edit');
 Route::get('/it/pictures/all', PicturesTable::class)->name('pictures.all');
 Route::get('/it/picture/add', AddPicture::class)->name('picture.add');
 Route::get('/it/picture/{picture}/edit', EditPicture::class)->name('picture.edit');
+
+Route::get('/it/applicationtype/all', ApplicationTypeTable::class)->name('applicationtype.all');
+Route::get('/it/applicationtype/add', AddApplicationType::class)->name('applicationtype.add');
+Route::get('/it/applicationtype/{applicationtype}/edit', EditApplicationType::class)->name('applicationtype.edit');
 
 require __DIR__.'/auth.php';
