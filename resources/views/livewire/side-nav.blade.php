@@ -51,7 +51,7 @@ onclick="dropdownPodatoci()">
     <a wire:navigate href="#" class="cursor-pointer p-2 hover:bg-sky-600 rounded-md mt-1 bg-gray-800 block">Прилог Документи</a>
     <a wire:navigate href="#" class="cursor-pointer p-2 hover:bg-sky-600 rounded-md mt-1 bg-gray-800 block">Наод - Табели</a>
     <a wire:navigate href="{{route('notes.all')}}" class="cursor-pointer p-2 hover:bg-sky-600 rounded-md mt-1 bg-gray-800 block">Текст во Забелешка</a>
-    <a wire:navigate href="{{route('images.all')}}" class="cursor-pointer p-2 hover:bg-sky-600 rounded-md mt-1 bg-gray-800 block">Задолжителни фотографии</a>
+    <a wire:navigate href="{{route('pictures.all')}}" class="cursor-pointer p-2 hover:bg-sky-600 rounded-md mt-1 bg-gray-800 block">Задолжителни фотографии</a>
 </div>
 
 <div class="my-2 bg-gray-600 h-[1px]"></div>

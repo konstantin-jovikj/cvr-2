@@ -11,15 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('application_image', function (Blueprint $table) {
+        Schema::create('application_picture', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('application_id');
-            $table->unsignedBigInteger('image_id');
-            $table->string('image_path');
+            $table->unsignedBigInteger('picture_id');
+            $table->string('picture_path');
             $table->timestamps();
 
             $table->foreign('application_id')->references('id')->on('applications');
-            $table->foreign('image_id')->references('id')->on('images');
+            $table->foreign('picture_id')->references('id')->on('pictures');
         });
     }
 

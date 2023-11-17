@@ -43,6 +43,6 @@ class DatabaseSeeder extends Seeder
         $this->call([MediatorSeeder::class]);
         $this->call([ShapeSeeder::class]);
         $this->call([NoteSeeder::class]);
-        $this->call([ImageSeeder::class]);
+        $this->call([PictureSeeder::class]);
     }
 }

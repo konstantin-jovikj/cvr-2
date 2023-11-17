@@ -14,13 +14,16 @@ use App\Livewire\BasicData\Colors\EditColor;
 use App\Livewire\BasicData\Fuel\AddFuel;
 use App\Livewire\BasicData\Fuel\EditFuel;
 use App\Livewire\BasicData\Fuel\FuelTable;
-use App\Livewire\BasicData\Images\ImagesTable;
+use App\Livewire\BasicData\Pictures\AddPicture;
+use App\Livewire\BasicData\Images\AddImage;
+use App\Livewire\BasicData\Pictures\PicturesTable;
 use App\Livewire\BasicData\Manufacturers\AddManufacturer;
 use App\Livewire\BasicData\Manufacturers\EditManufacturer;
 use App\Livewire\BasicData\Manufacturers\ManufacturersTable;
 use App\Livewire\BasicData\Notes\AddNote;
 use App\Livewire\BasicData\Notes\EditNote;
 use App\Livewire\BasicData\Notes\NotesTable;
+use App\Livewire\BasicData\Pictures\EditPicture;
 use App\Livewire\BasicData\Shapes\AddShape;
 use App\Livewire\BasicData\Shapes\EditShape;
 use App\Livewire\BasicData\Shapes\ShapesTable;
@@ -125,7 +128,8 @@ Route::get('/it/notes/all', NotesTable::class)->name('notes.all');
 Route::get('/it/notes/add', AddNote::class)->name('note.add');
 Route::get('/it/notes/{note}/edit', EditNote::class)->name('note.edit');
 
-Route::get('/it/images/all', ImagesTable::class)->name('images.all');
-
+Route::get('/it/pictures/all', PicturesTable::class)->name('pictures.all');
+Route::get('/it/picture/add', AddPicture::class)->name('picture.add');
+Route::get('/it/picture/{picture}/edit', EditPicture::class)->name('picture.edit');
 
 require __DIR__.'/auth.php';

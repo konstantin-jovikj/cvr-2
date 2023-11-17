@@ -8,7 +8,9 @@ use App\Models\Type;
 use App\Models\User;
 use App\Models\Brand;
 use App\Models\Color;
+use App\Models\Image;
 use App\Models\Shape;
+use App\Models\Picture;
 use App\Models\Category;
 use App\Models\Customer;
 use App\Models\Mediator;
@@ -17,11 +19,11 @@ use App\Models\Manufacturer;
 use App\Models\ApplicationType;
 use App\Models\ConfirmationType;
 use App\Models\ModificationType;
+
 use App\Models\ModifiedOrRepaired;
 use App\Models\AttachmentDocuments;
-
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Application extends Model
 {
@@ -145,5 +147,10 @@ class Application extends Model
     public function note()
     {
         return $this->belongsTo(Note::class);
+    }
+
+    public function pictures()
+    {
+        return $this->bolongsToMany(Picture::class);
     }
 }
