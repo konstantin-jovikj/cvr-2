@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('id_number')->unique()->nullable();
             $table->string('address')->nullable();
             $table->string('phone')->nullable();
-            $table->decimal('discount', 5, 2)->nullable()->default(0.00);
+            $table->decimal('discount', 5, 2)->default(0.00);
             $table->string('note');
             $table->timestamps();
 
