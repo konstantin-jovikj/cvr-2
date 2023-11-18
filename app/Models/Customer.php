@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\Application;
 use App\Models\CustomerType;
+use App\Models\LocalDepartment;
 use App\Models\InquiryApplication;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -35,5 +36,10 @@ class Customer extends Model
     public function inquiryApplications()
     {
         return $this->hasMany(InquiryApplication::class);
+    }
+
+    public function localDepartment()
+    {
+        return $this->belongsTo(LocalDepartment::class);
     }
 }

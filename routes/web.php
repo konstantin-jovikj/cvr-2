@@ -25,6 +25,9 @@ use App\Livewire\BasicData\Pictures\PicturesTable;
 use App\Livewire\BasicData\Manufacturers\AddManufacturer;
 use App\Livewire\BasicData\Manufacturers\EditManufacturer;
 use App\Livewire\BasicData\Manufacturers\ManufacturersTable;
+use App\Livewire\BasicData\Mediators\AddMediator;
+use App\Livewire\BasicData\Mediators\EditMediator;
+use App\Livewire\BasicData\Mediators\MediatorsTable;
 use App\Livewire\BasicData\Notes\AddNote;
 use App\Livewire\BasicData\Notes\EditNote;
 use App\Livewire\BasicData\Notes\NotesTable;
@@ -151,5 +154,12 @@ Route::get('/it/relateddocs/add', AddRelatedDoc::class)->name('relateddoc.add');
 Route::get('/it/relateddocs/{relateddocuments}/edit', EditRelatedDoc::class)->name('relateddoc.edit');
 
 Route::get('/it/applicationdocs/', ManageAppTypeDocs::class)->name('application_docs');
+
+Route::get('/it/mediators/all', MediatorsTable::class)->name('mediators.all');
+Route::get('/it/mediator/add', AddMediator::class)->name('mediator.add');
+Route::get('/it/mediator/{mediator}/edit', EditMediator::class)->name('mediator.edit');
+
+
+// Route::get('/it/customers/all')
 
 require __DIR__.'/auth.php';

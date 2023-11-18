@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('customers', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('local_department_id');
             $table->unsignedBigInteger('customer_type_id');
             $table->unsignedBigInteger('city_id');
             $table->string('embg')->unique()->nullable();
@@ -24,6 +25,7 @@ return new class extends Migration
             $table->string('note');
             $table->timestamps();
 
+            $table->foreign('local_department_id')->references('id')->on('local_departments');
             $table->foreign('customer_type_id')->references('id')->on('customer_types');
             $table->foreign('city_id')->references('id')->on('cities');
         });

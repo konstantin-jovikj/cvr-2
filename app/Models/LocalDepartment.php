@@ -5,6 +5,8 @@ namespace App\Models;
 use App\Models\City;
 use App\Models\Role;
 use App\Models\User;
+use App\Models\Customer;
+use App\Models\Mediator;
 use App\Models\Department;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -47,6 +49,15 @@ class LocalDepartment extends Model
         return $this->belongsToMany(Role::class);
     }
 
+    public function mediators()
+    {
+        return $this->hasMany(Mediator::class);
+    }
+
+    public function customers()
+    {
+        return $this->hasMany(Customer::class);
+    }
 
 
 }

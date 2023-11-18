@@ -13,9 +13,14 @@ return new class extends Migration
     {
         Schema::create('mediators', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('local_department_id')->nullable();
             $table->string('mediator_name')->nullable();
+            $table->string('mediator_address')->nullable();
+            $table->string('mediator_phone')->nullable();
             $table->string('note')->nullable();
             $table->timestamps();
+
+            $table->foreign('local_department_id')->references('id')->on('local_departments');
         });
     }
 
