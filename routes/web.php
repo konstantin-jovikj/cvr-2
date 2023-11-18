@@ -16,6 +16,8 @@ use App\Livewire\BasicData\Categories\EditCategory;
 use App\Livewire\BasicData\Colors\AddColor;
 use App\Livewire\BasicData\Colors\ColorsTable;
 use App\Livewire\BasicData\Colors\EditColor;
+use App\Livewire\BasicData\Customers\AddCustomer;
+use App\Livewire\BasicData\Customers\CustomersTable;
 use App\Livewire\BasicData\Fuel\AddFuel;
 use App\Livewire\BasicData\Fuel\EditFuel;
 use App\Livewire\BasicData\Fuel\FuelTable;
@@ -160,6 +162,10 @@ Route::get('/it/mediator/add', AddMediator::class)->name('mediator.add');
 Route::get('/it/mediator/{mediator}/edit', EditMediator::class)->name('mediator.edit');
 
 
-// Route::get('/it/customers/all')
+Route::get('/it/customers/all', CustomersTable::class)->name('customers.all');
+Route::get('/it/customer/add', AddCustomer::class)->name('customer.add');
+
+
+
 
 require __DIR__.'/auth.php';

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\City;
 use App\Models\Application;
 use App\Models\CustomerType;
 use App\Models\LocalDepartment;
@@ -15,8 +16,10 @@ class Customer extends Model
 
     protected $fillable = [
         // 'role_id',
+        'local_department_id',
         'customer_type_id',
         'city_id',
+        'customer_name',
         'embg',
         'embs',
         'id_number',
@@ -41,5 +44,10 @@ class Customer extends Model
     public function localDepartment()
     {
         return $this->belongsTo(LocalDepartment::class);
+    }
+
+    public function city()
+    {
+        return $this->belongsTo(City::class);
     }
 }
