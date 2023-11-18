@@ -2,6 +2,7 @@
 
 use App\Livewire\SuperAdmin\AddRole;
 use App\Livewire\AdminRegister\AdminRegister;
+use App\Livewire\BasicData\ApplicationDocs\ManageAppTypeDocs;
 use App\Livewire\BasicData\ApplicationPhotos\ManageAppTypePhotos;
 use App\Livewire\BasicData\ApplicationTypes\AddApplicationType;
 use App\Livewire\BasicData\ApplicationTypes\ApplicationTypeTable;
@@ -148,5 +149,7 @@ Route::get('/it/applicationphotos/', ManageAppTypePhotos::class)->name('applicat
 Route::get('/it/relateddocs/', RelatedDocsTable::class)->name('relateddocs.all');
 Route::get('/it/relateddocs/add', AddRelatedDoc::class)->name('relateddoc.add');
 Route::get('/it/relateddocs/{relateddocuments}/edit', EditRelatedDoc::class)->name('relateddoc.edit');
+
+Route::get('/it/applicationdocs/', ManageAppTypeDocs::class)->name('application_docs');
 
 require __DIR__.'/auth.php';

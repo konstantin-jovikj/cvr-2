@@ -25,4 +25,9 @@ class ApplicationType extends Model
     {
         return $this->belongsToMany(Picture::class);
     }
+
+    public function relatedDocuments()
+    {
+        return $this->belongsToMany(Relateddocuments::class);
+    }
 }

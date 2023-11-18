@@ -55,6 +55,7 @@ onclick="dropdownPodatoci()">
     <a wire:navigate href="{{route('relateddocs.all')}}" class="cursor-pointer p-2 hover:bg-sky-600 rounded-md mt-1 bg-gray-800 block">Прилог Документи</a>
     <a wire:navigate href="{{route('applicationtype.all')}}" class="cursor-pointer p-2 hover:bg-sky-600 rounded-md mt-1 bg-gray-800 block">Типови на Барања</a>
     <a wire:navigate href="{{route('application_photos')}}" class="cursor-pointer p-2 hover:bg-sky-600 rounded-md mt-1 bg-gray-800 block">Барања - Фотографии</a>
+    <a wire:navigate href="{{route('application_docs')}}" class="cursor-pointer p-2 hover:bg-sky-600 rounded-md mt-1 bg-gray-800 block">Барања - Документи</a>
 </div>
 
 <div class="my-2 bg-gray-600 h-[1px]"></div>

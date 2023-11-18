@@ -12,4 +12,9 @@ class Relateddocuments extends Model
     protected $fillable = [
         'desc',
     ];
+
+    public function applicationTypes()
+    {
+        return $this->belongsToMany(ApplicationType::class);
+    }
 }
