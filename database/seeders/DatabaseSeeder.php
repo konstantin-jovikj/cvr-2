@@ -6,6 +6,7 @@ namespace Database\Seeders;
 
 // use App\Models\ApplicationType;
 use App\Models\ConfirmationType;
+use App\Models\Relateddocuments;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -44,6 +45,7 @@ class DatabaseSeeder extends Seeder
         $this->call([ShapeSeeder::class]);
         $this->call([NoteSeeder::class]);
         $this->call([PictureSeeder::class]);
-        $this->call([AttachmentDocumentSeeder::class]);
+        // $this->call([AttachmentDocumentSeeder::class]);
+        $this->call([RelateddocumentsSeeder::class]);
     }
 }

@@ -21,7 +21,7 @@ use App\Models\ConfirmationType;
 use App\Models\ModificationType;
 
 use App\Models\ModifiedOrRepaired;
-use App\Models\AttachmentDocuments;
+// use App\Models\AttachmentDocuments;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -39,7 +39,7 @@ class Application extends Model
         'brand_id',
         'type_id',
         'confirmation_id',
-        'attached_doc_id',
+        // 'attached_doc_id',
         'modification_id',
         'mod_or_rep_id',
         'vehicle_type_id',
@@ -109,9 +109,9 @@ class Application extends Model
         return $this->belongsTo(ConfirmationType::class);
     }
 
-    public function attachmentDocuments()
+    public function relatedDocuments()
     {
-        return $this->hasMany(AttachmentDocuments::class);
+        return $this->belongsToMany(Relateddocuments::class);
     }
 
     public function modificationType()

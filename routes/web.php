@@ -28,6 +28,8 @@ use App\Livewire\BasicData\Notes\AddNote;
 use App\Livewire\BasicData\Notes\EditNote;
 use App\Livewire\BasicData\Notes\NotesTable;
 use App\Livewire\BasicData\Pictures\EditPicture;
+use App\Livewire\BasicData\RelatedDocs\AddRelatedDoc;
+use App\Livewire\BasicData\RelatedDocs\EditRelatedDoc;
 use App\Livewire\BasicData\RelatedDocs\RelatedDocsTable;
 use App\Livewire\BasicData\Shapes\AddShape;
 use App\Livewire\BasicData\Shapes\EditShape;
@@ -144,5 +146,7 @@ Route::get('/it/applicationtype/{applicationtype}/edit', EditApplicationType::cl
 Route::get('/it/applicationphotos/', ManageAppTypePhotos::class)->name('application_photos');
 
 Route::get('/it/relateddocs/', RelatedDocsTable::class)->name('relateddocs.all');
+Route::get('/it/relateddocs/add', AddRelatedDoc::class)->name('relateddoc.add');
+Route::get('/it/relateddocs/{relateddocuments}/edit', EditRelatedDoc::class)->name('relateddoc.edit');
 
 require __DIR__.'/auth.php';
