@@ -70,7 +70,18 @@ class AddApplication extends Component
 
     public function addApplication()
     {
-        $allFormValues = $this->input();
-        dd($allFormValues);
+        // $allFormValues = $this->input();
+        dd(
+            $this->currentCustomer,
+            $this->selected_app_type_name,
+            $this->appDate,
+            $this->selectedMediator,
+            $this->selectedCategory,
+            $this->selectedManufacturer,
+            $this->selectedBrand,
+            $this->selectedType,
+            $this->confirmations,
+            $this->isCnanges
+        );
     }
 }
