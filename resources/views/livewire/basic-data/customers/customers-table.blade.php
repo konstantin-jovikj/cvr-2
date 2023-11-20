@@ -82,7 +82,7 @@
                             <a wire:navigate href="{{ route('mediator.edit', $customer->id) }}"
                                 class="px-3 py-1 text-xs text-white bg-sky-600 hover:bg-sky-800 rounded-full">Досие</a>
 
-                            <a wire:navigate href='add.application({{ $customer->id }})'
+                            <a wire:navigate href="{{ route('application.add', $customer->id) }}"
                                 class="px-3 py-1 text-xs text-white bg-purple-600 hover:bg-purple-800 rounded-full">Барање</a>
 
                             <a wire:navigate href="{{ route('customer.edit', $customer->id) }}"

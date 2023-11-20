@@ -169,6 +169,6 @@ Route::get('/it/customer/add', AddCustomer::class)->name('customer.add');
 Route::get('/it/customer/{customer}/edit', EditCustomer::class)->name('customer.edit');
 
 
-Route::get('/newapplication/{customer}/add', AddApplication::class)->name('add.application');
+Route::get('/it/application/{customer}/add', AddApplication::class)->name('application.add');
 
 require __DIR__.'/auth.php';
