@@ -18,6 +18,7 @@ use App\Livewire\BasicData\Colors\ColorsTable;
 use App\Livewire\BasicData\Colors\EditColor;
 use App\Livewire\BasicData\Customers\AddCustomer;
 use App\Livewire\BasicData\Customers\CustomersTable;
+use App\Livewire\BasicData\Customers\EditCustomer;
 use App\Livewire\BasicData\Fuel\AddFuel;
 use App\Livewire\BasicData\Fuel\EditFuel;
 use App\Livewire\BasicData\Fuel\FuelTable;
@@ -43,6 +44,7 @@ use App\Livewire\BasicData\Shapes\ShapesTable;
 use App\Livewire\BasicData\Types\AddType;
 use App\Livewire\BasicData\Types\EditType;
 use App\Livewire\BasicData\Types\TypesTable;
+use App\Livewire\Documents\Application\AddApplication;
 use App\Livewire\Users;
 use App\Livewire\HomePage;
 use App\Livewire\EditUserForm;
@@ -164,8 +166,9 @@ Route::get('/it/mediator/{mediator}/edit', EditMediator::class)->name('mediator.
 
 Route::get('/it/customers/all', CustomersTable::class)->name('customers.all');
 Route::get('/it/customer/add', AddCustomer::class)->name('customer.add');
+Route::get('/it/customer/{customer}/edit', EditCustomer::class)->name('customer.edit');
 
 
-
+Route::get('/newapplication/{customer}/add', AddApplication::class)->name('add.application');
 
 require __DIR__.'/auth.php';

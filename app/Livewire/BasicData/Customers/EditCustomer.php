@@ -8,99 +8,91 @@ use App\Models\CustomerType;
 use Livewire\Component;
 use Illuminate\Support\Facades\Validator;
 
-
-class AddCustomer extends Component
+class EditCustomer extends Component
 {
-    public $customerTypes = '';
-    public $cities = '';
-
+    public $customerTypes;
+    public $cities;
     public $selectedType;
-    public $selectedCustomerType = null;
-    public $selectedCity = '';
-    public $customer_name = '';
-    public $embg = null;
-    public $embs = null;
-    public $id_number = null;
-    public $address = '';
-    public $phone = '';
-    public $discount = '';
-    public $note = '';
-
-
+    public $selectedCustomerType;
+    public $selectedCity;
+    public $customer_name;
+    public $embg;
+    public $embs;
+    public $id_number;
+    public $address;
+    public $phone;
+    public $discount;
+    public $note;
+    public $city_id;
+    public $customer;
 
     protected $rules = [
         'selectedCustomerType' => 'required',
+        // Add other common validation rules
     ];
 
-
-    public function mount()
+    public function mount(Customer $customer)
     {
         $this->customerTypes = CustomerType::all();
         $this->cities = City::all();
-    }
 
+        $this->selectedCustomerType = $customer->customer_type_id;
+        $this->selectedCity = $customer->city_id;
+        $this->embg = $customer->embg;
+        $this->embs = $customer->embs;
+        $this->id_number = $customer->id_number;
+        $this->customer_name = $customer->customer_name;
+        $this->address = $customer->address;
+        $this->phone = $customer->phone;
+        $this->discount = $customer->discount;
+        $this->note = $customer->note;
+    }
 
     public function render()
     {
-        return view('livewire.basic-data.customers.add-customer');
+        return view('livewire.basic-data.customers.edit-customer');
     }
+
 
     public function updatedSelectedCustomerType($customerType)
     {
-        // dd($customerType);
         $this->selectedType = $customerType;
         $this->validateOnly('selectedCustomerType');
     }
 
-    public function addCustomer()
+
+    public function updateCustomer()
     {
 
         if (empty($this->discount)) {
             $this->discount = '0.00';
         }
 
-        $rules = [
-            'customer_type_id' => 'required',
-            'city_id' => 'required',
-            'customer_name' => 'required|min:3',
-            'address' => 'required',
-            'phone' => 'required|min:9',
-            'discount' => ['numeric', 'regex:/^\d+(\.\d{1,2})?$/'],
-            'note' => '',
-        ];
-
-        if ($this->selectedType == 1) {
-            $rules['embg'] = 'required|regex:/^\d{13}$/|numeric';
-            $rules['id_number'] = 'required|min:5';
-            unset($rules['embs']);
-        } else {
-            $rules['embs'] = 'required|regex:/^\d{7}$/|numeric';
-            unset($rules['embg']);
-            unset($rules['id_number']);
-        }
-
         $validator = Validator::make(
+            $this->only([
+                'selectedCustomerType', 'selectedCity', 'customer_name', 'embg', 'embs', 'id_number',
+                'address', 'phone', 'discount', 'note'
+            ]),
             [
-                'customer_type_id' => $this->selectedType,
-                'city_id' => $this->selectedCity,
-                'customer_name' => $this->customer_name,
-                'address' => $this->address,
-                'phone' => $this->phone,
-                'discount' => $this->discount,
-                'note' => $this->note,
-                'embg' => $this->embg,
-                'embs' => $this->embs,
-                'id_number' => $this->id_number,
+                'selectedCustomerType' => 'required',
+                'selectedCity' => 'required',
+                'customer_name' => 'required|min:3',
+                'address' => 'required',
+                'phone' => 'required|min:9',
+                'discount' => ['numeric', 'regex:/^\d+(\.\d{1,2})?$/'],
+                'note' => '',
+                'embg' => $this->selectedCustomerType == 1 ? 'required|regex:/^\d{13}$/|numeric' : '',
+                'id_number' => $this->selectedCustomerType == 1 ? 'required|min:5' : '',
+                'embs' => $this->selectedCustomerType != 1 ? 'required|regex:/^\d{7}$/|numeric' : '',
             ],
-            $rules,
             $this->customMessages()
         );
 
         $validator->validate();
-        // If validation passes, create the Customer
-        Customer::create([
+
+        $this->customer->update([
             'local_department_id' => auth()->user()->local_department_id,
-            'customer_type_id' => $this->selectedType,
+            'customer_type_id' => $this->selectedCustomerType,
             'city_id' => $this->selectedCity,
             'embg' => $this->embg,
             'embs' => $this->embs,
@@ -112,13 +104,10 @@ class AddCustomer extends Component
             'note' => $this->note,
         ]);
 
-        session()->flash('success', 'Сопственикот е успешно додаден!');
+        session()->flash('success', 'Сопственикот е успешно ажуриран!');
         $this->reset();
         return redirect(route('customers.all'));
     }
-
-
-
 
     public function customMessages()
     {

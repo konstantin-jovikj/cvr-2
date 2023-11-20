@@ -1,5 +1,5 @@
 <div class="flex justify-center items-center mx-auto w-full sm:max-w-3xl h-auto  mt-6">
-    <form wire:submit="addCustomer" class="bg-white w-full shadow-md overflow-hidden sm:rounded-lg px-6 py-4">
+    <form wire:submit="updateCustomer" class="bg-white w-full shadow-md overflow-hidden sm:rounded-lg px-6 py-4">
 
         <div class="flex w-full mt-4 gap-4">
 
@@ -48,7 +48,7 @@
             </div>
         </div>
 
-        @if ($selectedType == 1)
+        @if ($selectedType == 1 || $selectedCustomerType == 1)
             <div class="flex w-full mt-4 gap-4">
                 <!-- ЕМБГ -->
                 <div class="w-1/2">
@@ -68,7 +68,7 @@
             </div>
         @endif
 
-        @if ($selectedType == 2)
+        @if ($selectedType == 2 || $selectedCustomerType == 2)
             <!-- ЕМБС -->
             <div class="mt-4">
                 <x-input-label for="embs" :value="__('ЕМБС')" />
@@ -92,7 +92,7 @@
                 <x-input-label for="discount" :value="__('Попуст')" />
                 <x-text-input wire:model="discount" id="discount" class="block mt-1 w-full" type="text"
                     name="discount"  autofocus autocomplete="discount" />
-                <x-input-error :messages="$errors->get('discount')" class="mt-2" />
+                <x-input-error :messages="$errors->get('id_number')" class="mt-2" />
             </div>
         </div>
 
@@ -110,7 +110,7 @@
                 {{ __('Назад') }}
             </a>
             <x-primary-button class="mt-12 ">
-                {{ __('Додај') }}
+                {{ __('Ажурирај') }}
             </x-primary-button>
         </div>
     </form>

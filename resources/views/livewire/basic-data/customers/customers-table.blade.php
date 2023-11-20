@@ -82,13 +82,13 @@
                             <a wire:navigate href="{{ route('mediator.edit', $customer->id) }}"
                                 class="px-3 py-1 text-xs text-white bg-sky-600 hover:bg-sky-800 rounded-full">Досие</a>
 
-                            <a wire:click='deleteMediator({{ $customer->id }})'
+                            <a wire:navigate href='add.application({{ $customer->id }})'
                                 class="px-3 py-1 text-xs text-white bg-purple-600 hover:bg-purple-800 rounded-full">Барање</a>
 
-                            <a wire:navigate href="{{ route('mediator.edit', $customer->id) }}"
+                            <a wire:navigate href="{{ route('customer.edit', $customer->id) }}"
                                 class="px-3 py-1 text-xs text-white bg-emerald-600 hover:bg-emerald-800 rounded-full">Измени</a>
 
-                            <button wire:click='deleteMediator({{ $customer->id }})'
+                            <button wire:click='deleteCustomer({{ $customer->id }})'
                                 wire:confirm="Дали сте сигурени дека сакате да го избришете Сопственикот?"
                                 class="px-3 py-1 text-xs text-white bg-red-600 hover:bg-red-800 rounded-full">Избриши</button>
                         </td>
