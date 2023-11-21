@@ -70,7 +70,7 @@ class AddApplication extends Component
 
     public function addApplication()
     {
-        $allFormValues = $this->input();
-        dd($allFormValues);
+        // $allFormValues = $this->input();
+        // dd($allFormValues);
     }
 }
