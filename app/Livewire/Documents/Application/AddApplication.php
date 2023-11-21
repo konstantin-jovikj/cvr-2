@@ -12,7 +12,10 @@ use App\Models\Category;
 use App\Models\ConfirmationType;
 use App\Models\Manufacturer;
 use App\Models\Mediator;
+use App\Models\ModificationType;
+use App\Models\ModifiedOrRepaired;
 use App\Models\Type;
+use App\Models\VehicleType;
 
 class AddApplication extends Component
 {
@@ -29,6 +32,10 @@ class AddApplication extends Component
     public $isCorrection;
     public $isChange;
     public $isLegalisation;
+    public $modificationTypes;
+    public $modOrRepaired;
+    public $traffic_permit_nr;
+    public $vehicle_type_id;
 
     public $selectedAppTypeName = null;
     public $selectedMediator = null;
@@ -36,7 +43,10 @@ class AddApplication extends Component
     public $selectedManufacturer = null;
     public $selectedBrand = null;
     public $selectedType = null;
+    public $selectedModificationType = null;
     public $selectedAppType;
+    public $selectedVehicleTypes = null;
+
 
     public function mount(Customer $customer)
     {
@@ -53,6 +63,9 @@ class AddApplication extends Component
         $this->confirmations = ConfirmationType::all();
         $this->isCorrection = ['Има_Преправка' => 1, 'Нема_Преправка' => 0];
         $this->isLegalisation = ['Да' => 1, 'Не' => 0];
+        $this->modificationTypes = ModificationType::all();
+        $this->modOrRepaired = ModifiedOrRepaired::all();
+        $this->selectedVehicleTypes = VehicleType::all();
     }
     public function render()
     {

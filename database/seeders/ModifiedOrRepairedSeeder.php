@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\ModifiedOrRepaired;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -12,6 +13,11 @@ class ModifiedOrRepairedSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        ModifiedOrRepaired::create([
+            'name' => 'Преправено',
+        ]);
+        ModifiedOrRepaired::create([
+            'name' => 'Поправено',
+        ]);
     }
 }

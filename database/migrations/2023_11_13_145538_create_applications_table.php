@@ -43,8 +43,8 @@ return new class extends Migration
             $table->string('mod_repair_note')->nullable();
             $table->string('traffic_permit_nr')->nullable();
             $table->string('production_year')->nullable();
-            $table->string('application_number')->nullable();
-            $table->date('application_date')->nullable();
+            $table->string('approval_number')->nullable();
+            $table->date('approval_date')->nullable();
             $table->string('cert_issued_by')->nullable();
 
 

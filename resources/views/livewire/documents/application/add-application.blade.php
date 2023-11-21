@@ -34,14 +34,13 @@
         </dl>
     </div>
     <form wire:submit="addApplication" class="bg-white w-full shadow-md overflow-hidden sm:rounded-lg px-6 py-4">
-
         <div class="flex w-full mt-4 gap-4">
             <!-- Tip na Baranje -->
 
             <div class="{{ $selectedAppType == 2 || $selectedAppType == 3 ? 'w-2/3' : 'w-full' }}">
-                <x-input-label for="selectedAppTypeName" :value="__('Тип на Барање')" />
+                <x-input-label for="selectedAppTypeName" :value="__('Тип на Барање')" class="text-sky-700 font-bold"/>
                 <select wire:model.live="selectedAppTypeName"
-                    class="block mt-1 w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
+                    class="block mt-1 w-full border-sky-600 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
                     <option value="" selected> -- Одбери Тип на Барање -- </option>
                     @foreach ($appTypes as $appType)
                         <option value="{{ $appType->id }}">{{ $appType->app_type_name }}</option>
@@ -50,26 +49,27 @@
                 <x-input-error :messages="$errors->get('selectedAppTypeName')" class="mt-2" />
             </div>
 
-            @if ($selectedAppType == 2 || $selectedAppType == 3)
-                <div class="w-1/3">
-                    <x-input-label for="isLegalisation" :value="__('Дали е легализација?')" />
-                    <ul
-                        class="items-center w-full text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg sm:flex">
-                        @foreach ($isLegalisation as $isLegalisationLabel => $isLegalisationValue)
-                            <li class="flex w-full border-b border-gray-200 sm:border-b-0">
-                                <div class="flex items-center ps-3 w-1/3">
-                                    <input wire:model='isLegalisation' id="isLegalisation{{ $loop->index }}"
-                                        type="radio" value="{{ $isLegalisationValue }}" name="isLegalisation"
-                                        class="w-4 h-4 text-gray-600 bg-gray-100 border-gray-300 focus:ring-gray-500 focus:ring-2">
-                                    <label for="isLegalisation{{ $loop->index }}"
-                                        class="w-full py-3 ms-2 text-sm text-gray-900 font-semibold">{{ $isLegalisationLabel }}</label>
-                                </div>
-                            </li>
-                        @endforeach
-                    </ul>
-                    <x-input-error :messages="$errors->get('selectedChange')" class="mt-2" />
-                </div>
-            @endif
+            @if ($selectedAppType != 6)
+                @if ($selectedAppType == 2 || $selectedAppType == 3)
+                    <div class="w-1/3">
+                        <x-input-label for="isLegalisation" :value="__('Дали е легализација?')" />
+                        <ul
+                            class="items-center w-full text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg sm:flex">
+                            @foreach ($isLegalisation as $isLegalisationLabel => $isLegalisationValue)
+                                <li class="flex w-full border-b border-gray-200 sm:border-b-0">
+                                    <div class="flex items-center ps-3 w-1/3">
+                                        <input wire:model='isLegalisation' id="isLegalisation{{ $loop->index }}"
+                                            type="radio" value="{{ $isLegalisationValue }}" name="isLegalisation"
+                                            class="w-4 h-4 text-gray-600 bg-gray-100 border-gray-300 focus:ring-gray-500 focus:ring-2">
+                                        <label for="isLegalisation{{ $loop->index }}"
+                                            class="w-full py-3 ms-2 text-sm text-gray-900 font-semibold">{{ $isLegalisationLabel }}</label>
+                                    </div>
+                                </li>
+                            @endforeach
+                        </ul>
+                        <x-input-error :messages="$errors->get('selectedChange')" class="mt-2" />
+                    </div>
+                @endif
         </div>
 
         <div class="flex w-full mt-4 gap-4">
@@ -253,15 +253,140 @@
             </div>
         </div>
 
+        <div class="flex w-full mt-4 gap-4">
+            @if ($selectedAppType == 4 || $selectedAppType == 7 || $selectedAppType == 8)
+                <!-- Reg Number -->
+                <div class="{{ $selectedAppType == 4 ? 'w-1/2' : 'w-full' }}">
+                    <x-input-label for="reg_number" :value="__('Регистерски Број')" />
+                    <x-text-input wire:model="reg_number " id="reg_number " class="block mt-1 w-full" type="text"
+                        name="reg_number " autofocus autocomplete="reg_number " />
+                    <x-input-error :messages="$errors->get('reg_number ')" class="mt-2" />
+                </div>
+            @endif
 
-        <div class="flex justify-between">
-            <a wire:navigate href="{{ route('fuel.all') }}"
-                class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150 mt-12">
-                {{ __('Назад') }}
-            </a>
-            <x-primary-button class="mt-12 ">
-                {{ __('Додај') }}
-            </x-primary-button>
+            @if ($selectedAppType == 4)
+                <!-- ModificationType -->
+                <div class="w-1/2">
+                    <x-input-label for="selectedModificationType" :value="__('Вид на Преправка / Поправка')" />
+                    <select wire:model="selectedModificationType"
+                        class="block mt-1 w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
+                        <option value="" selected> -- Одбери Вид на Преправка / Поправка -- </option>
+                        @foreach ($modificationTypes as $modificationType)
+                            <option value="{{ $modificationType->id }}">
+                                {{ $modificationType->modification_name }}
+                            </option>
+                        @endforeach
+                    </select>
+                    <x-input-error :messages="$errors->get('selectedModificationType')" class="mt-2" />
+                </div>
+            @endif
         </div>
+
+
+        @if ($selectedAppType == 4)
+            <div class="flex w-full mt-4 gap-4">
+                <!-- mod_repair_note -->
+                <div class="w-1/2">
+                    <x-input-label for="mod_repair_note" :value="__('Забелешка за преправка/поправка')" />
+                    <x-text-input wire:model="mod_repair_note " id="mod_repair_note " class="block mt-1 w-full"
+                        type="text" name="mod_repair_note " autofocus autocomplete="mod_repair_note " />
+                    <x-input-error :messages="$errors->get('mod_repair_note ')" class="mt-2" />
+                </div>
+
+
+                <!-- Modified Or Repaired -->
+                <div class="w-1/2">
+                    <x-input-label for="modified_or_repaired" :value="__('Преправено или Поправено?')" />
+                    <select wire:model="modified_or_repaired"
+                        class="block mt-1 w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
+                        <option value="" selected> -- Одбери дали е Преправено или Поправено -- </option>
+                        @foreach ($modOrRepaired as $modOrRepair)
+                            <option value="{{ $modOrRepair->id }}">{{ $modOrRepair->name }}
+                            </option>
+                        @endforeach
+                    </select>
+                    <x-input-error :messages="$errors->get('modified_or_repaired')" class="mt-2" />
+                </div>
+            </div>
+        @endif
+
+
+        @if ($selectedAppType == 7 || $selectedAppType == 8)
+            <div class="flex w-full mt-4 gap-4">
+                <!-- Soobrakjajna -->
+                <div class="w-1/3">
+                    <x-input-label for="traffic_permit_nr" :value="__('Број на сообраќајна')" />
+                    <x-text-input wire:model="traffic_permit_nr " id="traffic_permit_nr " class="block mt-1 w-full"
+                        type="text" name="traffic_permit_nr " autofocus autocomplete="traffic_permit_nr " />
+                    <x-input-error :messages="$errors->get('traffic_permit_nr ')" class="mt-2" />
+                </div>
+
+                <!-- God na Proizvodstvo -->
+                <div class="w-1/3">
+                    <x-input-label for="production_year" :value="__('Година на производство')" />
+                    <x-text-input wire:model="production_year " id="production_year " class="block mt-1 w-full"
+                        type="text" name="production_year " autofocus autocomplete="production_year " />
+                    <x-input-error :messages="$errors->get('production_year ')" class="mt-2" />
+                </div>
+
+
+                <!-- Вид на возило -->
+                <div class="w-1/3">
+                    <x-input-label for="vehicle_type_id " :value="__('Вид на возило')" />
+                    <select wire:model="vehicle_type_id "
+                        class="block mt-1 w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
+                        <option value="" selected> -- Одбери Вид на возило -- </option>
+                        @foreach ($selectedVehicleTypes as $selectedVehicleType)
+                            <option value="{{ $selectedVehicleType->id }}">
+                                {{ $selectedVehicleType->vehicle_type }}
+                            </option>
+                        @endforeach
+                    </select>
+                    <x-input-error :messages="$errors->get('vehicle_type_id')" class="mt-2" />
+                </div>
+            </div>
+        @endif
+
+        @if ($selectedAppType == 7 || $selectedAppType == 8)
+            <div class="flex w-full mt-4 gap-4">
+                <!-- Број на одобрение -->
+                <div class="w-1/3">
+                    <x-input-label for="traffic_permit_nr" :value="__('Број на одобрение')" />
+                    <x-text-input wire:model="traffic_permit_nr " id="traffic_permit_nr " class="block mt-1 w-full"
+                        type="text" name="traffic_permit_nr " autofocus autocomplete="traffic_permit_nr " />
+                    <x-input-error :messages="$errors->get('traffic_permit_nr ')" class="mt-2" />
+                </div>
+
+                <!-- Датум на одобрение/потврда -->
+                <div class="w-1/3">
+                    <x-input-label for="approval_date" :value="__('Датум на одобрение/потврда')" />
+                    <input wire:model='approval_date' type="date" name="approval_date" id="approval_date"
+                        class="block mt-1 w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
+                    <x-input-error :messages="$errors->get('approval_date ')" class="mt-2" />
+                </div>
+
+
+                <!-- Потврда издадена од -->
+                <div class="w-1/3">
+                    <x-input-label for="cert_issued_by " :value="__('Потврда издадена од')" />
+                    <x-text-input wire:model="cert_issued_by " id="cert_issued_by " class="block mt-1 w-full"
+                        type="text" name="cert_issued_by " autofocus autocomplete="cert_issued_by " />
+                    <x-input-error :messages="$errors->get('cert_issued_by')" class="mt-2" />
+                </div>
+            </div>
+        @endif
+        @endif
+
+
+            <div class="flex justify-between content-center">
+                <a wire:navigate href="{{ route('fuel.all') }}"
+                    class="mr-4 inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150 mt-12">
+                    {{ __('Назад') }}
+                </a>
+                <x-primary-button class="mt-12 ">
+                    {{ __('Додај') }}
+                </x-primary-button>
+            </div>
+
     </form>
 </div>
