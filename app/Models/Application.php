@@ -31,6 +31,7 @@ class Application extends Model
 
     protected $fillable = [
         'app_type_id',
+        'app_date',
         'user_id',
         'customer_id',
         'mediator_id',
@@ -51,6 +52,7 @@ class Application extends Model
         'engine_type',
         'engine_number',
         'is_correction',
+        'is_legalisation',
         'is_change',
         'note',
         'agreed_price',
@@ -58,8 +60,8 @@ class Application extends Model
         'mod_repair_note',
         'traffic_permit_nr',
         'production_year',
-        'application_number',
-        'application_date',
+        'approval_number',
+        'approval_date',
         'cert_issued_by',
 
     ];

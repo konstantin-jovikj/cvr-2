@@ -16,6 +16,8 @@ use App\Models\ModificationType;
 use App\Models\ModifiedOrRepaired;
 use App\Models\Type;
 use App\Models\VehicleType;
+use Illuminate\Support\Facades\Validator;
+
 
 class AddApplication extends Component
 {
@@ -36,6 +38,16 @@ class AddApplication extends Component
     public $modOrRepaired;
     public $traffic_permit_nr;
     public $vehicle_type_id;
+    public $vin_number ='';
+    public $engine_type = '';
+    public $engine_number = '';
+    public $note = '';
+    public $agreed_price = '';
+    public $mod_repair_note = '';
+    public $reg_number = '';
+    public $production_year = '';
+    public $approval_date = '';
+    public $cert_issued_by = '';
 
     public $selectedAppTypeName = null;
     public $selectedMediator = null;
@@ -46,6 +58,11 @@ class AddApplication extends Component
     public $selectedModificationType = null;
     public $selectedAppType;
     public $selectedVehicleTypes = null;
+    public $selectedIsLegalisation = null;
+    public $selectedCorrection = null;
+    public $selectedModOrRepaired = null;
+    public $selectedVehicleTypeId = null;
+    public $selectedConfirmation = null;
 
 
     public function mount(Customer $customer)
@@ -93,6 +110,104 @@ class AddApplication extends Component
 
     public function addApplication()
     {
-        dd($this->selected_app_type_name);
+        $rules = [
+            'app_type_id' => 'required',
+            'user_id' => 'required',
+            'app_date' => 'required',
+            'customer_id' => 'required',
+            'mediator_id' => 'required',
+            'category_id' => 'required',
+            'manufacturer_id' => 'required',
+            'brand_id' => 'required',
+            'type_id' => 'required',
+            'vin_number' => 'required',
+            'engine_type' => 'required',
+            'engine_number' => 'required',
+            'confirmation_id' => 'required',
+            'note' => 'required',
+            'agreed_price' => 'required',
+
+        ];
+
+        if ($this->selectedAppType == 1) {
+            $rules['selectedConfirmation'] = 'required';
+            $rules['selectedCorrection'] = 'required';
+        } else {
+            unset($rules['selectedConfirmation']);
+            unset($rules['selectedCorrection']);
+        }
+
+        if ($this->selectedAppType == 2 || $this->selectedAppType == 3) {
+            $rules['selectedIsLegalisation'] = 'required';
+        } else {
+            unset($rules['selectedIsLegalisation']);
+        }
+
+        if ($this->selectedAppType == 4) {
+            $rules['reg_number'] = 'required';
+            $rules['selectedModificationType'] = 'required';
+            $rules['mod_repair_note'] = '';
+            $rules['selectedModOrRepaired'] = 'required';
+        } else {
+            unset($rules['reg_number']);
+            unset($rules['selectedModificationType']);
+            unset($rules['mod_repair_note']);
+            unset($rules['selectedModOrRepaired']);
+        }
+
+        if ($this->selectedAppType == 6) {
+            $rules = [];
+        }
+
+        if ($this->selectedAppType == 7 || $this->selectedAppType == 8) {
+            $rules['reg_number'] = 'required';
+            $rules['traffic_permit_nr'] = 'required';
+            $rules['production_year'] = 'required';
+            $rules['selectedVehicleTypeId'] = 'required';
+            $rules['approval_date'] = 'required';
+            $rules['cert_issued_by'] = 'required';
+        } else {
+            unset($rules['reg_number']);
+            unset($rules['traffic_permit_nr']);
+            unset($rules['production_year']);
+            unset($rules['selectedVehicleTypeId']);
+            unset($rules['approval_date']);
+            unset($rules['cert_issued_by']);
+        }
+
+        $validator = Validator::make(
+            [
+                'app_type_id' => $this->selectedAppType,
+                'user_id' => auth()->user()->id,
+                'app_date' => $this->appDate,
+                'customer_id' => $this->currentCustomer->id,
+                'mediator_id' => $this->selectedMediator,
+                'category_id' => $this->selectedCategory,
+                'manufacturer_id' => $this->selectedManufacturer,
+                'brand_id' => $this->selectedBrand,
+                'type_id' => $this->selectedType,
+                'vin_number' => $this->vin_number,
+                'engine_type' => $this->engine_type,
+                'engine_number' => $this->engine_number,
+                'confirmation_id' => $this->selectedConfirmation,
+                'note' => $this->note,
+                'agreed_price' => $this->agreed_price,
+                'is_correction' =>$this->selectedCorrection,
+                'is_legalisation' => $this->selectedIsLegalisation,
+                'reg_number' =>$this->reg_number,
+                'modification_id' => $this->selectedModificationType->id,
+                'mod_repair_note' => $this->mod_repair_note,
+                'mod_or_rep_id' => $this->selectedModOrRepaired,
+                'traffic_permit_nr' => $this->traffic_permit_nr,
+                'production_year' => $this->production_year,
+                'vehicle_type_id' => $this->selectedVehicleTypeId,
+                'approval_date' => $this->approval_date,
+                'cert_issued_by' => $this->cert_issued_by
+            ],
+            $rules,
+            // $this->customMessages()
+        );
+
+        $validator->validate();
     }
 }

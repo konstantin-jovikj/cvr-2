@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('applications', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('app_type_id');
+            $table->dateTime('app_date')->default(now());
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('customer_id');
             $table->unsignedBigInteger('mediator_id');

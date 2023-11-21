@@ -1,4 +1,4 @@
-<div class="flex flex-col justify-center items-center mx-auto w-full sm:max-w-5xl h-auto  mt-6">
+<div class="flex flex-col justify-center items-center mx-auto w-full sm:max-w-5xl h-auto  mt-6 mb-32">
     {{-- Customer Details --}}
     <div class="bg-white w-full shadow-md overflow-hidden sm:rounded-lg px-6 py-4 mb-2">
 
@@ -58,7 +58,7 @@
                             @foreach ($isLegalisation as $isLegalisationLabel => $isLegalisationValue)
                                 <li class="flex w-full border-b border-gray-200 sm:border-b-0">
                                     <div class="flex items-center ps-3 w-1/3">
-                                        <input wire:model='isLegalisation' id="isLegalisation{{ $loop->index }}"
+                                        <input wire:model='selectedIsLegalisation' id="selectedIsLegalisation{{ $loop->index }}"
                                             type="radio" value="{{ $isLegalisationValue }}" name="isLegalisation"
                                             class="w-4 h-4 text-gray-600 bg-gray-100 border-gray-300 focus:ring-gray-500 focus:ring-2">
                                         <label for="isLegalisation{{ $loop->index }}"
@@ -205,13 +205,13 @@
             @if ($selectedAppType == 1)
                 <!-- is_correction  -->
                 <div class="w-1/2">
-                    <x-input-label for="isCorrection" :value="__('Преправка')" />
+                    <x-input-label for="selectedCorrection" :value="__('Преправка')" />
                     <ul
                         class="items-center w-full text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg sm:flex">
                         @foreach ($isCorrection as $isCorrectionLabel => $isCorrectionValue)
                             <li class="flex w-full border-b border-gray-200 sm:border-b-0">
                                 <div class="flex items-center ps-3 w-1/3">
-                                    <input wire:model='selectedChange' id="isCorrection{{ $loop->index }}"
+                                    <input wire:model='selectedCorrection' id="selectedCorrection{{ $loop->index }}"
                                         type="radio" value="{{ $isCorrectionValue }}" name="isCorrection"
                                         class="w-4 h-4 text-gray-600 bg-gray-100 border-gray-300 focus:ring-gray-500 focus:ring-2">
                                     <label for="isCorrection{{ $loop->index }}"
@@ -220,7 +220,7 @@
                             </li>
                         @endforeach
                     </ul>
-                    <x-input-error :messages="$errors->get('selectedChange')" class="mt-2" />
+                    <x-input-error :messages="$errors->get('selectedCorrection')" class="mt-2" />
                 </div>
             @endif
 
@@ -246,10 +246,10 @@
 
             <!-- Agreed Price  -->
             <div class="w-1/2">
-                <x-input-label for="agreedPrice " :value="__('Договорена Цена')" />
-                <x-text-input wire:model="agreedPrice " id="agreedPrice " class="block mt-1 w-full" type="text"
-                    name="agreedPrice " autofocus autocomplete="agreedPrice " />
-                <x-input-error :messages="$errors->get('agreedPrice ')" class="mt-2" />
+                <x-input-label for="agreed_price " :value="__('Договорена Цена')" />
+                <x-text-input wire:model="agreed_price " id="agreed_price " class="block mt-1 w-full" type="text"
+                    name="agreed_price " autofocus autocomplete="agreed_price " />
+                <x-input-error :messages="$errors->get('agreed_price ')" class="mt-2" />
             </div>
         </div>
 
@@ -258,9 +258,9 @@
                 <!-- Reg Number -->
                 <div class="{{ $selectedAppType == 4 ? 'w-1/2' : 'w-full' }}">
                     <x-input-label for="reg_number" :value="__('Регистерски Број')" />
-                    <x-text-input wire:model="reg_number " id="reg_number " class="block mt-1 w-full" type="text"
-                        name="reg_number " autofocus autocomplete="reg_number " />
-                    <x-input-error :messages="$errors->get('reg_number ')" class="mt-2" />
+                    <x-text-input wire:model="reg_number" id="reg_number " class="block mt-1 w-full" type="text"
+                        name="reg_number " autofocus autocomplete="reg_number" />
+                    <x-input-error :messages="$errors->get('reg_number')" class="mt-2" />
                 </div>
             @endif
 
@@ -296,8 +296,8 @@
 
                 <!-- Modified Or Repaired -->
                 <div class="w-1/2">
-                    <x-input-label for="modified_or_repaired" :value="__('Преправено или Поправено?')" />
-                    <select wire:model="modified_or_repaired"
+                    <x-input-label for="selectedModOrRepaired" :value="__('Преправено или Поправено?')" />
+                    <select wire:model="selectedModOrRepaired"
                         class="block mt-1 w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
                         <option value="" selected> -- Одбери дали е Преправено или Поправено -- </option>
                         @foreach ($modOrRepaired as $modOrRepair)
@@ -305,7 +305,7 @@
                             </option>
                         @endforeach
                     </select>
-                    <x-input-error :messages="$errors->get('modified_or_repaired')" class="mt-2" />
+                    <x-input-error :messages="$errors->get('selectedModOrRepaired')" class="mt-2" />
                 </div>
             </div>
         @endif
@@ -316,7 +316,7 @@
                 <!-- Soobrakjajna -->
                 <div class="w-1/3">
                     <x-input-label for="traffic_permit_nr" :value="__('Број на сообраќајна')" />
-                    <x-text-input wire:model="traffic_permit_nr " id="traffic_permit_nr " class="block mt-1 w-full"
+                    <x-text-input wire:model="traffic_permit_nr" id="traffic_permit_nr " class="block mt-1 w-full"
                         type="text" name="traffic_permit_nr " autofocus autocomplete="traffic_permit_nr " />
                     <x-input-error :messages="$errors->get('traffic_permit_nr ')" class="mt-2" />
                 </div>
@@ -324,7 +324,7 @@
                 <!-- God na Proizvodstvo -->
                 <div class="w-1/3">
                     <x-input-label for="production_year" :value="__('Година на производство')" />
-                    <x-text-input wire:model="production_year " id="production_year " class="block mt-1 w-full"
+                    <x-text-input wire:model="production_year" id="production_year " class="block mt-1 w-full"
                         type="text" name="production_year " autofocus autocomplete="production_year " />
                     <x-input-error :messages="$errors->get('production_year ')" class="mt-2" />
                 </div>
@@ -332,8 +332,8 @@
 
                 <!-- Вид на возило -->
                 <div class="w-1/3">
-                    <x-input-label for="vehicle_type_id " :value="__('Вид на возило')" />
-                    <select wire:model="vehicle_type_id "
+                    <x-input-label for="selectedVehicleTypeId" :value="__('Вид на возило')" />
+                    <select wire:model="selectedVehicleTypeId"
                         class="block mt-1 w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
                         <option value="" selected> -- Одбери Вид на возило -- </option>
                         @foreach ($selectedVehicleTypes as $selectedVehicleType)
@@ -342,7 +342,7 @@
                             </option>
                         @endforeach
                     </select>
-                    <x-input-error :messages="$errors->get('vehicle_type_id')" class="mt-2" />
+                    <x-input-error :messages="$errors->get('selectedVehicleTypeId')" class="mt-2" />
                 </div>
             </div>
         @endif
@@ -368,8 +368,8 @@
 
                 <!-- Потврда издадена од -->
                 <div class="w-1/3">
-                    <x-input-label for="cert_issued_by " :value="__('Потврда издадена од')" />
-                    <x-text-input wire:model="cert_issued_by " id="cert_issued_by " class="block mt-1 w-full"
+                    <x-input-label for="cert_issued_by" :value="__('Потврда издадена од')" />
+                    <x-text-input wire:model="cert_issued_by" id="cert_issued_by " class="block mt-1 w-full"
                         type="text" name="cert_issued_by " autofocus autocomplete="cert_issued_by " />
                     <x-input-error :messages="$errors->get('cert_issued_by')" class="mt-2" />
                 </div>
