@@ -32,13 +32,14 @@ return new class extends Migration
             $table->unsignedBigInteger('note_id');
 
             $table->string('vin_number')->unique();
-            $table->string('engine_type');
+            $table->string('engine_type')->nullable();
             $table->string('engine_number')->unique();
-            $table->boolean('is_correction');
+            $table->boolean('is_correction')->default(0);
+            $table->boolean('is_legalisation')->default(0);
             $table->string('is_change')->nullable();
             $table->string('note')->nullable();
             $table->string('agreed_price')->nullable();
-            $table->string('reg_number');
+            $table->string('reg_number')->nullable();
             $table->string('mod_repair_note')->nullable();
             $table->string('traffic_permit_nr')->nullable();
             $table->string('production_year')->nullable();

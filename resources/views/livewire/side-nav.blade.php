@@ -69,8 +69,8 @@
             class="cursor-pointer p-2 hover:bg-sky-600 rounded-md mt-1 bg-gray-800 block">Гориво</a>
         <a wire:navigate href="{{ route('colors.all') }}"
             class="cursor-pointer p-2 hover:bg-sky-600 rounded-md mt-1 bg-gray-800 block">Боја</a>
-        <a wire:navigate href="#"
-            class="cursor-pointer p-2 hover:bg-sky-600 rounded-md mt-1 bg-gray-800 block">Прилог Документи</a>
+        <a wire:navigate href="{{route('modifications.all')}}"
+            class="cursor-pointer p-2 hover:bg-sky-600 rounded-md mt-1 bg-gray-800 block">Видови на Преправки/Поправки</a>
         <a wire:navigate href="#"
             class="cursor-pointer p-2 hover:bg-sky-600 rounded-md mt-1 bg-gray-800 block">Наод - Табели</a>
         <a wire:navigate href="{{ route('notes.all') }}"

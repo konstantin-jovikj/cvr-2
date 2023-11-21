@@ -31,6 +31,9 @@ use App\Livewire\BasicData\Manufacturers\ManufacturersTable;
 use App\Livewire\BasicData\Mediators\AddMediator;
 use App\Livewire\BasicData\Mediators\EditMediator;
 use App\Livewire\BasicData\Mediators\MediatorsTable;
+use App\Livewire\BasicData\ModificationTypes\AddModification;
+use App\Livewire\BasicData\ModificationTypes\EditModification;
+use App\Livewire\BasicData\ModificationTypes\ModificationTable;
 use App\Livewire\BasicData\Notes\AddNote;
 use App\Livewire\BasicData\Notes\EditNote;
 use App\Livewire\BasicData\Notes\NotesTable;
@@ -57,6 +60,7 @@ use App\Livewire\SuperAdmin\ItLocalDep;
 use App\Livewire\SuperAdmin\MvrSuperAdminDashboard;
 use App\Livewire\SuperAdmin\StpSuperAdminDashboard;
 use App\Livewire\SuperAdmin\SuperAdminDashboard;
+use App\Models\ModificationType;
 use App\Models\Role;
 use Illuminate\Support\Facades\Route;
 
@@ -162,6 +166,10 @@ Route::get('/it/applicationdocs/', ManageAppTypeDocs::class)->name('application_
 Route::get('/it/mediators/all', MediatorsTable::class)->name('mediators.all');
 Route::get('/it/mediator/add', AddMediator::class)->name('mediator.add');
 Route::get('/it/mediator/{mediator}/edit', EditMediator::class)->name('mediator.edit');
+
+Route::get('/it/modifications/all', ModificationTable::class)->name('modifications.all');
+Route::get('/it/modification/add', AddModification::class)->name('modification.add');
+Route::get('/it/modification/{modificationtype}/edit', EditModification::class)->name('modification.edit');
 
 
 Route::get('/it/customers/all', CustomersTable::class)->name('customers.all');

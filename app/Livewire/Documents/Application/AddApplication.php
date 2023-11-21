@@ -26,14 +26,17 @@ class AddApplication extends Component
     public $brands;
     public $types;
     public $confirmations;
-    public $isCnanges;
+    public $isCorrection;
+    public $isChange;
+    public $isLegalisation;
 
-    public $selected_app_type_name = null;
+    public $selectedAppTypeName = null;
     public $selectedMediator = null;
     public $selectedCategory = null;
     public $selectedManufacturer = null;
     public $selectedBrand = null;
     public $selectedType = null;
+    public $selectedAppType;
 
     public function mount(Customer $customer)
     {
@@ -48,7 +51,8 @@ class AddApplication extends Component
         $this->brands = [];
         $this->types = [];
         $this->confirmations = ConfirmationType::all();
-        $this->isCnanges = ['Има Преправка' => 1, 'Нема Преправка' => 0];
+        $this->isCorrection = ['Има_Преправка' => 1, 'Нема_Преправка' => 0];
+        $this->isLegalisation = ['Да' => 1, 'Не' => 0];
     }
     public function render()
     {
@@ -68,9 +72,14 @@ class AddApplication extends Component
         $this->selectedType = null;
     }
 
+    public function updatedSelectedAppTypeName($appType)
+    {
+        $this->selectedAppType = $appType;
+        // $this->validateOnly('selectedAppTypeName');
+    }
+
     public function addApplication()
     {
-        $allFormValues = $this->input();
-        dd($allFormValues);
+        dd($this->selected_app_type_name);
     }
 }

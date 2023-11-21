@@ -47,5 +47,6 @@ class DatabaseSeeder extends Seeder
         $this->call([PictureSeeder::class]);
         // $this->call([AttachmentDocumentSeeder::class]);
         $this->call([RelateddocumentsSeeder::class]);
+        $this->call([ModificationTypeSeeder::class]);
     }
 }
