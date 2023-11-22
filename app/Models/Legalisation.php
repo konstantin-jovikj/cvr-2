@@ -3,17 +3,12 @@
 namespace App\Models;
 
 use App\Models\Application;
-use App\Models\InquiryApplication;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class ConfirmationType extends Model
+class Legalisation extends Model
 {
     use HasFactory;
-
-    protected $fillable = [
-        'confirmation_name',
-    ];
 
     public function applications()
     {

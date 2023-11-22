@@ -14,14 +14,16 @@ use App\Models\Picture;
 use App\Models\Category;
 use App\Models\Customer;
 use App\Models\Mediator;
+use App\Models\Correction;
 use App\Models\VehicleType;
+use App\Models\Legalisation;
 use App\Models\Manufacturer;
 use App\Models\ApplicationType;
-use App\Models\ConfirmationType;
-use App\Models\ModificationType;
 
-use App\Models\ModifiedOrRepaired;
+use App\Models\ConfirmationType;
 // use App\Models\AttachmentDocuments;
+use App\Models\ModificationType;
+use App\Models\ModifiedOrRepaired;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -29,7 +31,10 @@ class Application extends Model
 {
     use HasFactory;
 
+
+
     protected $fillable = [
+        'id',
         'app_type_id',
         'app_date',
         'user_id',
@@ -40,7 +45,6 @@ class Application extends Model
         'brand_id',
         'type_id',
         'confirmation_id',
-        // 'attached_doc_id',
         'modification_id',
         'mod_or_rep_id',
         'vehicle_type_id',
@@ -48,11 +52,11 @@ class Application extends Model
         'color_id',
         'shape_id',
         'note_id',
+        'correction_id',
+        'legalisation_id',
         'vin_number',
         'engine_type',
         'engine_number',
-        'is_correction',
-        'is_legalisation',
         'is_change',
         'note',
         'agreed_price',
@@ -63,7 +67,8 @@ class Application extends Model
         'approval_number',
         'approval_date',
         'cert_issued_by',
-
+        'created_at',
+        'updated_at',
     ];
 
     public function appType()
@@ -154,5 +159,15 @@ class Application extends Model
     public function pictures()
     {
         return $this->bolongsToMany(Picture::class);
+    }
+
+    public function corrections()
+    {
+        return $this->belongsTo(Correction::class);
+    }
+
+    public function legalisations()
+    {
+        return $this->belongsTo(Legalisation::class);
     }
 }

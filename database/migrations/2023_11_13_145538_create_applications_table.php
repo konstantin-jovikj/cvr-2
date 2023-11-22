@@ -13,30 +13,32 @@ return new class extends Migration
     {
         Schema::create('applications', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('app_type_id');
-            $table->dateTime('app_date')->default(now());
-            $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('customer_id');
-            $table->unsignedBigInteger('mediator_id');
-            $table->unsignedBigInteger('category_id');
-            $table->unsignedBigInteger('manufacturer_id');
-            $table->unsignedBigInteger('brand_id');
-            $table->unsignedBigInteger('type_id');
-            $table->unsignedBigInteger('confirmation_id');
+            $table->unsignedBigInteger('app_type_id')->nullable();
+            $table->dateTime('app_date')->default(now())->nullable();
+            $table->unsignedBigInteger('user_id')->nullable();
+            $table->unsignedBigInteger('customer_id')->nullable();
+            $table->unsignedBigInteger('mediator_id')->nullable();
+            $table->unsignedBigInteger('category_id')->nullable();
+            $table->unsignedBigInteger('manufacturer_id')->nullable();
+            $table->unsignedBigInteger('brand_id')->nullable();
+            $table->unsignedBigInteger('type_id')->nullable();
+            $table->unsignedBigInteger('confirmation_id')->nullable();
             // $table->unsignedBigInteger('attached_doc_id');
-            $table->unsignedBigInteger('modification_id');
-            $table->unsignedBigInteger('mod_or_rep_id');
-            $table->unsignedBigInteger('vehicle_type_id');
-            $table->unsignedBigInteger('fuel_id');
-            $table->unsignedBigInteger('color_id');
-            $table->unsignedBigInteger('shape_id');
-            $table->unsignedBigInteger('note_id');
+            $table->unsignedBigInteger('modification_id')->nullable();
+            $table->unsignedBigInteger('mod_or_rep_id')->nullable();
+            $table->unsignedBigInteger('vehicle_type_id')->nullable();
+            $table->unsignedBigInteger('fuel_id')->nullable();
+            $table->unsignedBigInteger('color_id')->nullable();
+            $table->unsignedBigInteger('shape_id')->nullable();
+            $table->unsignedBigInteger('note_id')->nullable();
+            $table->unsignedBigInteger('correction_id')->nullable();
+            $table->unsignedBigInteger('legalisation_id')->nullable();
 
-            $table->string('vin_number')->unique();
+            $table->string('vin_number')->nullable();
             $table->string('engine_type')->nullable();
-            $table->string('engine_number')->unique();
-            $table->boolean('is_correction')->default(0);
-            $table->boolean('is_legalisation')->default(0);
+            $table->string('engine_number')->nullable();
+            // $table->boolean('is_correction')->default(0)->nullable();
+            // $table->boolean('is_legalisation')->default(0)->nullable();
             $table->string('is_change')->nullable();
             $table->string('note')->nullable();
             $table->string('agreed_price')->nullable();
@@ -45,7 +47,7 @@ return new class extends Migration
             $table->string('traffic_permit_nr')->nullable();
             $table->string('production_year')->nullable();
             $table->string('approval_number')->nullable();
-            $table->date('approval_date')->nullable();
+            $table->dateTime('approval_date')->default(now())->nullable();
             $table->string('cert_issued_by')->nullable();
 
 
@@ -68,6 +70,8 @@ return new class extends Migration
             $table->foreign('color_id')->references('id')->on('colors');
             $table->foreign('shape_id')->references('id')->on('shapes');
             $table->foreign('note_id')->references('id')->on('notes');
+            $table->foreign('correction_id')->references('id')->on('corrections');
+            $table->foreign('legalisation_id')->references('id')->on('legalisations');
         });
     }
 

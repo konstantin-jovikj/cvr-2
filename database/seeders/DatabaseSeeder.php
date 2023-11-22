@@ -49,5 +49,7 @@ class DatabaseSeeder extends Seeder
         $this->call([RelateddocumentsSeeder::class]);
         $this->call([ModificationTypeSeeder::class]);
         $this->call([ModifiedOrRepairedSeeder::class]);
+        $this->call([CorrectionSeeder::class]);
+        $this->call([LegalisationSeeder::class]);
     }
 }

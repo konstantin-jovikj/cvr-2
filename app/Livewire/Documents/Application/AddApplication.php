@@ -2,7 +2,7 @@
 
 namespace App\Livewire\Documents\Application;
 
-
+use App\Models\Application;
 use Carbon\Carbon;
 use Livewire\Component;
 use App\Models\Customer;
@@ -10,6 +10,8 @@ use App\Models\ApplicationType;
 use App\Models\Brand;
 use App\Models\Category;
 use App\Models\ConfirmationType;
+use App\Models\Correction;
+use App\Models\Legalisation;
 use App\Models\Manufacturer;
 use App\Models\Mediator;
 use App\Models\ModificationType;
@@ -17,6 +19,7 @@ use App\Models\ModifiedOrRepaired;
 use App\Models\Type;
 use App\Models\VehicleType;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 
 
 class AddApplication extends Component
@@ -31,23 +34,26 @@ class AddApplication extends Component
     public $brands;
     public $types;
     public $confirmations;
-    public $isCorrection;
+    public $isCorrection = 0;
     public $isChange;
     public $isLegalisation;
     public $modificationTypes;
     public $modOrRepaired;
-    public $traffic_permit_nr;
+    public $trafficPermitNr;
     public $vehicle_type_id;
-    public $vin_number ='';
-    public $engine_type = '';
-    public $engine_number = '';
+    public $vinNumber = null;
+    public $engineType = '';
+    public $engineNumber = null;
     public $note = '';
-    public $agreed_price = '';
-    public $mod_repair_note = '';
-    public $reg_number = '';
-    public $production_year = '';
-    public $approval_date = '';
-    public $cert_issued_by = '';
+    public $agreedPrice = '';
+    public $modRepairNote = '';
+    public $regNumber = '';
+    public $productionYear = '';
+    public $approvalNumber = '';
+    public $approvalDate;
+    public $certIssuedBy = '';
+    public $corrections;
+    public $legalisations;
 
     public $selectedAppTypeName = null;
     public $selectedMediator = null;
@@ -55,21 +61,20 @@ class AddApplication extends Component
     public $selectedManufacturer = null;
     public $selectedBrand = null;
     public $selectedType = null;
-    public $selectedModificationType = null;
+    public $selectedModificationType;
     public $selectedAppType;
     public $selectedVehicleTypes = null;
-    public $selectedIsLegalisation = null;
-    public $selectedCorrection = null;
+    public $selectedIsLegalisation;
+    public $selectedCorrection = 1;
     public $selectedModOrRepaired = null;
     public $selectedVehicleTypeId = null;
-    public $selectedConfirmation = null;
+    public $selectedConfirmation;
+
 
 
     public function mount(Customer $customer)
     {
         $this->appDate = date('Y-m-d');
-        // $this->appDate = date('d-m-Y', strtotime($this->appDate));
-        // $this->appDate = strtotime($this->appDate);
         $this->currentCustomer = $customer;
         $this->appTypes = ApplicationType::all();
         $this->mediators = Mediator::all();
@@ -78,8 +83,8 @@ class AddApplication extends Component
         $this->brands = [];
         $this->types = [];
         $this->confirmations = ConfirmationType::all();
-        $this->isCorrection = ['Има_Преправка' => 1, 'Нема_Преправка' => 0];
-        $this->isLegalisation = ['Да' => 1, 'Не' => 0];
+        $this->corrections = Correction::all();
+        $this->legalisations = Legalisation::all();
         $this->modificationTypes = ModificationType::all();
         $this->modOrRepaired = ModifiedOrRepaired::all();
         $this->selectedVehicleTypes = VehicleType::all();
@@ -111,27 +116,30 @@ class AddApplication extends Component
     public function addApplication()
     {
         $rules = [
-            'app_type_id' => 'required',
-            'user_id' => 'required',
-            'app_date' => 'required',
-            'customer_id' => 'required',
-            'mediator_id' => 'required',
-            'category_id' => 'required',
-            'manufacturer_id' => 'required',
-            'brand_id' => 'required',
-            'type_id' => 'required',
-            'vin_number' => 'required',
-            'engine_type' => 'required',
-            'engine_number' => 'required',
-            'confirmation_id' => 'required',
+            'selectedAppTypeName' => 'required',
+            'appDate' => 'required',
+            'selectedMediator' => 'required',
+            'selectedCategory' => 'required',
+            'selectedManufacturer' => 'required',
+            'selectedBrand' => 'required',
+            'selectedType' => 'required',
+            'vinNumber' => [
+                'required',
+                'regex:/^[^QqIiOo\s]{17}$/',
+                Rule::unique('applications', 'vin_number')->whereNotNull('vin_number'),
+            ],
+            'engineNumber' => [
+                'required',
+                Rule::unique('applications', 'engine_number')->whereNotNull('engine_number'),
+            ],
             'note' => 'required',
-            'agreed_price' => 'required',
-
+            'agreedPrice' => 'required',
+            'isChange' => 'required',
         ];
 
         if ($this->selectedAppType == 1) {
-            $rules['selectedConfirmation'] = 'required';
-            $rules['selectedCorrection'] = 'required';
+                $rules['selectedConfirmation'] = 'required';
+                $rules['selectedCorrection'] = 'required';
         } else {
             unset($rules['selectedConfirmation']);
             unset($rules['selectedCorrection']);
@@ -144,14 +152,14 @@ class AddApplication extends Component
         }
 
         if ($this->selectedAppType == 4) {
-            $rules['reg_number'] = 'required';
+            $rules['regNumber'] = 'required';
             $rules['selectedModificationType'] = 'required';
-            $rules['mod_repair_note'] = '';
+            $rules['modRepairNote'] = '';
             $rules['selectedModOrRepaired'] = 'required';
         } else {
-            unset($rules['reg_number']);
+            unset($rules['regNumber']);
             unset($rules['selectedModificationType']);
-            unset($rules['mod_repair_note']);
+            unset($rules['modRepairNote']);
             unset($rules['selectedModOrRepaired']);
         }
 
@@ -160,54 +168,122 @@ class AddApplication extends Component
         }
 
         if ($this->selectedAppType == 7 || $this->selectedAppType == 8) {
-            $rules['reg_number'] = 'required';
-            $rules['traffic_permit_nr'] = 'required';
-            $rules['production_year'] = 'required';
+            $rules['regNumber'] = 'required';
+            $rules['trafficPermitNr'] = 'required';
+            $rules['productionYear'] = 'required';
             $rules['selectedVehicleTypeId'] = 'required';
-            $rules['approval_date'] = 'required';
-            $rules['cert_issued_by'] = 'required';
+            $rules['approvalNumber'] = 'required';
+            $rules['approvalDate'] = 'required';
+            $rules['certIssuedBy'] = 'required';
         } else {
-            unset($rules['reg_number']);
-            unset($rules['traffic_permit_nr']);
-            unset($rules['production_year']);
+            unset($rules['regNumber']);
+            unset($rules['trafficPermitNr']);
+            unset($rules['productionYear']);
             unset($rules['selectedVehicleTypeId']);
-            unset($rules['approval_date']);
-            unset($rules['cert_issued_by']);
+            unset($rules['approvalNumber']);
+            unset($rules['approvalDate']);
+            unset($rules['certIssuedBy']);
         }
 
         $validator = Validator::make(
             [
-                'app_type_id' => $this->selectedAppType,
-                'user_id' => auth()->user()->id,
-                'app_date' => $this->appDate,
-                'customer_id' => $this->currentCustomer->id,
-                'mediator_id' => $this->selectedMediator,
-                'category_id' => $this->selectedCategory,
-                'manufacturer_id' => $this->selectedManufacturer,
-                'brand_id' => $this->selectedBrand,
-                'type_id' => $this->selectedType,
-                'vin_number' => $this->vin_number,
-                'engine_type' => $this->engine_type,
-                'engine_number' => $this->engine_number,
-                'confirmation_id' => $this->selectedConfirmation,
+                'selectedAppTypeName' => $this->selectedAppTypeName,
+                'appDate' => $this->appDate,
+                'selectedMediator' => $this->selectedMediator,
+                'selectedCategory' => $this->selectedCategory,
+                'selectedManufacturer' => $this->selectedManufacturer,
+                'selectedBrand' => $this->selectedBrand,
+                'selectedType' => $this->selectedType,
+                'vinNumber' => $this->vinNumber,
+                'engineType' => $this->engineType,
+                'engineNumber' => $this->engineNumber,
+                'selectedConfirmation' => $this->selectedConfirmation,
+                'isChange' => $this->isChange,
                 'note' => $this->note,
-                'agreed_price' => $this->agreed_price,
-                'is_correction' =>$this->selectedCorrection,
-                'is_legalisation' => $this->selectedIsLegalisation,
-                'reg_number' =>$this->reg_number,
-                'modification_id' => $this->selectedModificationType->id,
-                'mod_repair_note' => $this->mod_repair_note,
-                'mod_or_rep_id' => $this->selectedModOrRepaired,
-                'traffic_permit_nr' => $this->traffic_permit_nr,
-                'production_year' => $this->production_year,
-                'vehicle_type_id' => $this->selectedVehicleTypeId,
-                'approval_date' => $this->approval_date,
-                'cert_issued_by' => $this->cert_issued_by
+                'agreedPrice' => $this->agreedPrice,
+                'selectedCorrection' =>$this->selectedCorrection,
+                'selectedIsLegalisation' => $this->selectedIsLegalisation,
+                'regNumber' =>$this->regNumber,
+                'selectedModificationType' => $this->selectedModificationType,
+                'modRepairNote' => $this->modRepairNote,
+                'selectedModOrRepaired' => $this->selectedModOrRepaired,
+                'trafficPermitNr' => $this->trafficPermitNr,
+                'productionYear' => $this->productionYear,
+                'selectedVehicleTypeId' => $this->selectedVehicleTypeId,
+                'approvalNumber' => $this->approvalNumber,
+                'approvalDate' => $this->approvalDate,
+                'certIssuedBy' => $this->certIssuedBy
             ],
             $rules,
-            // $this->customMessages()
+            $this->customMessages()
         );
-
+        // dd($rules, $validator);
         $validator->validate();
+
+        Application::create([
+            'app_type_id' => $this->selectedAppType,
+            'user_id' => auth()->user()->id,
+            'app_date' => $this->appDate,
+            'customer_id' => $this->currentCustomer->id,
+            'mediator_id' => $this->selectedMediator,
+            'category_id' => $this->selectedCategory,
+            'manufacturer_id' => $this->selectedManufacturer,
+            'brand_id' => $this->selectedBrand,
+            'type_id' => $this->selectedType,
+            'vin_number' => $this->vinNumber,
+            'engine_type' => $this->engineType,
+            'engine_number' => $this->engineNumber,
+            'confirmation_id' => $this->selectedConfirmation,
+            'is_change' => $this->isChange,
+            'note' => $this->note,
+            'agreed_price' => $this->agreedPrice,
+            'correction_id' =>$this->selectedCorrection,
+            'legalisation_id' => $this->selectedIsLegalisation,
+            'reg_number' =>$this->regNumber,
+            'modification_id' => $this->selectedModificationType,
+            'mod_repair_note' => $this->modRepairNote,
+            'mod_or_rep_id' => $this->selectedModOrRepaired,
+            'traffic_permit_nr' => $this->trafficPermitNr,
+            'production_year' => $this->productionYear,
+            'vehicle_type_id' => $this->selectedVehicleTypeId,
+            'approval_number' => $this->approvalNumber,
+            'approval_date' => $this->approvalDate,
+            'cert_issued_by' => $this->certIssuedBy
+        ]);
+
+        session()->flash('success', 'Барањето е успешно додадено!');
+        $this->reset();
+        return redirect(route('customers.all'));
+    }
+
+    public function customMessages()
+    {
+        return [
+            'selectedAppTypeName.required' => 'Типот на барање задолжителен.',
+            'appDate.required' => 'Датумот на барањето е задолжителен.',
+            'selectedMediator.required' => 'Изборот на посредникот е задолжителен.',
+            'selectedCategory.required' => 'Изборот на категоријата е задолжителен.',
+            'selectedManufacturer.required' => 'Изборот на производителот е задолжителен.',
+            'selectedBrand.required' => 'Изборот на марка е задолжителена.',
+            'selectedType.required' => 'Изборот на тип е задолжителен.',
+            'vinNumber.required' => 'Бројот на шасијата (VIN) е задолжителен.',
+            'vinNumber.regex' => 'Бројот на шасијата (VIN) мора да биде со должина од 17 карактери без Q, I, O, и празни места.',
+            'vinNumber.unique' => 'Бројот на шасијата (VIN) веќе постои.',
+            'engineNumber.required' => 'Бројот на моторот е задолжителен.',
+            'engineNumber.unique' => 'Бројот на моторот веќе постои.',
+            'note.required' => 'Забелешката е задолжителна.',
+            'agreedPrice.required' => 'Договорената цена е задолжителна.',
+            'isChange.required' => 'Статусот на промената е задолжителен.',
+            'selectedConfirmation.required' => 'Изборот на типот на потврдата е задолжителен.',
+            'selectedCorrection.required' => 'Изборот на преправка е задолжителен.',
+            'selectedIsLegalisation.required' => 'Изборот на статусот на легализацијата е задолжителен.',
+            'regNumber.required' => 'Регистарскиот број е задолжителен.',
+            'trafficPermitNr.required' => 'Бројот на сообраќајната дозвола е задолжителен.',
+            'productionYear.required' => 'Годината на производство е задолжителна.',
+            'selectedVehicleTypeId.required' => 'Изборот на типот на возилото е задолжителен.',
+            'approvalNumber.required' => 'Бројот на одобрението е задолжителен.',
+            'approvalDate.required' => 'Датумот на одобрението е задолжителен.',
+            'certIssuedBy.required' => 'Полето за издавач на потврда е задолжително.',
+        ];
     }
 }
