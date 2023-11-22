@@ -34,11 +34,10 @@ return new class extends Migration
             $table->unsignedBigInteger('correction_id')->nullable();
             $table->unsignedBigInteger('legalisation_id')->nullable();
 
+            $table->string('app_number')->nullable();
             $table->string('vin_number')->nullable();
             $table->string('engine_type')->nullable();
             $table->string('engine_number')->nullable();
-            // $table->boolean('is_correction')->default(0)->nullable();
-            // $table->boolean('is_legalisation')->default(0)->nullable();
             $table->string('is_change')->nullable();
             $table->string('note')->nullable();
             $table->string('agreed_price')->nullable();

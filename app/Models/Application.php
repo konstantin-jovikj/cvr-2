@@ -69,6 +69,7 @@ class Application extends Model
         'cert_issued_by',
         'created_at',
         'updated_at',
+        'app_number',
     ];
 
     public function appType()

@@ -12,11 +12,13 @@ use App\Models\Category;
 use App\Models\ConfirmationType;
 use App\Models\Correction;
 use App\Models\Legalisation;
+use App\Models\LocalDepartment;
 use App\Models\Manufacturer;
 use App\Models\Mediator;
 use App\Models\ModificationType;
 use App\Models\ModifiedOrRepaired;
 use App\Models\Type;
+use App\Models\User;
 use App\Models\VehicleType;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
@@ -54,6 +56,7 @@ class AddApplication extends Component
     public $certIssuedBy = '';
     public $corrections;
     public $legalisations;
+    public $app_number = null;
 
     public $selectedAppTypeName = null;
     public $selectedMediator = null;
@@ -123,6 +126,10 @@ class AddApplication extends Component
             'selectedManufacturer' => 'required',
             'selectedBrand' => 'required',
             'selectedType' => 'required',
+            'app_number' => [
+                'required',
+                Rule::unique('applications', 'app_number')->whereNotNull('app_number'),
+            ],
             'vinNumber' => [
                 'required',
                 'regex:/^[^QqIiOo\s]{17}$/',
@@ -194,6 +201,7 @@ class AddApplication extends Component
                 'selectedManufacturer' => $this->selectedManufacturer,
                 'selectedBrand' => $this->selectedBrand,
                 'selectedType' => $this->selectedType,
+                'app_number' => $this->generateAppNumber(),
                 'vinNumber' => $this->vinNumber,
                 'engineType' => $this->engineType,
                 'engineNumber' => $this->engineNumber,
@@ -230,6 +238,7 @@ class AddApplication extends Component
             'manufacturer_id' => $this->selectedManufacturer,
             'brand_id' => $this->selectedBrand,
             'type_id' => $this->selectedType,
+            'app_number' => $this->generateAppNumber(),
             'vin_number' => $this->vinNumber,
             'engine_type' => $this->engineType,
             'engine_number' => $this->engineNumber,
@@ -285,5 +294,26 @@ class AddApplication extends Component
             'approvalDate.required' => 'Датумот на одобрението е задолжителен.',
             'certIssuedBy.required' => 'Полето за издавач на потврда е задолжително.',
         ];
+    }
+
+                //DELOVODEN BROJ//
+
+    public function generateAppNumber()
+    {
+        $user = auth()->user();
+        $localDepartmentId = $user->local_department_id;
+
+        $prefix = LocalDepartment::where('id', $localDepartmentId)->value('local_department_prefix');
+        $month = date('m', strtotime($this->appDate));
+        $year = date('Y', strtotime($this->appDate));
+        $shortYear = substr($year, -2);
+
+        // Count of applications created within the current year
+        $countApp = Application::whereYear('created_at', $year)->count();
+        $countAppPadded = str_pad($countApp + 1, 5, '0', STR_PAD_LEFT);
+
+        $appNumber = $prefix .  $month . $shortYear . '/' . $countAppPadded;
+
+        return $appNumber;
     }
 }
