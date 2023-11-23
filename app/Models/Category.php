@@ -29,4 +29,8 @@ class Category extends Model
         return $this->hasMany(InquiryApplication::class);
     }
 
+    public function applications()
+    {
+        return $this->hasMany(Application::class);
+    }
 }

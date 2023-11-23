@@ -28,6 +28,13 @@
     </div>
     <div class="my-2 bg-gray-600 h-[1px]"></div>
 
+    {{-- BARANJA --}}
+    <div class="py-1 my-1 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-sky-600 text-white">
+        <a wire:navigate class="text-[13px] ml-4 text-gray-200 font-bold"
+            href="{{ route('applications.all') }}">Барања</a>
+    </div>
+    <div class="my-2 bg-gray-600 h-[1px]"></div>
+
 
     {{-- KORISNICI --}}
     <div class="py-1 my-1 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-sky-600 text-white">
@@ -69,8 +76,9 @@
             class="cursor-pointer p-2 hover:bg-sky-600 rounded-md mt-1 bg-gray-800 block">Гориво</a>
         <a wire:navigate href="{{ route('colors.all') }}"
             class="cursor-pointer p-2 hover:bg-sky-600 rounded-md mt-1 bg-gray-800 block">Боја</a>
-        <a wire:navigate href="{{route('modifications.all')}}"
-            class="cursor-pointer p-2 hover:bg-sky-600 rounded-md mt-1 bg-gray-800 block">Видови на Преправки/Поправки</a>
+        <a wire:navigate href="{{ route('modifications.all') }}"
+            class="cursor-pointer p-2 hover:bg-sky-600 rounded-md mt-1 bg-gray-800 block">Видови на
+            Преправки/Поправки</a>
         <a wire:navigate href="#"
             class="cursor-pointer p-2 hover:bg-sky-600 rounded-md mt-1 bg-gray-800 block">Наод - Табели</a>
         <a wire:navigate href="{{ route('notes.all') }}"
