@@ -356,33 +356,55 @@
             </div>
         @endif
         @endif
-        <div class="container bg-red-50 p-4 rounded-md mb-4">
+        <div class="container bg-amber-50 p-4 rounded-md mb-4">
             {{-- pictures --}}
-            <h2>Потребни (Задолжителни) Фотографии</h2>
+            <h2 class="text-xl text-center mb-4 bg-lime-300 py-4 rounded-md">Потребни (Задолжителни) Фотографии</h2>
             @if (empty($pictures))
                 <p>Откако ке го одберете типот на барање, ке може да ги прикачите бараните фотографии</p>
             @else
                 <ul>
                     @foreach ($pictures as $picture)
-                        <li>
-                            {{$picture->picture_name}}
-                        </li>
+                    <div class="border border-lime-400 p-4 rounded-md mb-2">
+                        <label class="block">
+                            <span class="mb-4 block font-semibold">{{ $picture->picture_name }}</span>
+                            <input type="file"
+                                class="block w-full text-sm text-lime-500
+                                        file:mr-4 file:py-2 file:px-4
+                                        file:rounded-full file:border-0
+                                        file:text-sm file:font-semibold
+                                        file:bg-lime-700 file:text-white
+                                        hover:file:bg-lime-300 mt-2
+                                        focus:outline-none focus:ring-2 focus:ring-lime-500 focus:ring-offset-2
+                                        ring ring-transparent ring-offset-4 rounded-full
+                                        transition ease-in-out duration-150" /></label>
+                    </div>
                     @endforeach
                 </ul>
             @endif
         </div>
 
-        <div class="container bg-sky-50 p-4 rounded">
+        <div class="container bg-blue-100 p-4 rounded">
             {{-- Documents --}}
-            <h2>Потребни (Задолжителни) Документи</h2>
+            <h2 class="text-xl text-center mb-4 bg-blue-300 py-4 rounded-md">Потребни (Задолжителни) Документи</h2>
             @if (empty($relatedDocs))
                 <p>Откако ке го одберете типот на барање, ке може да ги прикачите бараните документи</p>
             @else
                 <ul>
                     @foreach ($relatedDocs as $relatedDoc)
-                        <li>
-                            {{$relatedDoc->desc}}
-                        </li>
+                    <div class="border border-sky-400 p-4 rounded-md mb-2">
+                        <label class="block">
+                            <span class="mb-4 block  font-semibold">{{ $relatedDoc->desc }}</span>
+                            <input type="file"
+                                class="block w-full text-sm text-sky-700
+                                        file:mr-4 file:py-2 file:px-4
+                                        file:rounded-full file:border-0
+                                        file:text-sm file:font-semibold
+                                        file:bg-sky-800 file:text-white
+                                        hover:file:bg-sky-300 mt-2
+                                        focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2
+                                        ring ring-transparent ring-offset-4 rounded-full
+                                        transition ease-in-out duration-150" /></label>
+                    </div>
                     @endforeach
                 </ul>
             @endif
