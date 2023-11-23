@@ -171,4 +171,10 @@ class Application extends Model
     {
         return $this->belongsTo(Legalisation::class);
     }
+
+    public function associatedImages()
+    {
+        return $this->hasMany(AssociatedImage::class);
+
+    }
 }

@@ -364,11 +364,11 @@
             @else
                 <ul>
                     @foreach ($pictures as $picture)
-                    <div class="border border-lime-400 p-4 rounded-md mb-2">
-                        <label class="block">
-                            <span class="mb-4 block font-semibold">{{ $picture->picture_name }}</span>
-                            <input type="file"
-                                class="block w-full text-sm text-lime-500
+                        <div class="border border-lime-400 p-4 rounded-md mb-2">
+                            <label class="block">
+                                <span class="mb-4 block font-semibold">{{ $picture->picture_name }}</span>
+                                <input type="file" wire:model="uploadedImages.{{ $picture->id }}"
+                                    class="block w-full text-sm text-lime-500
                                         file:mr-4 file:py-2 file:px-4
                                         file:rounded-full file:border-0
                                         file:text-sm file:font-semibold
@@ -376,12 +376,18 @@
                                         hover:file:bg-lime-300 mt-2
                                         focus:outline-none focus:ring-2 focus:ring-lime-500 focus:ring-offset-2
                                         ring ring-transparent ring-offset-4 rounded-full
-                                        transition ease-in-out duration-150" id="pictures_{{$picture->id}}" /></label>
-                    </div>
+                                        transition ease-in-out duration-150"
+                                        id="picture_{{ $picture->id }}" />
+                            </label>
+                            @error('uploadedImages.' . $picture->id)
+                                <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                            @enderror
+                        </div>
                     @endforeach
                 </ul>
             @endif
         </div>
+
 
         <div class="container bg-blue-100 p-4 rounded">
             {{-- Documents --}}
@@ -392,11 +398,11 @@
             @else
                 <ul>
                     @foreach ($relatedDocs as $relatedDoc)
-                    <div class="border border-sky-400 p-4 rounded-md mb-2">
-                        <label class="block">
-                            <span class="mb-4 block  font-semibold">{{ $relatedDoc->desc }}</span>
-                            <input type="file"
-                                class="block w-full text-sm text-sky-700
+                        <div class="border border-sky-400 p-4 rounded-md mb-2">
+                            <label class="block">
+                                <span class="mb-4 block  font-semibold">{{ $relatedDoc->desc }}</span>
+                                <input type="file"
+                                    class="block w-full text-sm text-sky-700
                                         file:mr-4 file:py-2 file:px-4
                                         file:rounded-full file:border-0
                                         file:text-sm file:font-semibold
@@ -404,8 +410,9 @@
                                         hover:file:bg-sky-300 mt-2
                                         focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2
                                         ring ring-transparent ring-offset-4 rounded-full
-                                        transition ease-in-out duration-150" id="related_docs_{{$relatedDoc->id}}"/></label>
-                    </div>
+                                        transition ease-in-out duration-150"
+                                    id="related_docs_{{ $relatedDoc->id }}" /></label>
+                        </div>
                     @endforeach
                 </ul>
             @endif

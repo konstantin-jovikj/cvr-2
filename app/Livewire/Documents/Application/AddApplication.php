@@ -3,6 +3,7 @@
 namespace App\Livewire\Documents\Application;
 
 use Carbon\Carbon;
+use Livewire\Attributes\Validate;
 use App\Models\Type;
 use App\Models\User;
 use App\Models\Brand;
@@ -16,18 +17,21 @@ use App\Models\Application;
 use App\Models\VehicleType;
 use App\Models\Legalisation;
 use App\Models\Manufacturer;
+use Livewire\WithFileUploads;
 use App\Models\ApplicationType;
+use App\Models\AssociatedImage;
 use App\Models\LocalDepartment;
 use Illuminate\Validation\Rule;
 use App\Models\ConfirmationType;
 use App\Models\ModificationType;
-use App\Models\ModifiedOrRepaired;
 use App\Models\Relateddocuments;
+use App\Models\ModifiedOrRepaired;
 use Illuminate\Support\Facades\Validator;
 
 
 class AddApplication extends Component
 {
+    use WithFileUploads;
 
     public $currentCustomer;
     public $appTypes;
@@ -80,7 +84,13 @@ class AddApplication extends Component
     public $pictures;
     public $relatedDocs;
 
+    public $currentAppId;
+    public $appCurentNumber;
 
+
+    // #[Validate('image|max:1024')]
+    // #[Validate('required|min:5')]
+    public $uploadedImages = [];
 
     public function mount(Customer $customer)
     {
@@ -126,20 +136,9 @@ class AddApplication extends Component
     {
         $this->selectedAppType = $appType;
 
-        // $this->pictures = Picture::whereHas('applicationTypes', function ($query) use ($appType) {
-        //     $query->where('application_type_id', $appType);
-        // })->get();
-
         $this->pictures = ApplicationType::find($appType)->pictures;
 
-        // $this->relatedDocs = Relateddocuments::whereHas('applicationTypes', function ($query) use ($appType) {
-        //     $query->where('application_type_id', $appType);
-        // })->get();
-
         $this->relatedDocs = ApplicationType::find($appType)->relatedDocuments;
-
-        // $this->pictures->load('applicationTypes');
-
     }
 
     public function addApplication()
@@ -171,8 +170,8 @@ class AddApplication extends Component
         ];
 
         if ($this->selectedAppType == 1) {
-                $rules['selectedConfirmation'] = 'required';
-                $rules['selectedCorrection'] = 'required';
+            $rules['selectedConfirmation'] = 'required';
+            $rules['selectedCorrection'] = 'required';
         } else {
             unset($rules['selectedConfirmation']);
             unset($rules['selectedCorrection']);
@@ -235,9 +234,9 @@ class AddApplication extends Component
                 'isChange' => $this->isChange,
                 'note' => $this->note,
                 'agreedPrice' => $this->agreedPrice,
-                'selectedCorrection' =>$this->selectedCorrection,
+                'selectedCorrection' => $this->selectedCorrection,
                 'selectedIsLegalisation' => $this->selectedIsLegalisation,
-                'regNumber' =>$this->regNumber,
+                'regNumber' => $this->regNumber,
                 'selectedModificationType' => $this->selectedModificationType,
                 'modRepairNote' => $this->modRepairNote,
                 'selectedModOrRepaired' => $this->selectedModOrRepaired,
@@ -254,7 +253,7 @@ class AddApplication extends Component
         // dd($rules, $validator);
         $validator->validate();
 
-        Application::create([
+        $newApplication = Application::create([
             'app_type_id' => $this->selectedAppType,
             'user_id' => auth()->user()->id,
             'app_date' => $this->appDate,
@@ -272,9 +271,9 @@ class AddApplication extends Component
             'is_change' => $this->isChange,
             'note' => $this->note,
             'agreed_price' => $this->agreedPrice,
-            'correction_id' =>$this->selectedCorrection,
+            'correction_id' => $this->selectedCorrection,
             'legalisation_id' => $this->selectedIsLegalisation,
-            'reg_number' =>$this->regNumber,
+            'reg_number' => $this->regNumber,
             'modification_id' => $this->selectedModificationType,
             'mod_repair_note' => $this->modRepairNote,
             'mod_or_rep_id' => $this->selectedModOrRepaired,
@@ -285,6 +284,13 @@ class AddApplication extends Component
             'approval_date' => $this->approvalDate,
             'cert_issued_by' => $this->certIssuedBy
         ]);
+
+        // Upload Images
+
+
+        $this->currentAppId = $newApplication->id;
+        $this->appCurentNumber = $newApplication->app_number;
+        $this->appUploadedImages();
 
         session()->flash('success', 'Барањето е успешно додадено!');
         $this->reset();
@@ -322,7 +328,7 @@ class AddApplication extends Component
         ];
     }
 
-                //DELOVODEN BROJ//
+    //DELOVODEN BROJ//
 
     public function generateAppNumber()
     {
@@ -341,5 +347,47 @@ class AddApplication extends Component
         $appNumber = $prefix .  $month . $shortYear . '/' . $countAppPadded;
 
         return $appNumber;
+    }
+
+    public function appUploadedImages()
+    {
+        foreach ($this->uploadedImages as $uploadedImage) {
+            $rules = [
+                'uploadedImages' => 'required|image|mimes:jpeg,png,jpg,gif,webp|max:3072',
+            ];
+
+            $validator = Validator::make(
+                ['uploadedImages' => $this->uploadedImages],
+                $rules,
+                $this->customMessages()
+            );
+
+
+            // If the validation passes, proceed with uploading and storing the image
+            $userDepartment = auth()->user()->department->id;
+            $userLocalDept = auth()->user()->localDepartment->id;
+            $customFileName = $this->appCurentNumber . '_' . time() . '_' . uniqid() . '.' . $uploadedImage->getClientOriginalExtension();
+
+            $path = $uploadedImage->storeAs(
+                "attached_files/images/{$userDepartment}/{$userLocalDept}/{$this->appCurentNumber}",
+                $customFileName
+            );
+            $validator->validate();
+            AssociatedImage::create([
+                'application_id' => $this->currentAppId,
+                'image_path' => $path,
+            ]);
+        }
+        $this->uploadedImages = [];
+    }
+
+    public function customImageMessages()
+    {
+        return [
+            'uploadedImages.*.required' => 'Оваа фотографија е задолжителна.',
+            'uploadedImages.*.image' => 'Фајлот мора да биде слика.',
+            'uploadedImages.*.mimes' => 'Поддржани формати на слики: jpeg, png, jpg, gif, webp',
+            'uploadedImages.*.max' => 'Максимална големина на фотографијата е 3MB.',
+        ];
     }
 }
