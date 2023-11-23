@@ -34,7 +34,7 @@
         </dl>
     </div>
     <form wire:submit="addApplication" class="bg-white w-full shadow-md overflow-hidden sm:rounded-lg px-6 py-4">
-        <div class="flex w-full mt-4 gap-4">
+        <div class="{{ $selectedAppType == 6 ? '' : 'flex' }} w-full mt-4 gap-4">
             <!-- Tip na Baranje -->
 
             <div class="{{ $selectedAppType == 2 || $selectedAppType == 3 ? 'w-2/3' : 'w-full' }}">
@@ -359,7 +359,7 @@
         <div class="container bg-amber-50 p-4 rounded-md mb-4">
             {{-- pictures --}}
             <h2 class="text-xl text-center mb-4 bg-lime-300 py-4 rounded-md">Потребни (Задолжителни) Фотографии</h2>
-            @if (empty($pictures))
+            @if (count($pictures) === 0)
                 <p>Откако ке го одберете типот на барање, ке може да ги прикачите бараните фотографии</p>
             @else
                 <ul>
@@ -376,7 +376,7 @@
                                         hover:file:bg-lime-300 mt-2
                                         focus:outline-none focus:ring-2 focus:ring-lime-500 focus:ring-offset-2
                                         ring ring-transparent ring-offset-4 rounded-full
-                                        transition ease-in-out duration-150" /></label>
+                                        transition ease-in-out duration-150" id="pictures_{{$picture->id}}" /></label>
                     </div>
                     @endforeach
                 </ul>
@@ -386,7 +386,8 @@
         <div class="container bg-blue-100 p-4 rounded">
             {{-- Documents --}}
             <h2 class="text-xl text-center mb-4 bg-blue-300 py-4 rounded-md">Потребни (Задолжителни) Документи</h2>
-            @if (empty($relatedDocs))
+            {{-- @if (empty($relatedDocs)) --}}
+            @if (count($relatedDocs) === 0)
                 <p>Откако ке го одберете типот на барање, ке може да ги прикачите бараните документи</p>
             @else
                 <ul>
@@ -403,7 +404,7 @@
                                         hover:file:bg-sky-300 mt-2
                                         focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2
                                         ring ring-transparent ring-offset-4 rounded-full
-                                        transition ease-in-out duration-150" /></label>
+                                        transition ease-in-out duration-150" id="related_docs_{{$relatedDoc->id}}"/></label>
                     </div>
                     @endforeach
                 </ul>

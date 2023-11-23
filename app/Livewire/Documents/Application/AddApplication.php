@@ -126,13 +126,17 @@ class AddApplication extends Component
     {
         $this->selectedAppType = $appType;
 
-        $this->pictures = Picture::whereHas('applicationTypes', function ($query) use ($appType) {
-            $query->where('application_type_id', $appType);
-        })->get();
+        // $this->pictures = Picture::whereHas('applicationTypes', function ($query) use ($appType) {
+        //     $query->where('application_type_id', $appType);
+        // })->get();
 
-        $this->relatedDocs = Relateddocuments::whereHas('applicationTypes', function ($query) use ($appType) {
-            $query->where('application_type_id', $appType);
-        })->get();
+        $this->pictures = ApplicationType::find($appType)->pictures;
+
+        // $this->relatedDocs = Relateddocuments::whereHas('applicationTypes', function ($query) use ($appType) {
+        //     $query->where('application_type_id', $appType);
+        // })->get();
+
+        $this->relatedDocs = ApplicationType::find($appType)->relatedDocuments;
 
         // $this->pictures->load('applicationTypes');
 

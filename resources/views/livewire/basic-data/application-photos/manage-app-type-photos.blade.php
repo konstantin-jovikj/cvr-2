@@ -39,9 +39,10 @@
                                 {{ $applicationType->pictures->contains('id', $picture->id) ? 'checked' : '' }}
                                 {{-- id="pictures_{{ $picture->id }}" --}}
                                 type="checkbox"
+                                id="img_{{ $applicationType->id }}_{{ $picture->id }}"
                                 value="{{ $picture->id }}"
                                 class="px-2 py-2 text-sm text-gray-800 w-4 h-4 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
-                            <label for=""
+                            <label for="img_{{ $applicationType->id }}_{{ $picture->id }}"
                                 class="ml-2 text-sm font-medium text-gray-900">{{ $picture->picture_name }}</label>
                         </div>
                         @endforeach

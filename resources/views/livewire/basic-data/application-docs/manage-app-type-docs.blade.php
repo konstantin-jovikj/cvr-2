@@ -8,10 +8,7 @@
         <div>
             <livewire:alerts.alert-message />
         </div>
-        {{-- <div>
-            <a href="{{ route('role.add') }}"
-                class="bg-sky-800 px-4 py-2 rounded-md text-white text-sm hover:bg-sky-400 hover:text-sky-900 transition-all">Додади Нова Улога</a>
-        </div> --}}
+
     </div>
 
     <table class="w-full divide-y divide-sky-700 shadow">
@@ -38,11 +35,11 @@
                         <div class="flex items-center">
                             <input wire:click="toggleApplicationTypeDocs({{ $applicationType->id }}, {{ $relatedDocument->id }})"
                                 {{ $applicationType->relatedDocuments->contains('id', $relatedDocument->id) ? 'checked' : '' }}
-                                {{-- id="pictures_{{ $picture->id }}" --}}
                                 type="checkbox"
+                                id="doc_{{ $applicationType->id }}_{{ $relatedDocument->id }}"
                                 value="{{ $relatedDocument->id }}"
-                                class="px-2 py-2 text-sm text-gray-800 w-4 h-4 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2 ">
-                                <label for=""
+                                class="px-2 py-2 text-sm text-gray-800 w-4 h-4 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2"  >
+                                <label for="doc_{{ $applicationType->id }}_{{ $relatedDocument->id }}"
                                 class="ml-2 text-sm font-medium text-gray-900">{{ $relatedDocument->desc }}</label>
                         </div>
                         <div class="my-2 bg-sky-600 h-[1px]"></div>
