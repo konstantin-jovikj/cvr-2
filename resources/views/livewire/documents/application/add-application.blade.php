@@ -356,7 +356,37 @@
             </div>
         @endif
         @endif
+        <div class="container bg-red-50 p-4 rounded-md mb-4">
+            {{-- pictures --}}
+            <h2>Потребни (Задолжителни) Фотографии</h2>
+            @if (empty($pictures))
+                <p>Откако ке го одберете типот на барање, ке може да ги прикачите бараните фотографии</p>
+            @else
+                <ul>
+                    @foreach ($pictures as $picture)
+                        <li>
+                            {{$picture->picture_name}}
+                        </li>
+                    @endforeach
+                </ul>
+            @endif
+        </div>
 
+        <div class="container bg-sky-50 p-4 rounded">
+            {{-- Documents --}}
+            <h2>Потребни (Задолжителни) Документи</h2>
+            @if (empty($relatedDocs))
+                <p>Откако ке го одберете типот на барање, ке може да ги прикачите бараните документи</p>
+            @else
+                <ul>
+                    @foreach ($relatedDocs as $relatedDoc)
+                        <li>
+                            {{$relatedDoc->desc}}
+                        </li>
+                    @endforeach
+                </ul>
+            @endif
+        </div>
 
         <div class="flex justify-between content-center">
             <a wire:navigate href="{{ route('fuel.all') }}"
@@ -367,6 +397,8 @@
                 {{ __('Додај') }}
             </x-primary-button>
         </div>
+
+
 
     </form>
 </div>

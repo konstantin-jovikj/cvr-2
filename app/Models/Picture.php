@@ -13,10 +13,10 @@ class Picture extends Model
 
     protected $fillable = ['picture_name'];
 
-    public function applications()
-    {
-        return $this->belongsToMany(Application::class);
-    }
+    // public function applications()
+    // {
+    //     return $this->belongsToMany(Application::class);
+    // }
 
     public function applicationTypes()
     {

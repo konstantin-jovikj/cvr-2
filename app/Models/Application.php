@@ -157,10 +157,10 @@ class Application extends Model
         return $this->belongsTo(Note::class);
     }
 
-    public function pictures()
-    {
-        return $this->bolongsToMany(Picture::class);
-    }
+    // public function pictures()
+    // {
+    //     return $this->bolongsToMany(Picture::class);
+    // }
 
     public function corrections()
     {

@@ -2,26 +2,28 @@
 
 namespace App\Livewire\Documents\Application;
 
-use App\Models\Application;
 use Carbon\Carbon;
-use Livewire\Component;
-use App\Models\Customer;
-use App\Models\ApplicationType;
-use App\Models\Brand;
-use App\Models\Category;
-use App\Models\ConfirmationType;
-use App\Models\Correction;
-use App\Models\Legalisation;
-use App\Models\LocalDepartment;
-use App\Models\Manufacturer;
-use App\Models\Mediator;
-use App\Models\ModificationType;
-use App\Models\ModifiedOrRepaired;
 use App\Models\Type;
 use App\Models\User;
+use App\Models\Brand;
+use App\Models\Picture;
+use Livewire\Component;
+use App\Models\Category;
+use App\Models\Customer;
+use App\Models\Mediator;
+use App\Models\Correction;
+use App\Models\Application;
 use App\Models\VehicleType;
-use Illuminate\Support\Facades\Validator;
+use App\Models\Legalisation;
+use App\Models\Manufacturer;
+use App\Models\ApplicationType;
+use App\Models\LocalDepartment;
 use Illuminate\Validation\Rule;
+use App\Models\ConfirmationType;
+use App\Models\ModificationType;
+use App\Models\ModifiedOrRepaired;
+use App\Models\Relateddocuments;
+use Illuminate\Support\Facades\Validator;
 
 
 class AddApplication extends Component
@@ -73,6 +75,11 @@ class AddApplication extends Component
     public $selectedVehicleTypeId = null;
     public $selectedConfirmation;
 
+    // pictures and Documents
+
+    public $pictures;
+    public $relatedDocs;
+
 
 
     public function mount(Customer $customer)
@@ -91,6 +98,11 @@ class AddApplication extends Component
         $this->modificationTypes = ModificationType::all();
         $this->modOrRepaired = ModifiedOrRepaired::all();
         $this->selectedVehicleTypes = VehicleType::all();
+
+        // pictures and Documents
+        $this->pictures = [];
+        $this->relatedDocs = [];
+        // dd($this->pictures);
     }
     public function render()
     {
@@ -113,7 +125,17 @@ class AddApplication extends Component
     public function updatedSelectedAppTypeName($appType)
     {
         $this->selectedAppType = $appType;
-        // $this->validateOnly('selectedAppTypeName');
+
+        $this->pictures = Picture::whereHas('applicationTypes', function ($query) use ($appType) {
+            $query->where('application_type_id', $appType);
+        })->get();
+
+        $this->relatedDocs = Relateddocuments::whereHas('applicationTypes', function ($query) use ($appType) {
+            $query->where('application_type_id', $appType);
+        })->get();
+
+        // $this->pictures->load('applicationTypes');
+
     }
 
     public function addApplication()
