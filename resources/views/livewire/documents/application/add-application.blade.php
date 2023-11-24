@@ -377,7 +377,7 @@
                                         focus:outline-none focus:ring-2 focus:ring-lime-500 focus:ring-offset-2
                                         ring ring-transparent ring-offset-4 rounded-full
                                         transition ease-in-out duration-150"
-                                        id="picture_{{ $picture->id }}" />
+                                        id="uploadedImages.{{ $picture->id }}" />
                             </label>
                             @error('uploadedImages.' . $picture->id)
                                 <p class="text-red-500 text-sm mt-1">{{ $message }}</p>

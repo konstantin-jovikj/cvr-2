@@ -27,6 +27,8 @@ use App\Models\ModificationType;
 use App\Models\Relateddocuments;
 use App\Models\ModifiedOrRepaired;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\ValidationException;
+
 
 
 class AddApplication extends Component
@@ -89,7 +91,7 @@ class AddApplication extends Component
 
 
     // #[Validate('image|max:1024')]
-    // #[Validate('required|min:5')]
+    #[Rule('required|image|max:64')]
     public $uploadedImages = [];
 
     public function mount(Customer $customer)
@@ -290,6 +292,7 @@ class AddApplication extends Component
 
         $this->currentAppId = $newApplication->id;
         $this->appCurentNumber = $newApplication->app_number;
+
         $this->appUploadedImages();
 
         session()->flash('success', 'Барањето е успешно додадено!');
@@ -351,28 +354,46 @@ class AddApplication extends Component
 
     public function appUploadedImages()
     {
+
+        $userDepartment = auth()->user()->department->id;
+        $userLocalDept = auth()->user()->localDepartment->id;
+        $expectedImageNr = count($this->pictures);
+        $uploadedImegeNr = count($this->uploadedImages);
+
+        if ($expectedImageNr < $uploadedImegeNr) {
+            session()->flash('error', 'Polinjata so sliki se zadolzitelni!');
+            return redirect(route('customers.all'));
+        }
+
         foreach ($this->uploadedImages as $uploadedImage) {
-            $rules = [
-                'uploadedImages' => 'required|image|mimes:jpeg,png,jpg,gif,webp|max:3072',
-            ];
+            // $rules = ['uploadedImages' => ['required', 'image', 'mimes:jpeg,png,jpg,gif,webp', 'max:64']];
 
-            $validator = Validator::make(
-                ['uploadedImages' => $this->uploadedImages],
-                $rules,
-                $this->customMessages()
-            );
+            // $validator = Validator::make(
+            //     ['uploadedImages' => $uploadedImage],
+            //     $rules,
+            //     $this->customImageMessages()
+            // );
+            // dd($validator);
 
-
-            // If the validation passes, proceed with uploading and storing the image
-            $userDepartment = auth()->user()->department->id;
-            $userLocalDept = auth()->user()->localDepartment->id;
-            $customFileName = $this->appCurentNumber . '_' . time() . '_' . uniqid() . '.' . $uploadedImage->getClientOriginalExtension();
+            $validated = $this->validate();
 
             $path = $uploadedImage->storeAs(
-                "attached_files/images/{$userDepartment}/{$userLocalDept}/{$this->appCurentNumber}",
-                $customFileName
-            );
-            $validator->validate();
+                "attached_files/images/{$userDepartment}/{$userLocalDept}/{$this->currentAppId}",
+                $customFileName);
+
+
+            // if($this->uploadedImage){
+            //     $validated['uploadedImage'] = $this->uploadedImage->storeAs(
+            //         "attached_files/images/{$userDepartment}/{$userLocalDept}/{$this->currentAppId}",
+            //         $customFileName)
+            // }
+
+            // $validator->validate();
+
+
+
+
+
             AssociatedImage::create([
                 'application_id' => $this->currentAppId,
                 'image_path' => $path,
@@ -380,6 +401,69 @@ class AddApplication extends Component
         }
         $this->uploadedImages = [];
     }
+
+
+
+//     public function appUploadedImages()
+//     {
+//         $userDepartment = auth()->user()->department->id;
+//         $userLocalDept = auth()->user()->localDepartment->id;
+//         $expectedImageNr = count($this->pictures);
+//         $uploadedImegeNr = count($this->uploadedImages);
+
+//         Check if the correct number of images has been uploaded
+//         if (count($this->uploadedImages) !== $maxImageNr) {
+//             // If the uploaded images do not match the required number, set error messages for empty inputs
+//             for ($i = count($this->uploadedImages) + 1; $i <= $maxImageNr; $i++) {
+//                 $this->addError('uploadedImages.' . ($i - 1), 'This field is required.');
+//             }
+//             return;
+//         }
+// dd($expectedImageNr, $uploadedImegeNr);
+
+//         if ($expectedImageNr < $uploadedImegeNr) {
+//             session()->flash('error', 'Polinjata so sliki se zadolzitelni!');
+//             return redirect(route('customers.all'));
+//         }
+
+//         // Validate each uploaded image
+//         foreach ($this->uploadedImages as $key => $uploadedImage) {
+//             $rules = ['uploadedImages.' . $key => ['required', 'image', 'mimes:jpeg,png,jpg,gif,webp', 'max:3072']];
+
+//             $validator = Validator::make(
+//                 ['uploadedImages.' . $key => $uploadedImage],
+//                 $rules,
+//                 $this->customImageMessages()
+//             );
+
+//             if ($validator->fails()) {
+//                 $this->addError('uploadedImages.' . $key, $validator->errors()->get('uploadedImages.' . $key));
+//             }
+//         }
+
+//         if ($this->getErrorBag()->isEmpty()) {
+//             // If no validation errors, proceed to store the images
+//             foreach ($this->uploadedImages as $key => $image) {
+//                 $customFileName = $this->currentAppId . uniqid() . '.' . $image->getClientOriginalExtension();
+
+//                 $path = $image->storeAs(
+//                     "attached_files/images/{$userDepartment}/{$userLocalDept}/{$this->currentAppId}",
+//                     $customFileName
+//                 );
+//                 AssociatedImage::create([
+//                     'application_id' => $this->currentAppId,
+//                     'image_path' => $path,
+//                 ]);
+//             }
+//             // Clear uploadedImages array after processing
+//             $this->uploadedImages = [];
+//         }
+//     }
+
+
+
+
+
 
     public function customImageMessages()
     {
