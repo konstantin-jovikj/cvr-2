@@ -99,26 +99,6 @@
             {{-- ADD MORE DETAILS --}}
         </dl>
 
-        {{-- Images --}}
-
-        <h2 class="text-sm font-semibold fonr-gray700 border-b-2 border-t-2 border-sky-600 p-2">Прикачени Фотографии:
-        </h2>
-
-        <dl class="text-gray-900 divide-y divide-gray-200 grid grid-cols-1 md:grid-cols-2 divide-x">
-
-        </dl>
-
-            <div class="h-[200px] bg-slate-300 p-2">
-                {{-- @if ($images) --}}
-
-                <img src="{{ asset('2/4/2023/11/25/6/13mWhnnryTaMKaOzICciJ3lqWNtvJDA8keA5NJ64.jpg') }}" class="w-full h-full" alt="">
-                @foreach ($images as $image)
-
-                    <img src="{{ asset($image->image_path) }}" class="w-full h-full" alt="">
-                @endforeach
-                {{-- @endif --}}
-            </div>
-
 
 
 
@@ -136,16 +116,26 @@
         </div>
     </div>
 
-    {{-- SLIKI --}}
+    {{-- Images --}}
+<div class="container  rounded-lg bg-white p-4 shadow-md">
+    <div class="border-2 border-sky-600">
 
-    <div class="h-[300px] w-full p-2 border-2 border-red-600 flex-flex-col">
-        {{-- @if ($images) --}}
+        <h2 class="mb-1 text-sky-700 text-xs bg-gray-300 p-4">Прикачени Фотографии:
+        </h2>
 
-        {{-- <img src="{{ asset('2/4/2023/11/25/6/13mWhnnryTaMKaOzICciJ3lqWNtvJDA8keA5NJ64.jpg') }}" class="w-full h-full" alt=""> --}}
-        @foreach ($images as $image)
+        <div class="container flex flex-wrap mx-auto gap-2 p-4">
+            @if ($images)
 
-            <img src="{{ asset($image->image_path) }}" class="w-full h-full" alt="">
-        @endforeach
-        {{-- @endif --}}
+            @foreach ($images as $image)
+            <div class="w-full p-2 rounded lg:w-1/3 md:w-1/2 border-2 border-sky-600 shadow">
+                <img src="{{ asset('storage/' . $image->image_path) }}" class="object-scale-down h-48 w-96"
+                alt="">
+                <a class="bg-sky-600 w-full py-2 block rounded text-center text-white hover:bg-sky-700"
+                href="{{ asset('storage/' . $image->image_path) }}" download>Сними Фотографија</a>
+            </div>
+            @endforeach
+            @endif
+        </div>
     </div>
+</div>
 </div>
