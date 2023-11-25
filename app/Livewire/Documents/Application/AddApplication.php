@@ -313,7 +313,7 @@ class AddApplication extends Component
         $day = date('d', strtotime($this->appDate));
 
         foreach ($this->uploadedImages as $photo) {
-            $path = $photo->store("{$userDepartment}/{$userLocalDept}/{$year}/{$month}/{$day}/{$this->currentAppId}", 'app_pictures');
+            $path = $photo->store("{$userDepartment}/{$userLocalDept}/{$year}/{$month}/{$day}/{$this->currentAppId}", 'public');
 
             AssociatedImage::create([
                 'application_id' => $newApplication->id,

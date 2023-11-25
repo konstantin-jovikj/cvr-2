@@ -98,7 +98,7 @@
                                     </x-slot>
 
                                     <x-slot name="content">
-                                        <x-dropdown-link :href="route('customers.all')" wire:navigate>
+                                        <x-dropdown-link :href="route('application.details', $application->id)" wire:navigate>
                                             {{ __('Детали') }}
                                         </x-dropdown-link>
                                         <x-dropdown-link :href="route('customers.all')" wire:navigate>
@@ -132,41 +132,11 @@
                                     </x-slot>
                                 </x-dropdown>
                             </div>
-                            {{-- <a wire:navigate href="{{ route('category.edit', $application->id) }}"
-                                class="px-2 py-1 text-xs text-white bg-fuchsia-600 hover:bg-fuchsia-800 rounded-full">Детали</a>
 
-                            <a wire:navigate href="{{ route('category.edit', $application->id) }}"
-                                class="px-2 py-1 text-xs text-white bg-violet-600 hover:bg-violet-800 rounded-full">Печати</a>
 
-                            <a wire:navigate href="{{ route('category.edit', $application->id) }}"
-                                class="px-2 py-1 text-xs text-white bg-blue-600 hover:bg-blue-800 rounded-full">Печати</a>
-
-                            <a wire:navigate href="{{ route('category.edit', $application->id) }}"
-                                class="px-2 py-1 text-xs text-white bg-cyan-600 hover:bg-cyan-800 rounded-full">Досие</a>
-
-                            <a wire:navigate href="{{ route('category.edit', $application->id) }}"
-                                class="px-2 py-1 text-xs text-white bg-teal-600 hover:bg-teal-800 rounded-full">Таблица</a>
-
-                            <a wire:navigate href="{{ route('category.edit', $application->id) }}"
-                                class="px-2 py-1 text-xs text-white bg-green-600 hover:bg-green-800 rounded-full">Таблица
-                                СТП</a>
-
-                                <a wire:navigate href="{{ route('category.edit', $application->id) }}"
-                                    class="px-2 py-1 text-xs text-white bg-yellow-600 hover:bg-yellow-800 rounded-full">Записник</a>
-
-                            <a wire:navigate href="{{ route('category.edit', $application->id) }}"
-                                class="px-2 py-1 text-xs text-white bg-amber-600 hover:bg-amber-800 rounded-full">Барање
-                                до Биро</a>
-
-                            <a wire:navigate href="{{ route('category.edit', $application->id) }}"
-                                class="px-2 py-1 text-xs text-white bg-orange-600 hover:bg-orange-800 rounded-full">Наод</a>
-
-                            <a wire:navigate href="{{ route('category.edit', $application->id) }}"
-                                class="px-2 py-1 text-xs text-white bg-stone-600 hover:bg-stone-800 rounded-full">Ед.Одоб</a>
-
-                            <button wire:click='deleteCategory({{ $application->id }})'
+                            {{-- <button wire:click='deleteCategory({{ $application->id }})'
                                 wire:confirm="Дали сте сигурени дека сакате да ја избришете оваа категорија?"
-                                class="px-2 py-1 text-xs text-white bg-red-600 hover-bg-red-800 rounded-full">Избриши</button> --}}
+                                class="px-2 py-1 text-xs text-white bg-red-600 hover-bg-red-800 rounded-full">Избриши</button>  --}}
                         </td>
 
                     </tr>
