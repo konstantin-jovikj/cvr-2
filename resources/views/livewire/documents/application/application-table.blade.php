@@ -77,14 +77,69 @@
                         </form>
 
                         <td class="px-2 py-1 flex  gap-2">
-                            <a wire:navigate href="{{ route('category.edit', $application->id) }}"
+
+                            <div class="hidden sm:flex sm:items-center sm:ml-6">
+                                <x-dropdown align="right" width="48">
+                                    <x-slot name="trigger">
+                                        <button
+                                            class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
+                                            <div x-data="{ name: '{{ __('Одбери Опции') }}' }" x-text="name"
+                                                x-on:profile-updated.window="name = $event.detail.name"></div>
+
+                                            <div class="ml-1">
+                                                <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg"
+                                                    viewBox="0 0 20 20">
+                                                    <path fill-rule="evenodd"
+                                                        d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                                        clip-rule="evenodd" />
+                                                </svg>
+                                            </div>
+                                        </button>
+                                    </x-slot>
+
+                                    <x-slot name="content">
+                                        <x-dropdown-link :href="route('customers.all')" wire:navigate>
+                                            {{ __('Детали') }}
+                                        </x-dropdown-link>
+                                        <x-dropdown-link :href="route('customers.all')" wire:navigate>
+                                            {{ __('Печати') }}
+                                        </x-dropdown-link>
+                                        <x-dropdown-link :href="route('customers.all')" wire:navigate>
+                                            {{ __('Досие') }}
+                                        </x-dropdown-link>
+                                        <x-dropdown-link :href="route('customers.all')" wire:navigate>
+                                            {{ __('Таблица') }}
+                                        </x-dropdown-link>
+                                        <x-dropdown-link :href="route('customers.all')" wire:navigate>
+                                            {{ __('Таблица СТП') }}
+                                        </x-dropdown-link>
+                                        <x-dropdown-link :href="route('customers.all')" wire:navigate>
+                                            {{ __('Записник') }}
+                                        </x-dropdown-link>
+                                        <x-dropdown-link :href="route('customers.all')" wire:navigate>
+                                            {{ __('Барање до Биро') }}
+                                        </x-dropdown-link>
+                                        <x-dropdown-link :href="route('customers.all')" wire:navigate>
+                                            {{ __('Наод') }}
+                                        </x-dropdown-link>
+                                        <x-dropdown-link :href="route('customers.all')" wire:navigate>
+                                            {{ __('Ед.Одоб') }}
+                                        </x-dropdown-link>
+                                        <x-dropdown-link :href="route('customers.all')" wire:navigate>
+                                            {{ __('Избриши') }}
+                                        </x-dropdown-link>
+
+                                    </x-slot>
+                                </x-dropdown>
+                            </div>
+                            {{-- <a wire:navigate href="{{ route('category.edit', $application->id) }}"
                                 class="px-2 py-1 text-xs text-white bg-fuchsia-600 hover:bg-fuchsia-800 rounded-full">Детали</a>
 
                             <a wire:navigate href="{{ route('category.edit', $application->id) }}"
                                 class="px-2 py-1 text-xs text-white bg-violet-600 hover:bg-violet-800 rounded-full">Печати</a>
 
                             <a wire:navigate href="{{ route('category.edit', $application->id) }}"
-                                class="px-2 py-1 text-xs text-white bg-blue-600 hover:bg-blue-800 rounded-full">Измени</a>
+                                class="px-2 py-1 text-xs text-white bg-blue-600 hover:bg-blue-800 rounded-full">Печати</a>
 
                             <a wire:navigate href="{{ route('category.edit', $application->id) }}"
                                 class="px-2 py-1 text-xs text-white bg-cyan-600 hover:bg-cyan-800 rounded-full">Досие</a>
@@ -111,7 +166,7 @@
 
                             <button wire:click='deleteCategory({{ $application->id }})'
                                 wire:confirm="Дали сте сигурени дека сакате да ја избришете оваа категорија?"
-                                class="px-2 py-1 text-xs text-white bg-red-600 hover-bg-red-800 rounded-full">Избриши</button>
+                                class="px-2 py-1 text-xs text-white bg-red-600 hover-bg-red-800 rounded-full">Избриши</button> --}}
                         </td>
 
                     </tr>
