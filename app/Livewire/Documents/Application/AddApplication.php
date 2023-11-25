@@ -19,6 +19,7 @@ use App\Models\Legalisation;
 use App\Models\Manufacturer;
 use Livewire\WithFileUploads;
 use App\Models\ApplicationType;
+use App\Models\AssociatedDocument;
 use App\Models\AssociatedImage;
 use App\Models\LocalDepartment;
 use Illuminate\Validation\Rule;
@@ -26,8 +27,10 @@ use App\Models\ConfirmationType;
 use App\Models\ModificationType;
 use App\Models\Relateddocuments;
 use App\Models\ModifiedOrRepaired;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
+
 
 
 
@@ -89,10 +92,10 @@ class AddApplication extends Component
     public $currentAppId;
     public $appCurentNumber;
 
-
-    // #[Validate('image|max:1024')]
-    #[Rule('required|image|max:64')]
+        // #[Validate('required')]
+        // #[Validate(['uploadedImages.*' => 'image|max:1024'])]
     public $uploadedImages = [];
+    public $uploadedDocs = [];
 
     public function mount(Customer $customer)
     {
@@ -137,9 +140,7 @@ class AddApplication extends Component
     public function updatedSelectedAppTypeName($appType)
     {
         $this->selectedAppType = $appType;
-
         $this->pictures = ApplicationType::find($appType)->pictures;
-
         $this->relatedDocs = ApplicationType::find($appType)->relatedDocuments;
     }
 
@@ -169,6 +170,8 @@ class AddApplication extends Component
             'note' => 'required',
             'agreedPrice' => 'required',
             'isChange' => 'required',
+            'uploadedImages.*' => 'image|max:4096',
+            'uploadedDocs.*' => 'max:1024',
         ];
 
         if ($this->selectedAppType == 1) {
@@ -199,6 +202,10 @@ class AddApplication extends Component
 
         if ($this->selectedAppType == 6) {
             $rules = [];
+            $rules = [
+                'uploadedImages.*' => 'image|max:4096',
+                'uploadedDocs.*' => 'max:1024',
+            ];
         }
 
         if ($this->selectedAppType == 7 || $this->selectedAppType == 8) {
@@ -247,7 +254,9 @@ class AddApplication extends Component
                 'selectedVehicleTypeId' => $this->selectedVehicleTypeId,
                 'approvalNumber' => $this->approvalNumber,
                 'approvalDate' => $this->approvalDate,
-                'certIssuedBy' => $this->certIssuedBy
+                'certIssuedBy' => $this->certIssuedBy,
+                'uploadedImages' => $this->uploadedImages,
+                'uploadedDocs' => $this->relatedDocs,
             ],
             $rules,
             $this->customMessages()
@@ -291,9 +300,35 @@ class AddApplication extends Component
 
 
         $this->currentAppId = $newApplication->id;
-        $this->appCurentNumber = $newApplication->app_number;
 
-        $this->appUploadedImages();
+        $userDepartment = auth()->user()->department->id;
+        $userLocalDept = auth()->user()->localDepartment->id;
+
+        $appType = $newApplication->app_type_id;
+
+        $this->pictures = ApplicationType::find($appType)->pictures;
+
+        $year = date('Y', strtotime($this->appDate));
+        $month = date('m', strtotime($this->appDate));
+        $day = date('d', strtotime($this->appDate));
+
+        foreach ($this->uploadedImages as $photo) {
+            $path = $photo->store("{$userDepartment}/{$userLocalDept}/{$year}/{$month}/{$day}/{$this->currentAppId}", 'app_pictures');
+
+            AssociatedImage::create([
+                'application_id' => $newApplication->id,
+                'image_path' => $path,
+            ]);
+        }
+
+        foreach ($this->uploadedDocs as $doc) {
+            $path = $doc->store("{$userDepartment}/{$userLocalDept}/{$year}/{$month}/{$day}/{$this->currentAppId}", 'app_docs');
+
+            AssociatedDocument::create([
+                'application_id' => $newApplication->id,
+                'document_path' => $path,
+            ]);
+        }
 
         session()->flash('success', 'Барањето е успешно додадено!');
         $this->reset();
@@ -328,6 +363,9 @@ class AddApplication extends Component
             'approvalNumber.required' => 'Бројот на одобрението е задолжителен.',
             'approvalDate.required' => 'Датумот на одобрението е задолжителен.',
             'certIssuedBy.required' => 'Полето за издавач на потврда е задолжително.',
+            'uploadedImages.*.image' => 'Прикачената датотека мора да биде фотографија.',
+            'uploadedImages.*.max' => 'Прикачената слика не може да биде поголема од 4MB.',
+            'uploadedDocs.*.max' => 'Прикачениот фајл не може да биде поголем од 1MB.',
         ];
     }
 
@@ -352,126 +390,30 @@ class AddApplication extends Component
         return $appNumber;
     }
 
-    public function appUploadedImages()
-    {
-
-        $userDepartment = auth()->user()->department->id;
-        $userLocalDept = auth()->user()->localDepartment->id;
-        $expectedImageNr = count($this->pictures);
-        $uploadedImegeNr = count($this->uploadedImages);
-
-        if ($expectedImageNr < $uploadedImegeNr) {
-            session()->flash('error', 'Polinjata so sliki se zadolzitelni!');
-            return redirect(route('customers.all'));
-        }
-
-        foreach ($this->uploadedImages as $uploadedImage) {
-            // $rules = ['uploadedImages' => ['required', 'image', 'mimes:jpeg,png,jpg,gif,webp', 'max:64']];
-
-            // $validator = Validator::make(
-            //     ['uploadedImages' => $uploadedImage],
-            //     $rules,
-            //     $this->customImageMessages()
-            // );
-            // dd($validator);
-
-            $validated = $this->validate();
-
-            $path = $uploadedImage->storeAs(
-                "attached_files/images/{$userDepartment}/{$userLocalDept}/{$this->currentAppId}",
-                $customFileName);
 
 
-            // if($this->uploadedImage){
-            //     $validated['uploadedImage'] = $this->uploadedImage->storeAs(
-            //         "attached_files/images/{$userDepartment}/{$userLocalDept}/{$this->currentAppId}",
-            //         $customFileName)
-            // }
+        // $userDepartment = auth()->user()->department->id;
+        // $userLocalDept = auth()->user()->localDepartment->id;
+        // $expectedImageNr = count($this->pictures);
+        // $uploadedImegeNr = count($this->uploadedImages);
 
-            // $validator->validate();
+
+
+        //     $validated = $this->validate();
+
+        //     $path = $uploadedImage->storeAs("attached_files/{$userDepartment}/{$userLocalDept}/{$this->currentAppId}",
+        //         $customFileName);
 
 
 
 
-
-            AssociatedImage::create([
-                'application_id' => $this->currentAppId,
-                'image_path' => $path,
-            ]);
-        }
-        $this->uploadedImages = [];
-    }
-
-
-
-//     public function appUploadedImages()
-//     {
-//         $userDepartment = auth()->user()->department->id;
-//         $userLocalDept = auth()->user()->localDepartment->id;
-//         $expectedImageNr = count($this->pictures);
-//         $uploadedImegeNr = count($this->uploadedImages);
-
-//         Check if the correct number of images has been uploaded
-//         if (count($this->uploadedImages) !== $maxImageNr) {
-//             // If the uploaded images do not match the required number, set error messages for empty inputs
-//             for ($i = count($this->uploadedImages) + 1; $i <= $maxImageNr; $i++) {
-//                 $this->addError('uploadedImages.' . ($i - 1), 'This field is required.');
-//             }
-//             return;
-//         }
-// dd($expectedImageNr, $uploadedImegeNr);
-
-//         if ($expectedImageNr < $uploadedImegeNr) {
-//             session()->flash('error', 'Polinjata so sliki se zadolzitelni!');
-//             return redirect(route('customers.all'));
-//         }
-
-//         // Validate each uploaded image
-//         foreach ($this->uploadedImages as $key => $uploadedImage) {
-//             $rules = ['uploadedImages.' . $key => ['required', 'image', 'mimes:jpeg,png,jpg,gif,webp', 'max:3072']];
-
-//             $validator = Validator::make(
-//                 ['uploadedImages.' . $key => $uploadedImage],
-//                 $rules,
-//                 $this->customImageMessages()
-//             );
-
-//             if ($validator->fails()) {
-//                 $this->addError('uploadedImages.' . $key, $validator->errors()->get('uploadedImages.' . $key));
-//             }
-//         }
-
-//         if ($this->getErrorBag()->isEmpty()) {
-//             // If no validation errors, proceed to store the images
-//             foreach ($this->uploadedImages as $key => $image) {
-//                 $customFileName = $this->currentAppId . uniqid() . '.' . $image->getClientOriginalExtension();
-
-//                 $path = $image->storeAs(
-//                     "attached_files/images/{$userDepartment}/{$userLocalDept}/{$this->currentAppId}",
-//                     $customFileName
-//                 );
-//                 AssociatedImage::create([
-//                     'application_id' => $this->currentAppId,
-//                     'image_path' => $path,
-//                 ]);
-//             }
-//             // Clear uploadedImages array after processing
-//             $this->uploadedImages = [];
-//         }
-//     }
-
-
-
-
-
-
-    public function customImageMessages()
-    {
-        return [
-            'uploadedImages.*.required' => 'Оваа фотографија е задолжителна.',
-            'uploadedImages.*.image' => 'Фајлот мора да биде слика.',
-            'uploadedImages.*.mimes' => 'Поддржани формати на слики: jpeg, png, jpg, gif, webp',
-            'uploadedImages.*.max' => 'Максимална големина на фотографијата е 3MB.',
-        ];
-    }
+    // public function customImageMessages()
+    // {
+    //     return [
+    //         'uploadedImages.*.required' => 'Оваа фотографија е задолжителна.',
+    //         'uploadedImages.*.image' => 'Фајлот мора да биде слика.',
+    //         'uploadedImages.*.mimes' => 'Поддржани формати на слики: jpeg, png, jpg, gif, webp',
+    //         'uploadedImages.*.max' => 'Максимална големина на фотографијата е 3MB.',
+    //     ];
+    // }
 }
