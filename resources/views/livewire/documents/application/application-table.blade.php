@@ -7,11 +7,11 @@
         <div>
             <livewire:alerts.alert-message />
         </div>
-        <div>
+        {{-- <div>
             <a href="{{ route('category.add') }}"
                 class="bg-sky-800 px-4 py-2 rounded-md text-white text-sm hover:bg-sky-400 hover:text-sky-900 transition-all">Додај
                 Нова Категорија</a>
-        </div>
+        </div> --}}
     </div>
     <div class="container flex justify-center mx-auto">
 
@@ -35,6 +35,9 @@
                     </th>
                     <th class="px-2 py-2 text-xs text-gray-800">
                         Забелешка
+                    </th>
+                    <th class="px-2 py-2 text-xs text-gray-800">
+                        Статус
                     </th>
                     <th class="px-2 py-2 text-xs text-gray-800">
                         Опции
@@ -73,6 +76,14 @@
                                 {{ $application->note }}
                             </span>
                         </td>
+                        <td class="px-2 py-1">
+                            @if ($application->approval_number == null || $application->approval_number == '')
+                             nema
+                            @else
+                            ima
+                            @endif
+                        </td>
+
 
                         </form>
 

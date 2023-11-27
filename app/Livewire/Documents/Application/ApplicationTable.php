@@ -19,7 +19,7 @@ class ApplicationTable extends Component
 
         $applications = Application::whereHas('user', function ($query) use ($localDeptId) {
             $query->where('local_department_id', $localDeptId);
-        })->with('user', 'category')->paginate(10);
+        })->with('user', 'category')->orderBy('created_at', 'desc')->paginate(10);
 
         $applications->loadMissing('category');
 

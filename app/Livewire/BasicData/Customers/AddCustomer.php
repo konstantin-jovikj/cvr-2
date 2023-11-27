@@ -3,9 +3,10 @@
 namespace App\Livewire\BasicData\Customers;
 
 use App\Models\City;
+use Livewire\Component;
 use App\Models\Customer;
 use App\Models\CustomerType;
-use Livewire\Component;
+use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Validator;
 
 
@@ -69,12 +70,28 @@ class AddCustomer extends Component
             'note' => '',
         ];
 
+
         if ($this->selectedType == 1) {
-            $rules['embg'] = 'required|regex:/^\d{13}$/|numeric';
-            $rules['id_number'] = 'required|min:5';
+            // $rules['embg'] = 'required|regex:/^\d{13}$/|numeric';
+            $rules['embg'] = [
+                'required',
+                'regex:/^\d{13}$/',
+                'numeric',
+                Rule::unique('customers', 'embg')->whereNotNull('embg')
+            ];
+            $rules['id_number'] = [
+                'required',
+                'min:5',
+                Rule::unique('customers', 'id_number')->whereNotNull('id_number')
+            ];
             unset($rules['embs']);
         } else {
-            $rules['embs'] = 'required|regex:/^\d{7}$/|numeric';
+            $rules['embs'] = [
+                'required',
+                'regex:/^\d{7}$/',
+                'numeric',
+                Rule::unique('customers', 'embs')->whereNotNull('embs')
+            ];
             unset($rules['embg']);
             unset($rules['id_number']);
         }
@@ -134,11 +151,14 @@ class AddCustomer extends Component
             'embg.required' => 'ЕМБГ е задолжителен.',
             'embg.numeric' => 'ЕМБГ треба да содржи само цифри.',
             'embg.regex' => 'ЕМБГ треба да има точно 13 карактери.',
+            'embg.unique' => 'ЕМБГ веќе постои.',
             'embs.required' => 'ЕМБС е задолжителен.',
             'embs.regex' => 'ЕМБС треба да има точно 7 карактери.',
             'embs.numeric' => 'ЕМБС треба да содржи само цифри.',
+            'embs.unique' => 'ЕМБС веќе постои.',
             'id_number.required' => 'Бројот на Лична Карта е задолжителен.',
-            'id_number.min' => 'Бројот на Лична Карта бројот треба да има најмалку 5 карактери.',
+            'id_number.min' => 'Бројот на Лична Карта треба да има најмалку 5 карактери.',
+            'id_number.unique' => 'Бројот на Лична Карта веќе постои.',
         ];
     }
 }
