@@ -365,9 +365,9 @@
                 <ul>
                     @foreach ($pictures as $picture)
                         <div class="border border-lime-400 p-4 rounded-md mb-2">
-                            <label class="block" for="uploadedImages.{{ $picture->id }}">
+                            <label class="block" for="uploadedImages.{{ $picture->picture_name }}">
                                 <span class="mb-4 block font-semibold">{{ $picture->picture_name }}</span>
-                                <input type="file" wire:model="uploadedImages.{{ $picture->id }}"
+                                <input type="file" wire:model="uploadedImages.{{ $picture->picture_name }}"
                                     class="block w-full text-sm text-lime-500
                                         file:mr-4 file:py-2 file:px-4
                                         file:rounded-full file:border-0
@@ -380,7 +380,7 @@
                                     id="uploadedImages.{{ $picture->id }}" required />
                                 {{-- <x-text-input wire:model="uploadedImages.{{ $picture->id }}" class="block mt-1 w-full" type="file" autofocus required autocomplete="uploadedPhotos"/> --}}
                             </label>
-                            @error('uploadedImages.' . $picture->id)
+                            @error('uploadedImages.' . $picture->picture_name)
                                 <span class="error text-red-600">{{ $message }}</span>
                             @enderror
                         </div>
@@ -400,9 +400,9 @@
                 <ul>
                     @foreach ($relatedDocs as $relatedDoc)
                         <div class="border border-sky-400 p-4 rounded-md mb-2">
-                            <label class="block" for="uploadedDocs.{{ $relatedDoc->id }}">
+                            <label class="block" for="uploadedDocs.{{ $relatedDoc->desc }}">
                                 <span class="mb-4 block  font-semibold">{{ $relatedDoc->desc }}</span>
-                                <input type="file" wire:model="uploadedDocs.{{ $relatedDoc->id }}"
+                                <input type="file" wire:model="uploadedDocs.{{ $relatedDoc->desc }}"
                                     class="block w-full text-sm text-sky-700
                                         file:mr-4 file:py-2 file:px-4
                                         file:rounded-full file:border-0
@@ -414,7 +414,7 @@
                                         transition ease-in-out duration-150"
                                     id="uploadedDocs.{{ $relatedDoc->id }}" required/>
                             </label>
-                            @error('uploadedDocs.' . $relatedDoc->id)
+                            @error('uploadedDocs.' . $relatedDoc->desc)
                                 <span class="error text-red-600">{{ $message }}</span>
                             @enderror
                         </div>

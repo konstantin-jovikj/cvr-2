@@ -92,8 +92,8 @@ class AddApplication extends Component
     public $currentAppId;
     public $appCurentNumber;
 
-        // #[Validate('required')]
-        // #[Validate(['uploadedImages.*' => 'image|max:1024'])]
+    // #[Validate('required')]
+    // #[Validate(['uploadedImages.*' => 'image|max:1024'])]
     public $uploadedImages = [];
     public $uploadedDocs = [];
 
@@ -300,6 +300,8 @@ class AddApplication extends Component
 
 
         $this->currentAppId = $newApplication->id;
+        $this->appCurentNumber = $newApplication->app_number;
+        $this->appCurentNumber = str_replace('/', '-', $this->appCurentNumber);
 
         $userDepartment = auth()->user()->department->id;
         $userLocalDept = auth()->user()->localDepartment->id;
@@ -312,27 +314,41 @@ class AddApplication extends Component
         $month = date('m', strtotime($this->appDate));
         $day = date('d', strtotime($this->appDate));
 
-        foreach ($this->uploadedImages as $photo) {
+        foreach ($this->uploadedImages as $picture_name => $photo) {
+            // dd($picture_name, $photo);
+            $extension = $photo->getClientOriginalExtension();
+            $AppNumberPrefix = $this->appCurentNumber;
+
             $path = $photo->store("{$userDepartment}/{$userLocalDept}/{$year}/{$month}/{$day}/{$this->currentAppId}", 'public');
+
+            $picture_desc_with_extension_and_prefix = $AppNumberPrefix . '-' .$picture_name . '.' . $extension;
 
             AssociatedImage::create([
                 'application_id' => $newApplication->id,
                 'image_path' => $path,
+                'image_name' => $picture_desc_with_extension_and_prefix,
             ]);
         }
 
-        foreach ($this->uploadedDocs as $doc) {
+
+        foreach ($this->uploadedDocs as $document_desc => $doc) {
+
+            $extension = $doc->getClientOriginalExtension();
+            $AppNumberPrefix = $this->appCurentNumber;
+
             $path = $doc->store("{$userDepartment}/{$userLocalDept}/{$year}/{$month}/{$day}/{$this->currentAppId}", 'app_docs');
 
+            $document_desc_with_extension_and_prefix = $AppNumberPrefix . '-' .$document_desc . '.' . $extension;
             AssociatedDocument::create([
                 'application_id' => $newApplication->id,
                 'document_path' => $path,
+                'document_desc' => $document_desc_with_extension_and_prefix,
             ]);
         }
 
         session()->flash('success', 'Барањето е успешно додадено!');
         $this->reset();
-        return redirect(route('customers.all'));
+        return redirect(route('applications.all'));
     }
 
     public function customMessages()
@@ -392,17 +408,17 @@ class AddApplication extends Component
 
 
 
-        // $userDepartment = auth()->user()->department->id;
-        // $userLocalDept = auth()->user()->localDepartment->id;
-        // $expectedImageNr = count($this->pictures);
-        // $uploadedImegeNr = count($this->uploadedImages);
+    // $userDepartment = auth()->user()->department->id;
+    // $userLocalDept = auth()->user()->localDepartment->id;
+    // $expectedImageNr = count($this->pictures);
+    // $uploadedImegeNr = count($this->uploadedImages);
 
 
 
-        //     $validated = $this->validate();
+    //     $validated = $this->validate();
 
-        //     $path = $uploadedImage->storeAs("attached_files/{$userDepartment}/{$userLocalDept}/{$this->currentAppId}",
-        //         $customFileName);
+    //     $path = $uploadedImage->storeAs("attached_files/{$userDepartment}/{$userLocalDept}/{$this->currentAppId}",
+    //         $customFileName);
 
 
 

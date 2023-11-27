@@ -29,15 +29,18 @@ class ApplicationDetails extends Component
         return view('livewire.documents.application.application-details');
     }
 
-    public function download($path)
-{
-    $filePath = storage_path('app/app_docs/' . $path);
+    public function download($path, $document_desc)
+    {
+        $filePath = storage_path('app/app_docs/' . $path);
 
-    if (Storage::disk('app_docs')->exists($path)) {
-        return response()->download($filePath);
+        if (Storage::disk('app_docs')->exists($path)) {
+            $headers = [
+                'Content-Disposition' => 'attachment; filename="' . $document_desc . '"',
+            ];
+
+            return response()->download($filePath, $document_desc, $headers);
+        }
+
+        abort(404);
     }
-
-    abort(404);
-}
-
 }

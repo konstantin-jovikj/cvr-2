@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class AssociatedDocument extends Model
 {
 
-    protected $fillable = ['document_path', 'application_id'];
+    protected $fillable = ['document_path', 'application_id', 'document_desc'];
 
 
     use HasFactory;

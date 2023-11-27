@@ -10,7 +10,7 @@ class AssociatedImage extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['image_path', 'application_id'];
+    protected $fillable = ['image_path', 'application_id', 'image_name'];
 
     public function application()
     {

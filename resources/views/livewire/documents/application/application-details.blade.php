@@ -128,6 +128,7 @@
                         <div class="p-2 rounded border-2 border-sky-600 shadow" id="img-wrap">
                             <img src="{{ asset('storage/' . $image->image_path) }}" class="object-scale-down h-48 w-96"
                                 alt="">
+                                <span class="text-xs text-sky-800 font-semibold bg-slate-300 w-full p-1 block rounded my-1">{{$image->image_name}}</span>
                             <a class="bg-sky-600 w-full py-2 block rounded text-center text-white hover:bg-sky-700"
                                 href="{{ asset('storage/' . $image->image_path) }}" download>Сними Фотографија</a>
                         </div>
@@ -157,14 +158,14 @@
                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
                                 stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5" />
                             </svg>
-                            <span class="text-xs">Individual configuration</span>
+                            <span class="text-xs">{{$document->document_desc}}</span>
                         </li>
                         <div class="p-2">
 
-                            <button wire:click="download('{{ $document->document_path }}')"
+                            <button wire:click="download('{{ $document->document_path }}', '{{ $document->document_desc }}')"
                                 class="bg-sky-600 px-4 py-2 block rounded text-center text-white hover:bg-sky-700">
-                                Сними Документ
-                            </button>
+                            Сними Документ
+                        </button>
                         </div>
                     </div>
 

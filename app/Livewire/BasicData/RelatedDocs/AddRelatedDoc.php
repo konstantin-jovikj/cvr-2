@@ -31,8 +31,10 @@ class AddRelatedDoc extends Component
         );
         $validator->validate();
 
+        $sanitizedText = str_replace('.', '', $this->desc);
+
         Relateddocuments::create([
-            'desc' => $this->desc,
+            'desc' => $sanitizedText,
         ]);
 
         session()->flash('success', 'Новиот Прилог Документ е успешно додаден!');

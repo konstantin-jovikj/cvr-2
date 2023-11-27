@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('application_id');
             $table->string('document_path');
+            $table->text('document_desc')->nullable();
             $table->timestamps();
 
             $table->foreign('application_id')->references('id')->on('applications');

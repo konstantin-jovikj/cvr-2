@@ -37,8 +37,10 @@ class EditRelatedDoc extends Component
         );
         $validator->validate();
 
+        $sanitizedText = str_replace('.', '', $this->desc);
+
         $this->relateddocuments->update([
-            'desc' => $this->desc,
+            'desc' => $sanitizedText,
         ]);
 
         session()->flash('success', 'Новиот Прилог Документ е успешно ажуриран!');
