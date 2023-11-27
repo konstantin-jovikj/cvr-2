@@ -117,25 +117,61 @@
     </div>
 
     {{-- Images --}}
-<div class="container  rounded-lg bg-white p-4 shadow-md">
-    <div class="border-2 border-sky-600">
+    <div class="container rounded-lg bg-white p-6 shadow-md">
+        <div class="border-2 border-sky-600">
 
-        <h2 class="mb-1 text-sky-700 text-xs bg-gray-300 p-4">Прикачени Фотографии:
-        </h2>
+            <h2 class="mb-1 text-sky-700 text-xs bg-gray-300 p-4">Прикачени Фотографии:</h2>
 
-        <div class="container flex flex-wrap mx-auto gap-2 p-4">
-            @if ($images)
-
-            @foreach ($images as $image)
-            <div class="w-full p-2 rounded lg:w-1/3 md:w-1/2 border-2 border-sky-600 shadow">
-                <img src="{{ asset('storage/' . $image->image_path) }}" class="object-scale-down h-48 w-96"
-                alt="">
-                <a class="bg-sky-600 w-full py-2 block rounded text-center text-white hover:bg-sky-700"
-                href="{{ asset('storage/' . $image->image_path) }}" download>Сними Фотографија</a>
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 p-4">
+                @if ($images)
+                    @foreach ($images as $image)
+                        <div class="p-2 rounded border-2 border-sky-600 shadow" id="img-wrap">
+                            <img src="{{ asset('storage/' . $image->image_path) }}" class="object-scale-down h-48 w-96"
+                                alt="">
+                            <a class="bg-sky-600 w-full py-2 block rounded text-center text-white hover:bg-sky-700"
+                                href="{{ asset('storage/' . $image->image_path) }}" download>Сними Фотографија</a>
+                        </div>
+                    @endforeach
+                @endif
             </div>
-            @endforeach
-            @endif
         </div>
     </div>
-</div>
+
+
+    {{-- Documents --}}
+    <div class="container rounded-lg bg-white p-6 shadow-md">
+        <div class="border-2 border-sky-600">
+
+            <h2 class="mb-1 text-sky-700 text-xs bg-gray-300 p-4">Прикачени Документи:</h2>
+
+            <div class="p-4">
+                @if ($documents)
+                    <ul class="space-y-4 text-left text-gray-600">
+                        @foreach ($documents as $document)
+                        <div class="border-b-2 border-sky-700 p-4">
+
+                            <li class="flex items-center space-x-3 rtl:space-x-reverse border-b-2 border-slate-300 pb-4">
+                                <svg class="flex-shrink-0 w-3.5 h-3.5 text-green-500 dark:text-green-400"
+                                aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                viewBox="0 0 16 12">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5" />
+                            </svg>
+                            <span class="text-xs">Individual configuration</span>
+                        </li>
+                        <div class="p-2">
+
+                            <button wire:click="download('{{ $document->document_path }}')"
+                                class="bg-sky-600 px-4 py-2 block rounded text-center text-white hover:bg-sky-700">
+                                Сними Документ
+                            </button>
+                        </div>
+                    </div>
+
+                        @endforeach
+                    </ul>
+                @endif
+            </div>
+        </div>
+    </div>
 </div>

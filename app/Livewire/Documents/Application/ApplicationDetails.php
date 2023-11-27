@@ -4,26 +4,23 @@ namespace App\Livewire\Documents\Application;
 
 use Livewire\Component;
 use App\Models\Application;
-use App\Livewire\Documents\Application\ImageController;
 use App\Models\AssociatedImage;
+use App\Models\AssociatedDocument;
+use Illuminate\Support\Facades\Storage;
+use App\Livewire\Documents\Application\ImageController;
 
 class ApplicationDetails extends Component
 {
     public $application;
     public $images;
+    public $documents;
 
     public function mount(Application $application)
     {
         $this->application = $application;
         $this->images = AssociatedImage::where('application_id', $application->id)->get();
-        // $this->dispatch('getImage', $$this->images);
-        // dd($images);
-        // if (!is_null($images)) {
-
-            // foreach ($images as $image) {
-            //     $this->dispatch('getImage', $image->image_path);
-            // }
-        // }
+        $this->documents = AssociatedDocument::where('application_id', $application->id)->get();
+        // dd($this->images,$this->documents);
     }
 
 
@@ -32,21 +29,15 @@ class ApplicationDetails extends Component
         return view('livewire.documents.application.application-details');
     }
 
-    // public $application;
-    // public $images = [];
+    public function download($path)
+{
+    $filePath = storage_path('app/app_docs/' . $path);
 
-    // protected $listeners = ['getImage'];
+    if (Storage::disk('app_docs')->exists($path)) {
+        return response()->download($filePath);
+    }
 
-    // public function mount(Application $application)
-    // {
-    //     $this->application = $application;
-    //     $this->images = $this->application->associatedImages->pluck('image_path')->toArray();
+    abort(404);
+}
 
-    // }
-
-    // public function render()
-    // {
-    //     $this->images = $this->application->associatedImages->pluck('image_path')->toArray();
-    //     return view('livewire.documents.application.application-details');
-    // }
 }

@@ -23,6 +23,7 @@ use App\Models\ApplicationType;
 use App\Models\ConfirmationType;
 // use App\Models\AttachmentDocuments;
 use App\Models\ModificationType;
+use App\Models\AssociatedDocument;
 use App\Models\ModifiedOrRepaired;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -175,6 +176,12 @@ class Application extends Model
     public function associatedImages()
     {
         return $this->hasMany(AssociatedImage::class);
+
+    }
+
+    public function associatedDocs()
+    {
+        return $this->hasMany(AssociatedDocument::class);
 
     }
 }

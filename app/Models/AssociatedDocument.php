@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Application;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class AssociatedDocument extends Model
 {
@@ -12,4 +13,9 @@ class AssociatedDocument extends Model
 
 
     use HasFactory;
+
+    public function application()
+    {
+        return $this->belongsTo(Application::class);
+    }
 }
