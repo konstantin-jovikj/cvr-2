@@ -313,7 +313,7 @@ class EditApplication extends Component
         // $validator->validate();
 
         $this->currentApp->update([
-            'app_type_id' => $this->selectedAppType,
+            'app_type_id' => $this->selectedAppTypeName,
             'user_id' => auth()->user()->id,
             'app_date' => $this->appDate,
             'customer_id' => $this->currentCustomer,
