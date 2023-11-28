@@ -363,9 +363,11 @@ class EditApplication extends Component
         $month = date('m', strtotime($this->appDate));
         $day = date('d', strtotime($this->appDate));
 
-        foreach ($this->uploadedImages as $index => $photo) {
+        foreach ($this->appImages as $index => $photo) {
             // Check if the image exists for updating
-            if ($photo instanceof \Illuminate\Http\UploadedFile) {
+            // ($this->uploadedImages)
+            dd($photo->image_name);
+            // if ($photo instanceof \Illuminate\Http\UploadedFile) {
                 $extension = $photo->getClientOriginalExtension();
                 $picture_name = $this->uploadedImages[$index]->getClientOriginalName();
 
@@ -379,7 +381,7 @@ class EditApplication extends Component
                     'image_path' => $path,
                     'image_name' => $picture_desc_with_extension_and_prefix,
                 ]);
-            }
+            // }
         }
 
 
