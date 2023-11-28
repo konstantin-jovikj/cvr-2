@@ -32,7 +32,7 @@
         <div class="mt-4">
             <x-input-label for="type_name" :value="__('Тип на Возило - Опис')" />
             <x-text-input wire:model="type_name" id="type_name" class="block mt-1 w-full" type="text"
-                name="brand_name" required autofocus autocomplete="type_name" />
+                name="type_name" required autofocus autocomplete="type_name" />
             <x-input-error :messages="$errors->get('type_name')" class="mt-2" />
         </div>
 

@@ -78,9 +78,9 @@
                         </td>
                         <td class="px-2 py-1">
                             @if ($application->approval_number == null || $application->approval_number == '')
-                             nema
+                                <div class="bg-red-600 h-[12px] w-[12px] rounded-full shadow-md"></div>
                             @else
-                            ima
+                                <div class="bg-green-800 h-[12px] w-[12px] rounded-full shadow-md"></div>
                             @endif
                         </td>
 
@@ -111,6 +111,9 @@
                                     <x-slot name="content">
                                         <x-dropdown-link :href="route('application.details', $application->id)" wire:navigate>
                                             {{ __('Детали') }}
+                                        </x-dropdown-link>
+                                        <x-dropdown-link :href="route('application.edit', $application->id)" wire:navigate>
+                                            {{ __('Измени Барање') }}
                                         </x-dropdown-link>
                                         <x-dropdown-link :href="route('customers.all')" wire:navigate>
                                             {{ __('Печати') }}
