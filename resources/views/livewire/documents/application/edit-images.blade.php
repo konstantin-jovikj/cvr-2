@@ -43,24 +43,37 @@
 
             <h2 class="mb-1 text-sky-700 text-xs bg-gray-300 p-4">Прикачени Фотографии:</h2>
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 p-4">
+            <div class="grid grid-cols-1  p-4">
                 @if ($images)
                     @foreach ($images as $image)
                         <div class="p-2 rounded border-2 border-sky-600 shadow" id="img-wrap">
                             <img src="{{ asset('storage/' . $image->image_path) }}" class="object-scale-down h-48 w-96" alt="">
                             <span class="text-xs text-sky-800 font-semibold bg-slate-300 w-full p-1 block rounded my-1">{{$image->image_name}}</span>
-                            {{-- <form action="" enctype="multipart/form-data"> --}}
-                                <input wire:model="newUploadedImages" type="file" />
-                                {{-- @if ($newUploadedImages[$image->id ])
-                                <img src="{{ $newUploadedImages->temporaryUrl() }}" class="object-scale-down h-48 w-96" alt="">
-                                @endif --}}
-                                <button wire:click="changeImage({{ $image->id }})" class="bg-sky-600 px-4 py-2 block rounded text-center text-white hover:bg-sky-700">Change</button>
-                            {{-- </form> --}}
+                                <input wire:model="newUploadedImages.{{ $image->id }}" type="file" class="block w-full text-sm text-lime-500
+                                file:mr-4 file:py-2 file:px-4
+                                file:rounded-full file:border-0
+                                file:text-sm file:font-semibold
+                                file:bg-lime-700 file:text-white
+                                hover:file:bg-lime-300 mt-2
+                                focus:outline-none focus:ring-2 focus:ring-lime-500 focus:ring-offset-2
+                                ring ring-transparent ring-offset-4 rounded-full
+                                transition ease-in-out duration-150"/>
+
+                                @if(isset($newUploadedImages[$image->id]))
+                                <button wire:click="changeImage({{ $image->id }})" class="bg-pink-600 px-4 py-1 text-sm block rounded text-center text-white hover:bg-pink-700 mt-4">Замени фотографија</button>
+                            @endif
+                            @error('newUploadedImages.' . $image->id)
+                            <span class="error text-red-600">{{ $message }}</span>
+                        @enderror
                         </div>
                     @endforeach
+
                 @endif
             </div>
         </div>
+            @error('newUploadedImages')
+            <span class="error text-red-600">{{ $message }}</span>
+        @enderror
     </div>
 
 </div>

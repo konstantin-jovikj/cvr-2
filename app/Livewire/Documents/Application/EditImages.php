@@ -2,6 +2,9 @@
 
 namespace App\Livewire\Documents\Application;
 
+use Livewire\Attributes\Validate;
+use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Validator;
 use Livewire\Component;
 use App\Models\Application;
 use App\Models\AssociatedImage;
@@ -16,7 +19,13 @@ class EditImages extends Component
     public $images = [];
     public $oldImage;
     public $newImage;
+
+    // #[Validate('image|max:4096')]
     public  $newUploadedImages=[];
+
+    // protected $rules = [
+    //     'newUploadedImages' => 'image|max:4096',
+    // ];
 
     public function mount(Application $application)
     {
@@ -32,6 +41,18 @@ class EditImages extends Component
 
     public function changeImage($image)
     {
+        $rules = [
+            'newUploadedImages.*' => 'image|max:4096',
+        ];
+
+        $validator = Validator::make(
+            [
+                'newUploadedImages' => $this->newUploadedImages,
+            ],
+            $rules,
+            $this->customMessages()
+        );
+        $validator->validate();
 
         // dd($this->newUploadedImages);
         $this->oldImage = AssociatedImage::where('id', $image)->first();
@@ -63,6 +84,7 @@ class EditImages extends Component
         foreach($this->newUploadedImages as $uploadedImage){
 
             $path = $uploadedImage->store("{$userDepartment}/{$userLocalDept}/{$year}/{$month}/{$day}/{$currentAppId}", 'public');
+
             AssociatedImage::create([
                 'application_id' => $currentAppId,
                 'image_path' => $path,
@@ -70,7 +92,17 @@ class EditImages extends Component
             ]);
         }
 
+        session()->flash('success', 'Фотографијата е успешно ажурирана!');
+        $this->reset();
+        return redirect(route('applications.all'));
+    }
 
+    public function customMessages()
+    {
+        return [
+            'newUploadedImages.*.image' => 'Прикачената датотека мора да биде фотографија.',
+            'newUploadedImages.*.max' => 'Прикачената слика не може да биде поголема од 4MB.',
+        ];
     }
 
 }
