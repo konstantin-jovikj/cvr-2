@@ -5,11 +5,12 @@
             {{ $application->app_number }}</h2>
 
         <dl class="text-gray-900 divide-y divide-gray-200 grid grid-cols-1 md:grid-cols-2 divide-x">
-            <div class="flex flex-col p-2">
-                <dt class="mb-1 text-gray-500 text-xs ">Тип на Барање</dt>
-                <dd class="text-sm font-semibold">{{ $application->appType->app_type_name }}</dd>
-            </div>
-
+            @if ($application->appType && $application->appType->app_type_name != null)
+                <div class="flex flex-col p-2">
+                    <dt class="mb-1 text-gray-500 text-xs ">Тип на Барање</dt>
+                    <dd class="text-sm font-semibold">{{ $application->appType->app_type_name }}</dd>
+                </div>
+            @endif
             <div class="flex flex-col p-2">
                 <dt class="mb-1 text-gray-500 text-xs ">Име и презиме / Назив</dt>
                 <dd class="text-sm font-semibold">{{ $application->customer->customer_name }}</dd>
@@ -128,7 +129,8 @@
                         <div class="p-2 rounded border-2 border-sky-600 shadow" id="img-wrap">
                             <img src="{{ asset('storage/' . $image->image_path) }}" class="object-scale-down h-48 w-96"
                                 alt="">
-                                <span class="text-xs text-sky-800 font-semibold bg-slate-300 w-full p-1 block rounded my-1">{{$image->image_name}}</span>
+                            <span
+                                class="text-xs text-sky-800 font-semibold bg-slate-300 w-full p-1 block rounded my-1">{{ $image->image_name }}</span>
                             <a class="bg-sky-600 w-full py-2 block rounded text-center text-white hover:bg-sky-700"
                                 href="{{ asset('storage/' . $image->image_path) }}" download>Сними Фотографија</a>
                         </div>
@@ -149,26 +151,27 @@
                 @if ($documents)
                     <ul class="space-y-4 text-left text-gray-600">
                         @foreach ($documents as $document)
-                        <div class="border-b-2 border-sky-700 p-4">
+                            <div class="border-b-2 border-sky-700 p-4">
 
-                            <li class="flex items-center space-x-3 rtl:space-x-reverse border-b-2 border-slate-300 pb-4">
-                                <svg class="flex-shrink-0 w-3.5 h-3.5 text-green-500 dark:text-green-400"
-                                aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
-                                viewBox="0 0 16 12">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5" />
-                            </svg>
-                            <span class="text-xs">{{$document->document_desc}}</span>
-                        </li>
-                        <div class="p-2">
+                                <li
+                                    class="flex items-center space-x-3 rtl:space-x-reverse border-b-2 border-slate-300 pb-4">
+                                    <svg class="flex-shrink-0 w-3.5 h-3.5 text-green-500 dark:text-green-400"
+                                        aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                        viewBox="0 0 16 12">
+                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                            stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5" />
+                                    </svg>
+                                    <span class="text-xs">{{ $document->document_desc }}</span>
+                                </li>
+                                <div class="p-2">
 
-                            <button wire:click="download('{{ $document->document_path }}', '{{ $document->document_desc }}')"
-                                class="bg-sky-600 px-4 py-2 block rounded text-center text-white hover:bg-sky-700">
-                            Сними Документ
-                        </button>
-                        </div>
-                    </div>
-
+                                    <button
+                                        wire:click="download('{{ $document->document_path }}', '{{ $document->document_desc }}')"
+                                        class="bg-sky-600 px-4 py-2 block rounded text-center text-white hover:bg-sky-700">
+                                        Сними Документ
+                                    </button>
+                                </div>
+                            </div>
                         @endforeach
                     </ul>
                 @endif

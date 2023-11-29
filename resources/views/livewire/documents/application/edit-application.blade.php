@@ -377,8 +377,8 @@
             </div>
         @endif
         @endif
-        <div class="container bg-amber-50 p-4 rounded-md mb-4">
-            {{-- pictures --}}
+        {{-- <div class="container bg-amber-50 p-4 rounded-md mb-4">
+            <!-- pictures -->
             <h2 class="text-xl text-center mb-4 bg-lime-300 py-4 rounded-md">Потребни (Задолжителни) Фотографии</h2>
             @if (count($appImages) === 0)
                 <p>Откако ке го одберете типот на барање, ке може да ги прикачите бараните фотографии</p>
@@ -405,13 +405,13 @@
                 @endforeach
             </ul>
             @endif
-        </div>
+        </div> --}}
 
 
-        <div class="container bg-blue-100 p-4 rounded">
+        {{-- <div class="container bg-blue-100 p-4 rounded"> --}}
             {{-- Documents --}}
-            <h2 class="text-xl text-center mb-4 bg-blue-300 py-4 rounded-md">Потребни (Задолжителни) Документи</h2>
-            {{-- @if (empty($relatedDocs)) --}}
+            {{-- <h2 class="text-xl text-center mb-4 bg-blue-300 py-4 rounded-md">Потребни (Задолжителни) Документи</h2> --}}
+{{--
             @if (count($appDocs) === 0)
                 <p>Откако ке го одберете типот на барање, ке може да ги прикачите бараните документи</p>
             @else
@@ -439,7 +439,7 @@
                     @endforeach
                 </ul>
             @endif
-        </div>
+        </div> --}}
 
         <div class="flex justify-between content-center">
             <a wire:navigate href="{{ route('applications.all') }}"

@@ -347,60 +347,60 @@ class EditApplication extends Component
         // Upload Images
 
 
-        $this->currentAppId = $this->application->id;
-        $this->appCurentNumber = $this->application->app_number;
-        $this->appCurentNumber = str_replace('/', '-', $this->appCurentNumber);
+        // $this->currentAppId = $this->application->id;
+        // $this->appCurentNumber = $this->application->app_number;
+        // $this->appCurentNumber = str_replace('/', '-', $this->appCurentNumber);
 
-        $userDepartment = auth()->user()->department->id;
-        $userLocalDept = auth()->user()->localDepartment->id;
+        // $userDepartment = auth()->user()->department->id;
+        // $userLocalDept = auth()->user()->localDepartment->id;
 
-        $appType = $this->application->app_type_id;
+        // $appType = $this->application->app_type_id;
 
-        // $this->pictures = ApplicationType::find($appType)->pictures;
-        // $this->uploadedImages
+        // // $this->pictures = ApplicationType::find($appType)->pictures;
+        // // $this->uploadedImages
 
-        $year = date('Y', strtotime($this->appDate));
-        $month = date('m', strtotime($this->appDate));
-        $day = date('d', strtotime($this->appDate));
+        // $year = date('Y', strtotime($this->appDate));
+        // $month = date('m', strtotime($this->appDate));
+        // $day = date('d', strtotime($this->appDate));
 
-        foreach ($this->appImages as $index => $photo) {
-            // Check if the image exists for updating
-            // ($this->uploadedImages)
-            dd($photo->image_name);
-            // if ($photo instanceof \Illuminate\Http\UploadedFile) {
-                $extension = $photo->getClientOriginalExtension();
-                $picture_name = $this->uploadedImages[$index]->getClientOriginalName();
+        // foreach ($this->appImages as $index => $photo) {
+        //     // Check if the image exists for updating
+        //     // ($this->uploadedImages)
+        //     dd($photo->image_name);
+        //     // if ($photo instanceof \Illuminate\Http\UploadedFile) {
+        //         $extension = $photo->getClientOriginalExtension();
+        //         $picture_name = $this->uploadedImages[$index]->getClientOriginalName();
 
-                $AppNumberPrefix = $this->appCurentNumber;
-                $path = $photo->store("{$userDepartment}/{$userLocalDept}/{$year}/{$month}/{$day}/{$this->currentAppId}", 'public');
+        //         $AppNumberPrefix = $this->appCurentNumber;
+        //         $path = $photo->store("{$userDepartment}/{$userLocalDept}/{$year}/{$month}/{$day}/{$this->currentAppId}", 'public');
 
-                $picture_desc_with_extension_and_prefix = $AppNumberPrefix . '-' . $picture_name . '.' . $extension;
+        //         $picture_desc_with_extension_and_prefix = $AppNumberPrefix . '-' . $picture_name . '.' . $extension;
 
-                AssociatedImage::create([
-                    'application_id' => $this->currentAppId,
-                    'image_path' => $path,
-                    'image_name' => $picture_desc_with_extension_and_prefix,
-                ]);
-            // }
-        }
+        //         AssociatedImage::create([
+        //             'application_id' => $this->currentAppId,
+        //             'image_path' => $path,
+        //             'image_name' => $picture_desc_with_extension_and_prefix,
+        //         ]);
+        //     // }
+        // }
 
 
-        foreach ($this->uploadedDocs as $document_desc => $doc) {
+        // foreach ($this->uploadedDocs as $document_desc => $doc) {
 
-            $extension = $doc->getClientOriginalExtension();
-            $AppNumberPrefix = $this->appCurentNumber;
+        //     $extension = $doc->getClientOriginalExtension();
+        //     $AppNumberPrefix = $this->appCurentNumber;
 
-            // $path = $doc->store("{$userDepartment}/{$userLocalDept}/{$year}/{$month}/{$day}/{$this->currentAppId}", 'app_docs');
+        //     // $path = $doc->store("{$userDepartment}/{$userLocalDept}/{$year}/{$month}/{$day}/{$this->currentAppId}", 'app_docs');
 
-            $path = $doc->store("{$doc->document_path}", 'app_docs');
+        //     $path = $doc->store("{$doc->document_path}", 'app_docs');
 
-            // $document_desc_with_extension_and_prefix = $AppNumberPrefix . '-' .$document_desc . '.' . $extension;
-            AssociatedDocument::create([
-                'application_id' => $this->application->id,
-                'document_path' => $path,
-                'document_desc' => $document_desc,
-            ]);
-        }
+        //     // $document_desc_with_extension_and_prefix = $AppNumberPrefix . '-' .$document_desc . '.' . $extension;
+        //     AssociatedDocument::create([
+        //         'application_id' => $this->application->id,
+        //         'document_path' => $path,
+        //         'document_desc' => $document_desc,
+        //     ]);
+        // }
 
         session()->flash('success', 'Барањето е успешно ажурирано!');
         $this->reset();
@@ -437,9 +437,9 @@ class EditApplication extends Component
             'approvalNumber.required' => 'Бројот на одобрението е задолжителен.',
             'approvalDate.required' => 'Датумот на одобрението е задолжителен.',
             'certIssuedBy.required' => 'Полето за издавач на потврда е задолжително.',
-            'uploadedImages.*.image' => 'Прикачената датотека мора да биде фотографија.',
-            'uploadedImages.*.max' => 'Прикачената слика не може да биде поголема од 4MB.',
-            'uploadedDocs.*.max' => 'Прикачениот фајл не може да биде поголем од 1MB.',
+            // 'uploadedImages.*.image' => 'Прикачената датотека мора да биде фотографија.',
+            // 'uploadedImages.*.max' => 'Прикачената слика не може да биде поголема од 4MB.',
+            // 'uploadedDocs.*.max' => 'Прикачениот фајл не може да биде поголем од 1MB.',
         ];
     }
 

@@ -115,6 +115,9 @@
                                         <x-dropdown-link :href="route('application.edit', $application->id)" wire:navigate>
                                             {{ __('Измени Барање') }}
                                         </x-dropdown-link>
+                                        <x-dropdown-link :href="route('application.images.edit', $application->id)" wire:navigate>
+                                            {{ __('Измени Фотографии') }}
+                                        </x-dropdown-link>
                                         <x-dropdown-link :href="route('customers.all')" wire:navigate>
                                             {{ __('Печати') }}
                                         </x-dropdown-link>
