@@ -113,10 +113,13 @@
                                             {{ __('Детали') }}
                                         </x-dropdown-link>
                                         <x-dropdown-link :href="route('application.edit', $application->id)" wire:navigate>
-                                            {{ __('Измени Барање') }}
+                                            {{ __('Промени Барање') }}
                                         </x-dropdown-link>
                                         <x-dropdown-link :href="route('application.images.edit', $application->id)" wire:navigate>
-                                            {{ __('Измени Фотографии') }}
+                                            {{ __('Промени Фотографии') }}
+                                        </x-dropdown-link>
+                                        <x-dropdown-link :href="route('application.documents.edit', $application->id)" wire:navigate>
+                                            {{ __('Промени Документи') }}
                                         </x-dropdown-link>
                                         <x-dropdown-link :href="route('customers.all')" wire:navigate>
                                             {{ __('Печати') }}

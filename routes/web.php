@@ -52,6 +52,7 @@ use App\Livewire\Documents\Application\ApplicationDetails;
 use App\Livewire\Documents\Application\ApplicationTable;
 use App\Livewire\Documents\Application\DownloadAssocDocs;
 use App\Livewire\Documents\Application\EditApplication;
+use App\Livewire\Documents\Application\EditDocuments;
 use App\Livewire\Documents\Application\EditImages;
 use App\Livewire\Documents\Application\ImageController;
 use App\Livewire\Users;
@@ -188,6 +189,7 @@ Route::get('/it/applications/all', ApplicationTable::class)->name('applications.
 Route::get('/it/application/{application}/details', ApplicationDetails::class)->name('application.details');
 Route::get('/it/application/{application}/edit', EditApplication::class)->name('application.edit');
 Route::get('/it/application/images/{application}/edit', EditImages::class)->name('application.images.edit');
+Route::get('/it/application/documents/{application}/edit', EditDocuments::class)->name('application.documents.edit');
 // Route::get('/app_pictures/{path}', ImageController::class)->name('application.pictures');
 // Route::get('/it/doc/dowmload/{path}', DownloadAssocDocs::class)->name('application.documents');
 

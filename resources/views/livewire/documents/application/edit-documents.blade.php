@@ -44,30 +44,28 @@
             <h2 class="mb-1 text-sky-700 text-xs bg-gray-300 p-4">Прикачени Фотографии:</h2>
 
             <div class="grid grid-cols-1  p-4">
-                @if ($images)
-                    @foreach ($images as $image)
-                        <div class="p-2 rounded border-2 border-sky-600 shadow" id="img-wrap">
-                            <img src="{{ asset('storage/' . $image->image_path) }}" class="object-scale-down h-48 w-96"
-                                alt="">
+                @if ($documents)
+                    @foreach ($documents as $document)
+                        <div class="p-2 rounded border-2 border-sky-600 shadow mb-4" id="img-wrap">
                             <span
-                                class="text-xs text-sky-800 font-semibold bg-slate-300 w-full p-1 block rounded my-1">{{ $image->image_name }}</span>
-                            <input wire:model="newUploadedImages.{{ $image->id }}" type="file"
-                                class="block w-full text-sm text-lime-500
+                                class="text-xs text-sky-800 font-semibold bg-slate-300 w-full p-1 block rounded my-1">{{ $document->document_desc }}</span>
+                            <input wire:model="newUploadedDocuments.{{ $document->id }}" type="file"
+                                class="block w-full text-sm text-sky-500
                                 file:mr-4 file:py-2 file:px-4
                                 file:rounded-full file:border-0
                                 file:text-sm file:font-semibold
-                                file:bg-lime-700 file:text-white
-                                hover:file:bg-lime-300 mt-2
-                                focus:outline-none focus:ring-2 focus:ring-lime-500 focus:ring-offset-2
+                                file:bg-sky-800 file:text-white
+                                hover:file:bg-sky-300 mt-2
+                                focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2
                                 ring ring-transparent ring-offset-4 rounded-full
                                 transition ease-in-out duration-150" />
 
-                            @if (isset($newUploadedImages[$image->id]))
-                                <button wire:click="changeImage({{ $image->id }})"
+                            @if (isset($newUploadedDocuments[$document->id]))
+                                <button wire:click="changeDocument({{ $document->id }})"
                                     class="bg-pink-600 px-4 py-1 text-sm block rounded text-center text-white hover:bg-pink-700 mt-4">Замени
-                                    фотографија</button>
+                                    документ</button>
                             @endif
-                            @error('newUploadedImages.' . $image->id)
+                            @error('newUploadedDocuments.' . $document->id)
                                 <span class="error text-red-600">{{ $message }}</span>
                             @enderror
                         </div>
