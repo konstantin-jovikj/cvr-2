@@ -112,7 +112,7 @@ class EditDocuments extends Component
     public function customMessages()
     {
         return [
-            'newUploadedImages.*.max' => 'Прикачениот документ не може да биде поголема од 1MB.',
+            'newUploadedImages.*.max' => 'Прикачениот документ не може да биде поголем од 1MB.',
         ];
     }
 }

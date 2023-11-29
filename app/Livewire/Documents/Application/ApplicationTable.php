@@ -6,6 +6,7 @@ use App\Models\User;
 use Livewire\Component;
 use App\Models\Application;
 use Livewire\WithPagination;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class ApplicationTable extends Component
 {
@@ -27,4 +28,5 @@ class ApplicationTable extends Component
 
         return view('livewire.documents.application.application-table', compact('applications'));
     }
+
 }

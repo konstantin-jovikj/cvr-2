@@ -121,7 +121,9 @@
                                         <x-dropdown-link :href="route('application.documents.edit', $application->id)" wire:navigate>
                                             {{ __('Промени Документи') }}
                                         </x-dropdown-link>
-                                        <x-dropdown-link :href="route('customers.all')" wire:navigate>
+
+
+                                        <x-dropdown-link :href="route('pdf.apptest', $application->id)" target="_blank">
                                             {{ __('Печати') }}
                                         </x-dropdown-link>
                                         <x-dropdown-link :href="route('customers.all')" wire:navigate>

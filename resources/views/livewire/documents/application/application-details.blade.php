@@ -100,6 +100,7 @@
             {{-- ADD MORE DETAILS --}}
         </dl>
 
+        {{-- <button wire:click="generatePdf($application->id)" >PRINTAJ</button> --}}
 
 
 

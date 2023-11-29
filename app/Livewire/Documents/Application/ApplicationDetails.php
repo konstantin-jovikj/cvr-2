@@ -8,6 +8,7 @@ use App\Models\AssociatedImage;
 use App\Models\AssociatedDocument;
 use Illuminate\Support\Facades\Storage;
 use App\Livewire\Documents\Application\ImageController;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class ApplicationDetails extends Component
 {
@@ -42,5 +43,11 @@ class ApplicationDetails extends Component
         }
 
         abort(404);
+    }
+
+    public function generatePdf($application)
+    {
+        $pdf = PDF::loadView('livewire.documents.application.pdf.pdf-template', compact('application'));
+        return $pdf->stream('generated-pdf.pdf');
     }
 }

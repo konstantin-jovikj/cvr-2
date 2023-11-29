@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PdfController;
 use App\Livewire\SuperAdmin\AddRole;
 use App\Livewire\AdminRegister\AdminRegister;
 use App\Livewire\BasicData\ApplicationDocs\ManageAppTypeDocs;
@@ -55,6 +56,7 @@ use App\Livewire\Documents\Application\EditApplication;
 use App\Livewire\Documents\Application\EditDocuments;
 use App\Livewire\Documents\Application\EditImages;
 use App\Livewire\Documents\Application\ImageController;
+use App\Livewire\Documents\Application\Pdf\EdinecnoOdobreniePdf;
 use App\Livewire\Users;
 use App\Livewire\HomePage;
 use App\Livewire\EditUserForm;
@@ -190,7 +192,10 @@ Route::get('/it/application/{application}/details', ApplicationDetails::class)->
 Route::get('/it/application/{application}/edit', EditApplication::class)->name('application.edit');
 Route::get('/it/application/images/{application}/edit', EditImages::class)->name('application.images.edit');
 Route::get('/it/application/documents/{application}/edit', EditDocuments::class)->name('application.documents.edit');
-// Route::get('/app_pictures/{path}', ImageController::class)->name('application.pictures');
-// Route::get('/it/doc/dowmload/{path}', DownloadAssocDocs::class)->name('application.documents');
+
+
+// PDF
+Route::get('it/application/{application}/eo/pdf', [PdfController::class, 'generatePdf'])->name('pdf.apptest');
+
 
 require __DIR__.'/auth.php';
