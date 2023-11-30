@@ -14,14 +14,42 @@ class PdfController extends Controller
 
     public function generatePdf(Application $application)
     {
+        // try {
 
-        $applicationTypes = ApplicationType::all();
-        try {
-            // Pdf::setOption(['defaultFont' => 'DejaVu Sans']);
-            $pdf = PDF::loadView('pdf.pdf-template', compact('application', 'applicationTypes'));
-            return $pdf->stream();
-        } catch (\Exception $e) {
-            dd($e->getMessage()); // Handle or log the exception
-        }
+            $appType = $application->app_type_id;
+            $appDocuments = ApplicationType::find($appType)->relatedDocuments;
+
+            if ($appType == 1){
+                $pdf = PDF::loadView('pdf.pdf-template', compact('application', 'appDocuments'));
+                return $pdf->stream();
+            }
+            if ($appType == 2){
+                $pdf = PDF::loadView('pdf.pdf-template', compact('application', 'appDocuments'));
+                return $pdf->stream();
+            }
+            if ($appType == 3){
+                $pdf = PDF::loadView('pdf.pdf-template', compact('application', 'appDocuments'));
+                return $pdf->stream();
+            }
+            if ($appType == 4){
+                $pdf = PDF::loadView('pdf.pdf-template', compact('application', 'appDocuments'));
+                return $pdf->stream();
+            }
+            if ($appType == 5){
+                $pdf = PDF::loadView('pdf.pdf-template', compact('application', 'appDocuments'));
+                return $pdf->stream();
+            }
+            if ($appType == 6){
+                $pdf = PDF::loadView('pdf.pdf-template', compact('application', 'appDocuments'));
+                return $pdf->stream();
+            }
+            if ($appType == 7){
+                $pdf = PDF::loadView('pdf.pdf-template', compact('application', 'appDocuments'));
+                return $pdf->stream();
+            }
+            if ($appType == 8){
+                $pdf = PDF::loadView('pdf.pdf-template', compact('application', 'appDocuments'));
+                return $pdf->stream();
+            }
     }
 }
