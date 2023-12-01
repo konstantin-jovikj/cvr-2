@@ -87,16 +87,27 @@
                         Деловоден број
                     </th>
                     <th class="px-2 py-2 text-xs text-gray-800">
-                        Име и презме
+                        Тип на барање
                     </th>
                     <th class="px-2 py-2 text-xs text-gray-800">
                         Категоријa
                     </th>
+
+                    <th class="px-2 py-2 text-xs text-gray-800">
+                        Марка
+                    </th>
+                    <th class="px-2 py-2 text-xs text-gray-800">
+                        Тип на возило
+                    </th>
+
                     <th class="px-2 py-2 text-xs text-gray-800">
                         Бр на шасија
                     </th>
                     <th class="px-2 py-2 text-xs text-gray-800">
-                        Забелешка
+                        Тип на мотор
+                    </th>
+                    <th class="px-2 py-2 text-xs text-gray-800">
+                        Број на мотор
                     </th>
                     <th class="px-2 py-2 text-xs text-gray-800">
                         Статус
@@ -106,40 +117,78 @@
                     </th>
                 </tr>
             </thead>
-            {{-- <tbody class="bg-white divide-y divide-gray-300 text-left">
-                @foreach ($applications as $application)
+            <tbody class="bg-white divide-y divide-gray-300 text-left">
+                @foreach ($userApplications as $userApplication)
                     <tr class="whitespace-wrap">
                         <td class="px-2 py-1 text-xs text-gray-800 ">
-                            {{ $application->app_date }}
+                            {{ date('d-m-Y', strtotime($userApplication->app_date)) }}
                         </td>
                         <td class="px-2 py-1">
                             <div class="text-xs text-gray-900 font-bold">
-                                {{ $application->app_number }}
+                                {{ $userApplication->app_number }}
+                            </div>
+                        </td>
+                        <td class="px-2 py-1">
+                            <div class="text-xs text-blue-700 font-bold">
+                                {{ $userApplication->appType->app_type_name }}
                             </div>
                         </td>
                         <td class="px-2 py-1">
                             <div class="text-xs text-gray-900">
-                                {{ $application->customer->customer_name }}
+                                {{ optional($userApplication->category)->category_name }}
                             </div>
                         </td>
                         <td class="px-2 py-1">
                             <div class="text-xs text-gray-900">
-                                {{ optional($application->category)->category_name }}
-                            </div>
-                        </td>
-                        <td class="px-2 py-1">
-                            <div class="text-xs text-gray-900">
-                                {{ $application->vin_number }}
+                                @if ($userApplication->brand != null && $userApplication->brand->brand_name != null)
+                                    {{ $userApplication->brand->brand_name }}
+                                @else
+                                    {{ '/' }}
+                                @endif
                             </div>
                         </td>
 
                         <td class="px-2 py-1">
-                            <span class="text-xs text-green-700 font-bold">
-                                {{ $application->note }}
-                            </span>
+                            <div class="text-xs text-gray-900">
+                                @if ($userApplication->type != null && $userApplication->type->type_name != null)
+                                    {{ $userApplication->type->type_name }}
+                                @else
+                                    {{ '/' }}
+                                @endif
+                            </div>
+                        </td>
+
+                        <td class="px-2 py-1">
+                            <div class="text-xs text-red-700 uppercase font-bold">
+                                @if ($userApplication->vin_number != null)
+                                    {{ $userApplication->vin_number }}
+                                @else
+                                    {{ '/' }}
+                                @endif
+                            </div>
                         </td>
                         <td class="px-2 py-1">
-                            @if ($application->approval_number == null || $application->approval_number == '')
+                            <div class="text-xs text-gray-900">
+                                @if ($userApplication->engine_type != null)
+                                    {{ $userApplication->engine_type }}
+                                @else
+                                    {{ '/' }}
+                                @endif
+                            </div>
+                        </td>
+                        <td class="px-2 py-1">
+                            <div class="text-xs text-gray-900">
+                                @if ($userApplication->engine_number != null)
+                                    {{ $userApplication->engine_number }}
+                                @else
+                                    {{ '/' }}
+                                @endif
+                            </div>
+                        </td>
+
+
+                        <td class="px-2 py-1">
+                            @if ($userApplication->approval_number == null || $userApplication->approval_number == '')
                                 <div class="bg-red-600 h-[12px] w-[12px] rounded-full shadow-md"></div>
                             @else
                                 <div class="bg-green-800 h-[12px] w-[12px] rounded-full shadow-md"></div>
@@ -171,32 +220,35 @@
                                     </x-slot>
 
                                     <x-slot name="content">
-                                        <x-dropdown-link :href="route('application.details', $application->id)" wire:navigate>
+                                        <x-dropdown-link :href="route('application.details', $userApplication->id)" wire:navigate>
                                             {{ __('Детали') }}
                                         </x-dropdown-link>
-                                        <x-dropdown-link :href="route('application.edit', $application->id)" wire:navigate>
+                                        <x-dropdown-link :href="route('certificate.add', ['application' => $userApplication->id, 'customer' => $customer->id])" wire:navigate>
+                                            {{ __('Направи потврда') }}
+                                        </x-dropdown-link>
+                                        {{-- <x-dropdown-link :href="route('application.edit', $userApplication->id)" wire:navigate>
                                             {{ __('Промени Барање') }}
                                         </x-dropdown-link>
-                                        <x-dropdown-link :href="route('application.images.edit', $application->id)" wire:navigate>
+                                        <x-dropdown-link :href="route('application.images.edit', $userApplication->id)" wire:navigate>
                                             {{ __('Промени Фотографии') }}
                                         </x-dropdown-link>
-                                        <x-dropdown-link :href="route('application.documents.edit', $application->id)" wire:navigate>
+                                        <x-dropdown-link :href="route('application.documents.edit', $userApplication->id)" wire:navigate>
                                             {{ __('Промени Документи') }}
-                                        </x-dropdown-link>
+                                        </x-dropdown-link> --}}
 
 
-                                        <x-dropdown-link :href="route('pdf.apptest', $application->id)" target="_blank">
-                                            {{ __('Печати') }}
+                                        <x-dropdown-link :href="route('pdf.apptest', $userApplication->id)" target="_blank">
+                                            {{ __('Печати барање') }}
                                         </x-dropdown-link>
-                                        <x-dropdown-link :href="route('user.dossier', $application->customer->id)" wire:navigate>
+                                        {{-- <x-dropdown-link :href="route('user.dossier', $userApplication->customer->id)" wire:navigate>
                                             {{ __('Досие') }}
-                                        </x-dropdown-link>
-                                        <x-dropdown-link :href="route('customers.all')" wire:navigate>
+                                        </x-dropdown-link> --}}
+                                        {{-- <x-dropdown-link :href="route('customers.all')" wire:navigate>
                                             {{ __('Таблица') }}
                                         </x-dropdown-link>
                                         <x-dropdown-link :href="route('customers.all')" wire:navigate>
                                             {{ __('Таблица СТП') }}
-                                        </x-dropdown-link>
+                                        </x-dropdown-link> --}}
                                         <x-dropdown-link :href="route('customers.all')" wire:navigate>
                                             {{ __('Записник') }}
                                         </x-dropdown-link>
@@ -206,11 +258,11 @@
                                         <x-dropdown-link :href="route('customers.all')" wire:navigate>
                                             {{ __('Наод') }}
                                         </x-dropdown-link>
-                                        <x-dropdown-link :href="route('customers.all')" wire:navigate>
+                                        {{-- <x-dropdown-link :href="route('customers.all')" wire:navigate>
                                             {{ __('Ед.Одоб') }}
-                                        </x-dropdown-link>
+                                        </x-dropdown-link> --}}
                                         <x-dropdown-link :href="route('customers.all')" wire:navigate>
-                                            {{ __('Избриши') }}
+                                            {{ __('Избриши наод') }}
                                         </x-dropdown-link>
 
                                     </x-slot>
@@ -220,10 +272,10 @@
 
                     </tr>
                 @endforeach
-            </tbody> --}}
+            </tbody>
         </table>
     </div>
-    <div class="container mx-auto mt-5">
-        {{-- {{ $applications->links() }} --}}
+    <div class="container mx-auto mt-5 px-6">
+        {{ $userApplications->links() }}
     </div>
 </div>

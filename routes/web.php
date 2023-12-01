@@ -199,7 +199,7 @@ Route::get('/it/application/documents/{application}/edit', EditDocuments::class)
 // CERTIFICATE
 Route::get('/it/certificate/{customer}/all', DossierTable::class)->name('user.dossier');
 
-Route::get('/it/certificate/{application}/add', AddCertificate::class)->name('certificate.add');
+Route::get('/it/certificate/{application}/{customer}/add', AddCertificate::class)->name('certificate.add');
 
 
 // PDF
