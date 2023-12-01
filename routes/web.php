@@ -57,6 +57,8 @@ use App\Livewire\Documents\Application\EditDocuments;
 use App\Livewire\Documents\Application\EditImages;
 use App\Livewire\Documents\Application\ImageController;
 use App\Livewire\Documents\Application\Pdf\EdinecnoOdobreniePdf;
+use App\Livewire\Documents\Certificate\AddCertificate;
+use App\Livewire\Documents\Dossier\DossierTable;
 use App\Livewire\Users;
 use App\Livewire\HomePage;
 use App\Livewire\EditUserForm;
@@ -192,6 +194,12 @@ Route::get('/it/application/{application}/details', ApplicationDetails::class)->
 Route::get('/it/application/{application}/edit', EditApplication::class)->name('application.edit');
 Route::get('/it/application/images/{application}/edit', EditImages::class)->name('application.images.edit');
 Route::get('/it/application/documents/{application}/edit', EditDocuments::class)->name('application.documents.edit');
+
+
+// CERTIFICATE
+Route::get('/it/certificate/{customer}/all', DossierTable::class)->name('user.dossier');
+
+Route::get('/it/certificate/{application}/add', AddCertificate::class)->name('certificate.add');
 
 
 // PDF

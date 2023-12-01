@@ -2,7 +2,7 @@
     <div class="bg-sky-100 container flex  mx-auto my-6 p-6 justify-between">
 
         <div class="">
-            <h2 class="text-xl uppercase font-bold text-sky-700">Барања</h2>
+            <h2 class="text-xl uppercase font-bold text-sky-700">ДОСИЕ НА БАРАТЕЛ - СОПСТВЕНИК НА ВОЗИЛО(А)</h2>
         </div>
         <div>
             <livewire:alerts.alert-message />
@@ -13,6 +13,68 @@
                 Нова Категорија</a>
         </div> --}}
     </div>
+
+    {{-- Details --}}
+
+    <div class="bg-white w-4/5 shadow-md overflow-hidden sm:rounded-lg px-6 py-4 mb-6 mx-auto">
+
+        <h2 class=" text-xl  border-b-2 border-sky-600 pb-2">Детали за Барател -Сопственик:
+            <span class="text-sky-600 font-bold">{{ $customer->customer_name }}</span>
+        </h2>
+
+
+        <dl class="text-gray-900 divide-y divide-gray-200 grid grid-cols-1 md:grid-cols-2 divide-x">
+
+
+            @if ($customer->embg != null || !empty($customer->embg))
+                <div class="flex flex-col p-2">
+                    <dt class="mb-1 text-gray-500 text-xs">ЕМБГ</dt>
+                    <dd class="text-sm font-semibold">{{ $customer->embg }}</dd>
+                </div>
+            @endif
+
+            @if ($customer->embs != null || !empty($customer->embs))
+                <div class="flex flex-col p-2">
+                    <dt class="mb-1 text-gray-500 text-xs">ЕМБC</dt>
+                    <dd class="text-sm font-semibold">{{ $customer->embs }}</dd>
+                </div>
+            @endif
+
+            @if ($customer->address != null || !empty($customer->address))
+                <div class="flex flex-col p-2">
+                    <dt class="mb-1 text-gray-500 text-xs">Адреса</dt>
+                    <dd class="text-sm font-semibold">{{ $customer->address }} - {{ $customer->city->zip }} -
+                        {{ $customer->city->city_name }}</dd>
+                </div>
+            @endif
+
+            @if ($customer->phone != null || !empty($customer->phone))
+                <div class="flex flex-col p-2">
+                    <dt class="mb-1 text-gray-500 text-xs">Телефон</dt>
+                    <dd class="text-sm font-semibold">{{ $customer->phone }}</dd>
+                </div>
+            @endif
+
+            @if ($customer->discount != null || !empty($customer->discount))
+                <div class="flex flex-col p-2">
+                    <dt class="mb-1 text-gray-500 text-xs">Попуст</dt>
+                    <dd class="text-sm font-semibold">{{ $customer->discount }}</dd>
+                </div>
+            @endif
+
+            @if ($customer->note != null || !empty($customer->note))
+                <div class="flex flex-col p-2">
+                    <dt class="mb-1 text-gray-500 text-xs">Забелешка</dt>
+                    <dd class="text-sm font-semibold">{{ $customer->note }}</dd>
+                </div>
+            @endif
+
+
+            {{-- ADD MORE DETAILS --}}
+        </dl>
+    </div>
+
+
     <div class="container flex justify-center mx-auto">
 
         <table class="w-full divide-y divide-gray-300 shadow ">
@@ -44,7 +106,7 @@
                     </th>
                 </tr>
             </thead>
-            <tbody class="bg-white divide-y divide-gray-300 text-left">
+            {{-- <tbody class="bg-white divide-y divide-gray-300 text-left">
                 @foreach ($applications as $application)
                     <tr class="whitespace-wrap">
                         <td class="px-2 py-1 text-xs text-gray-800 ">
@@ -154,19 +216,14 @@
                                     </x-slot>
                                 </x-dropdown>
                             </div>
-
-
-                            {{-- <button wire:click='deleteCategory({{ $application->id }})'
-                                wire:confirm="Дали сте сигурени дека сакате да ја избришете оваа категорија?"
-                                class="px-2 py-1 text-xs text-white bg-red-600 hover-bg-red-800 rounded-full">Избриши</button>  --}}
                         </td>
 
                     </tr>
                 @endforeach
-            </tbody>
+            </tbody> --}}
         </table>
     </div>
     <div class="container mx-auto mt-5">
-        {{ $applications->links() }}
+        {{-- {{ $applications->links() }} --}}
     </div>
 </div>
