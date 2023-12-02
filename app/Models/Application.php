@@ -50,7 +50,8 @@ class Application extends Model
         'mod_or_rep_id',
         'vehicle_type_id',
         'fuel_id',
-        'color_id',
+        'color_1_id',
+        'color_2_id',
         'shape_id',
         'note_id',
         'correction_id',
@@ -64,13 +65,61 @@ class Application extends Model
         'reg_number',
         'mod_repair_note',
         'traffic_permit_nr',
-        'production_year',
         'approval_number',
         'approval_date',
         'cert_issued_by',
         'created_at',
         'updated_at',
         'app_number',
+
+        'cert_date',
+        'variant',
+        'edition',
+        'selected_production_year',
+        'const_total_mass',
+        'legal_total_mass',
+        'legal_total_group_mass',
+        'vehicle_mass',
+        'vehicle_type',
+        'application_mark_mkd',
+        'application_mark_eu',
+        'coc_number',
+        'number_of_axles',
+        'allowed_pneumatics',
+        'length',
+        'width',
+        'height',
+        'axel_mass_distibution_1',
+        'axel_mass_distibution_2',
+        'axel_mass_distibution_3',
+        'axel_mass_distibution_4',
+        'axel_mass_distibution_5',
+        'connection_point_mass_distibution',
+        'max_structural_axle_load_1',
+        'max_structural_axle_load_2',
+        'max_structural_axle_load_3',
+        'max_structural_axle_load_4',
+        'max_structural_axle_load_5',
+        'max_connection_point_load',
+        'braked_trailer_max_mass',
+        'unbraked_trailer_max_mass',
+        'trailer_connection_point_max_load',
+        'plugin_device_approval_mark',
+        'engine_volume',
+        'engine_power',
+        'engine_revolutions',
+        'power_mass_distribution',
+        'number_of_seats',
+        'number_of_standing_places',
+        'number_of_lie_down_places',
+        'max_speed',
+        'stationary_noise_level',
+        'noise_at_rpm',
+        'co2',
+        'cert_note_text',
+        'has_certificate',
+
+
     ];
 
     public function appType()
@@ -88,7 +137,7 @@ class Application extends Model
         return $this->belongsTo(Customer::class);
     }
 
-        public function mediator()
+    public function mediator()
     {
         return $this->belongsTo(Mediator::class);
     }
@@ -176,12 +225,10 @@ class Application extends Model
     public function associatedImages()
     {
         return $this->hasMany(AssociatedImage::class);
-
     }
 
     public function associatedDocs()
     {
         return $this->hasMany(AssociatedDocument::class);
-
     }
 }

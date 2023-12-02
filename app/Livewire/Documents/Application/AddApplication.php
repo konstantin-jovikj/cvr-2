@@ -289,7 +289,7 @@ class AddApplication extends Component
             'mod_repair_note' => $this->modRepairNote,
             'mod_or_rep_id' => $this->selectedModOrRepaired,
             'traffic_permit_nr' => $this->trafficPermitNr,
-            'production_year' => $this->productionYear,
+            // 'production_year' => $this->productionYear,
             'vehicle_type_id' => $this->selectedVehicleTypeId,
             'approval_number' => $this->approvalNumber,
             'approval_date' => $this->approvalDate,

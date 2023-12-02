@@ -35,6 +35,7 @@ return new class extends Migration
             $table->unsignedBigInteger('correction_id')->nullable();
             $table->unsignedBigInteger('legalisation_id')->nullable();
 
+            $table->string('has_certificate')->nullable();
             $table->string('app_number')->nullable();
             $table->string('vin_number')->nullable();
             $table->string('engine_type')->nullable();
@@ -46,7 +47,6 @@ return new class extends Migration
             $table->string('mod_repair_note')->nullable();
             $table->string('traffic_permit_nr')->nullable();
             $table->string('approval_number')->nullable();
-            $table->boolean('has_certificate')->default(false);
             $table->dateTime('approval_date')->default(now())->nullable();
             $table->string('cert_issued_by')->nullable();
 

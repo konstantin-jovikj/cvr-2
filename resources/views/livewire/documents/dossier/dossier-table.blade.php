@@ -188,7 +188,7 @@
 
 
                         <td class="px-2 py-1">
-                            @if ($userApplication->approval_number == null || $userApplication->approval_number == '')
+                            @if ($userApplication->has_certificate == null || $userApplication->has_certificate == 0)
                                 <div class="bg-red-600 h-[12px] w-[12px] rounded-full shadow-md"></div>
                             @else
                                 <div class="bg-green-800 h-[12px] w-[12px] rounded-full shadow-md"></div>
@@ -223,8 +223,13 @@
                                         <x-dropdown-link :href="route('application.details', $userApplication->id)" wire:navigate>
                                             {{ __('Детали') }}
                                         </x-dropdown-link>
-                                        <x-dropdown-link :href="route('certificate.add', ['application' => $userApplication->id, 'customer' => $customer->id])" wire:navigate>
-                                            {{ __('Направи потврда') }}
+                                        @if ($userApplication->has_certificate == null || $userApplication->has_certificate == 0)
+                                            <x-dropdown-link :href="route('certificate.add', [
+                                                'application' => $userApplication->id,
+                                                'customer' => $customer->id,
+                                            ])" wire:navigate>
+                                                {{ __('Направи потврда') }}
+                                        @endif
                                         </x-dropdown-link>
                                         {{-- <x-dropdown-link :href="route('application.edit', $userApplication->id)" wire:navigate>
                                             {{ __('Промени Барање') }}
@@ -237,6 +242,9 @@
                                         </x-dropdown-link> --}}
 
 
+                                        <x-dropdown-link :href="route('pdf.apptest', $userApplication->id)" target="_blank">
+                                            {{ __('Печати потврда') }}
+                                        </x-dropdown-link>
                                         <x-dropdown-link :href="route('pdf.apptest', $userApplication->id)" target="_blank">
                                             {{ __('Печати барање') }}
                                         </x-dropdown-link>

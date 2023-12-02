@@ -19,6 +19,7 @@ class AddCertificate extends Component
     public $fuels;
     public $colors;
     public $notes;
+    public $certificateCreated = 1;
 
     public $certDate; //add
     public $variant; //add
@@ -104,6 +105,62 @@ class AddCertificate extends Component
 
     public function addCertificate()
     {
+        $this->application->update([
+            'has_certificate' => '1',
+            'cert_date' => $this->certDate,
+            'variant' => $this->variant,
+            'edition' => $this->edition,
+            'selected_production_year' => $this->selectedProductionYear,
+            'const_total_mass' => $this->constTotalMass,
+            'legal_total_mass' => $this->legalTotalMass,
+            'legal_total_group_mass' => $this->legalTotalGroupMass,
+            'vehicle_mass' => $this->vehicleMass,
+            'vehicle_type' => $this->vehicleType,
+            'fuel_id' => $this->selectedFuel,
+            'color_1_id' => $this->selectedColor_1,
+            'color_2_id' => $this->selectedColor_2,
+            'note_id' => $this->selectedNote,
+            'shape_id' => $this->selectedChassis,
+            'application_mark_mkd' => $this->applicationMarkMKD,
+            'application_mark_eu' => $this->applicationMarkEU,
+            'coc_number' => $this->CocNumber,
+            'number_of_axles' => $this->numberOfAxles,
+            'allowed_pneumatics' => $this->allowedPneumatics,
+            'length' => $this->length,
+            'width' => $this->width,
+            'height' => $this->height,
+            'axel_mass_distibution_1' => $this->axelMassDistibution_1,
+            'axel_mass_distibution_2' => $this->axelMassDistibution_2,
+            'axel_mass_distibution_3' => $this->axelMassDistibution_3,
+            'axel_mass_distibution_4' => $this->axelMassDistibution_4,
+            'axel_mass_distibution_5' => $this->axelMassDistibution_5,
+            'connection_point_mass_distibution' => $this->connectionPointlMassDistibution,
+            'max_structural_axle_load_1' => $this->maxStructuralAxleLoad_1,
+            'max_structural_axle_load_2' => $this->maxStructuralAxleLoad_2,
+            'max_structural_axle_load_3' => $this->maxStructuralAxleLoad_3,
+            'max_structural_axle_load_4' => $this->maxStructuralAxleLoad_4,
+            'max_structural_axle_load_5' => $this->maxStructuralAxleLoad_5,
+            'max_connection_point_load' => $this->maxConnectionPointLoad,
+            'braked_trailer_max_mass' => $this->brakedTrailerMaxMass,
+            'unbraked_trailer_max_mass' => $this->unbrakedTrailerMaxMass,
+            'trailer_connection_point_max_load' => $this->trailerConnectionPointMaxLoad,
+            'plugin_device_approval_mark' => $this->pluginDeviceApprovalMark,
+            'engine_volume' => $this->engineVolume,
+            'engine_power' => $this->engineVolume,
+            'engine_revolutions' => $this->engineRevolutions,
+            'power_mass_distribution' => $this->powerMassDistribution,
+            'number_of_seats' => $this->numberOfSeats,
+            'number_of_standing_places' => $this->numberOfStandingPlaces,
+            'number_of_lie_down_places' => $this->numberOfLieDownPlaces,
+            'max_speed' => $this->maxSpeed,
+            'stationary_noise_level' => $this->stationaryNoiseLevel,
+            'noise_at_rpm' => $this->noiseAtRpm,
+            'co2' => $this->co2,
+            'cert_note_text' => $this->certNoteText,
+        ]);
 
+        session()->flash('success', 'Потврдата е успешно изработена!');
+        $this->reset();
+        return redirect(route('applications.all'));
     }
 }

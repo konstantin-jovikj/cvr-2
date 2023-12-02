@@ -4,15 +4,18 @@
     <div class="bg-white w-full shadow-md overflow-hidden sm:rounded-lg px-6 py-4 mb-2">
 
         <h2 class=" text-xl font-bold border-b-2 border-sky-600 pb-2"> <span>Барање со деловоден Број : </span>
-            <span class="font-bold text-sky-600"> {{ $application->app_number}}</span> </h2>
+            <span class="font-bold text-sky-600"> {{ $application->app_number }}</span>
+        </h2>
 
 
     </div>
     {{-- Customer Details --}}
     <div class="bg-white w-full shadow-md overflow-hidden sm:rounded-lg px-6 py-4 mb-2">
 
-        <h2 class=" text-xl font-bold border-b-2 border-sky-600 pb-2"> <span>Има и Презиме (Назив) на сопственик на возило:</span>
-            <span class="font-bold text-sky-600"> {{ $customer->customer_name }}</span> </h2>
+        <h2 class=" text-xl font-bold border-b-2 border-sky-600 pb-2"> <span>Има и Презиме (Назив) на сопственик на
+                возило:</span>
+            <span class="font-bold text-sky-600"> {{ $customer->customer_name }}</span>
+        </h2>
 
         <dl class=" text-gray-900 divide-y divide-gray-200 grid grid-cols-2 divide-x ">
             <div class="flex flex-col p-2">
@@ -40,19 +43,27 @@
                 <dt class="mb-1 text-gray-500 text-xs ">Забелешка</dt>
                 <dd class="text-sm font-semibold">{{ $customer->note }}</dd>
             </div>
-            <div class="flex flex-col p-2">
-                <dt class="mb-1 text-gray-500 text-xs ">Производител</dt>
-                <dd class="text-sm font-semibold">{{ $application->manufacturer->name }}</dd>
-            </div>
-            <div class="flex flex-col p-2">
-                <dt class="mb-1 text-gray-500 text-xs ">Марка</dt>
-                <dd class="text-sm font-semibold">{{ $application->brand->brand_name }}</dd>
-            </div>
-            <div class="flex flex-col p-2">
-                <dt class="mb-1 text-gray-500 text-xs ">Тип</dt>
-                <dd class="text-sm font-semibold">{{ $application->type->type_name }}</dd>
-            </div>
 
+            @if ($application->manufacturer_id != null)
+                <div class="flex flex-col p-2">
+                    <dt class="mb-1 text-gray-500 text-xs ">Производител</dt>
+                    <dd class="text-sm font-semibold">{{ $application->manufacturer->name }}</dd>
+                </div>
+            @endif
+
+            @if ($application->brand_id != null)
+                <div class="flex flex-col p-2">
+                    <dt class="mb-1 text-gray-500 text-xs ">Марка</dt>
+                    <dd class="text-sm font-semibold">{{ $application->brand->brand_name }}</dd>
+                </div>
+            @endif
+
+            @if ($application->type_id != null)
+                <div class="flex flex-col p-2">
+                    <dt class="mb-1 text-gray-500 text-xs ">Тип</dt>
+                    <dd class="text-sm font-semibold">{{ $application->type->type_name }}</dd>
+                </div>
+            @endif
         </dl>
     </div>
 
@@ -64,18 +75,26 @@
         <h2 class=" text-xl font-bold border-b-2 border-sky-600 pb-2">Возило</h2>
 
         <dl class=" text-gray-900 divide-y divide-gray-200 grid grid-cols-3 divide-x">
+            @if ($application->manufacturer_id != null)
             <div class="flex flex-col p-2">
                 <dt class="mb-1 text-gray-500 text-xs ">Производител</dt>
                 <dd class="text-sm font-semibold">{{ $application->manufacturer->name }}</dd>
             </div>
+        @endif
+
+        @if ($application->brand_id != null)
             <div class="flex flex-col p-2">
                 <dt class="mb-1 text-gray-500 text-xs ">Марка</dt>
                 <dd class="text-sm font-semibold">{{ $application->brand->brand_name }}</dd>
             </div>
+        @endif
+
+        @if ($application->type_id != null)
             <div class="flex flex-col p-2">
                 <dt class="mb-1 text-gray-500 text-xs ">Тип</dt>
                 <dd class="text-sm font-semibold">{{ $application->type->type_name }}</dd>
             </div>
+        @endif
 
         </dl>
     </div>
@@ -93,14 +112,14 @@
             <div class="w-1/3">
                 <x-input-label for="variant" :value="__('Варијанта')" />
                 <x-text-input wire:model="variant" id="variant " class="block mt-1 w-full" type="text"
-                    name="variant" required autofocus autocomplete="variant" />
+                    name="variant"  autofocus autocomplete="variant" />
                 <x-input-error :messages="$errors->get('variant')" class="mt-2" />
             </div>
 
             <div class="w-1/3">
                 <x-input-label for="edition" :value="__('Изведба')" />
                 <x-text-input wire:model="edition" id="edition " class="block mt-1 w-full" type="text"
-                    name="variant" required autofocus autocomplete="edition" />
+                    name="variant"  autofocus autocomplete="edition" />
                 <x-input-error :messages="$errors->get('edition')" class="mt-2" />
             </div>
         </div>
@@ -121,14 +140,14 @@
             <div class="w-1/3 flex flex-col justify-between">
                 <x-input-label for="constTotalMass" :value="__('Најголема конструктивна вкупна маса на возилото (kg)')" />
                 <x-text-input wire:model="constTotalMass" id="constTotalMass " class="block mt-1 w-full" type="number"
-                    name="constTotalMass" required autofocus autocomplete="constTotalMass" />
+                    name="constTotalMass"  autofocus autocomplete="constTotalMass" />
                 <x-input-error :messages="$errors->get('constTotalMass')" class="mt-2" />
             </div>
 
             <div class="w-1/3 flex flex-col justify-between">
                 <x-input-label for="legalTotalMass" :value="__('Најголема легална вкупна маса на возилото при регистрација (kg)')" />
                 <x-text-input wire:model="legalTotalMass" id="legalTotalMass " class="block mt-1 w-full" type="number"
-                    name="legalTotalMass" required autofocus autocomplete="legalTotalMass" />
+                    name="legalTotalMass"  autofocus autocomplete="legalTotalMass" />
                 <x-input-error :messages="$errors->get('legalTotalMass')" class="mt-2" />
             </div>
         </div>
@@ -139,7 +158,7 @@
             <div class="w-1/3 flex flex-col justify-between">
                 <x-input-label for="legalTotalGroupMass" :value="__('Најголема легална вкупна маса на група возила при регистрација (kg)')" />
                 <x-text-input wire:model="legalTotalGroupMass" id="legalTotalGroupMass " class="block mt-1 w-full"
-                    type="number" name="legalTotalGroupMass" required autofocus
+                    type="number" name="legalTotalGroupMass"  autofocus
                     autocomplete="legalTotalGroupMass" />
                 <x-input-error :messages="$errors->get('legalTotalGroupMass')" class="mt-2" />
             </div>
@@ -147,14 +166,14 @@
             <div class="w-1/3 flex flex-col justify-between">
                 <x-input-label for="vehicleMass" :value="__('Маса на возилото (kg)')" />
                 <x-text-input wire:model="vehicleMass" id="vehicleMass " class="block mt-1 w-full" type="number"
-                    name="vehicleMass" required autofocus autocomplete="vehicleMass" />
+                    name="vehicleMass"  autofocus autocomplete="vehicleMass" />
                 <x-input-error :messages="$errors->get('vehicleMass')" class="mt-2" />
             </div>
 
             <div class="w-1/3 flex flex-col justify-between">
                 <x-input-label for="vehicleType" :value="__('Вид на возилото')" />
                 <x-text-input wire:model="vehicleType" id="vehicleType " class="block mt-1 w-full" type="text"
-                    name="vehicleType" required autofocus autocomplete="vehicleType" />
+                    name="vehicleType"  autofocus autocomplete="vehicleType" />
                 <x-input-error :messages="$errors->get('vehicleType')" class="mt-2" />
             </div>
         </div>
@@ -183,7 +202,7 @@
             <div class="w-1/3 flex flex-col justify-between">
                 <x-input-label for="applicationMarkEU" :value="__('Ознака на одобрение во ЕУ')" />
                 <x-text-input wire:model="applicationMarkEU" id="applicationMarkEU " class="block mt-1 w-full"
-                    type="text" name="applicationMarkEU" required autofocus autocomplete="applicationMarkEU" />
+                    type="text" name="applicationMarkEU"  autofocus autocomplete="applicationMarkEU" />
                 <x-input-error :messages="$errors->get('applicationMarkEU')" class="mt-2" />
             </div>
         </div>
@@ -207,7 +226,7 @@
             <div class="w-1/3 flex flex-col justify-between">
                 <x-input-label for="allowedPneumatics" :value="__('Дозволени пневматици и наплатки')" />
                 <x-text-input wire:model="allowedPneumatics" id="allowedPneumatics " class="block mt-1 w-full"
-                    type="text" name="allowedPneumatics" required autofocus autocomplete="allowedPneumatics" />
+                    type="text" name="allowedPneumatics"  autofocus autocomplete="allowedPneumatics" />
                 <x-input-error :messages="$errors->get('allowedPneumatics')" class="mt-2" />
             </div>
         </div>
@@ -231,7 +250,7 @@
             <div class="w-1/3 flex flex-col justify-between">
                 <x-input-label for="height" :value="__('Висина на возилото (mm)')" />
                 <x-text-input wire:model="height" id="height " class="block mt-1 w-full" type="number"
-                    name="height" required autofocus autocomplete="height" />
+                    name="height"  autofocus autocomplete="height" />
                 <x-input-error :messages="$errors->get('height')" class="mt-2" />
             </div>
         </div>
@@ -310,10 +329,10 @@
             </div>
             <div class="w-1/6 flex flex-col justify-between">
                 <x-input-label for="maxStructuralAxleLoad_4" :value="__('Најголемо конструктивно осно оптоварување (kg) 4')" />
-                <x-text-input wire:model="maxStructuralAxleLoad_3" id="maxStructuralAxleLoad_3 "
-                    class="block mt-1 w-full" type="number" name="maxStructuralAxleLoad_3" autofocus
-                    autocomplete="maxStructuralAxleLoad_3" />
-                <x-input-error :messages="$errors->get('maxStructuralAxleLoad_3')" class="mt-2" />
+                <x-text-input wire:model="maxStructuralAxleLoad_4" id="maxStructuralAxleLoad_4 "
+                    class="block mt-1 w-full" type="number" name="maxStructuralAxleLoad_4" autofocus
+                    autocomplete="maxStructuralAxleLoad_4" />
+                <x-input-error :messages="$errors->get('maxStructuralAxleLoad_4')" class="mt-2" />
             </div>
             <div class="w-1/6 flex flex-col justify-between">
                 <x-input-label for="maxStructuralAxleLoad_5" :value="__('Најголемо конструктивно осно оптоварување (kg) 5')" />
@@ -354,7 +373,7 @@
             <div class="w-1/3 flex flex-col justify-between">
                 <x-input-label for="trailerConnectionPointMaxLoad" :value="__('Најголемо конструктивно оптоварување во приклучокот за приколка ( kg )')" />
                 <x-text-input wire:model="trailerConnectionPointMaxLoad" id="trailerConnectionPointMaxLoad "
-                    class="block mt-1 w-full" type="number" name="trailerConnectionPointMaxLoad" required autofocus
+                    class="block mt-1 w-full" type="number" name="trailerConnectionPointMaxLoad"  autofocus
                     autocomplete="trailerConnectionPointMaxLoad" />
                 <x-input-error :messages="$errors->get('trailerConnectionPointMaxLoad')" class="mt-2" />
             </div>
@@ -368,9 +387,10 @@
 
             <div class="w-1/3 flex flex-col justify-between">
                 <x-input-label for="pluginDeviceApprovalMark" :value="__('Ознака за одобрување на приклучниот уред')" />
-                <x-text-input wire:model="brakedTrailerMaxMass" id="brakedTrailerMaxMass " class="block mt-1 w-full"
-                    type="text" name="brakedTrailerMaxMass" autofocus autocomplete="brakedTrailerMaxMass" />
-                <x-input-error :messages="$errors->get('brakedTrailerMaxMass')" class="mt-2" />
+                <x-text-input wire:model="pluginDeviceApprovalMark" id="pluginDeviceApprovalMark "
+                    class="block mt-1 w-full" type="text" name="pluginDeviceApprovalMark" autofocus
+                    autocomplete="pluginDeviceApprovalMark" />
+                <x-input-error :messages="$errors->get('pluginDeviceApprovalMark')" class="mt-2" />
             </div>
 
             <div class="w-1/3 flex flex-col justify-between">
@@ -383,7 +403,7 @@
             <div class="w-1/3 flex flex-col justify-between">
                 <x-input-label for="enginePower" :value="__('Силина на моторот ( kW )')" />
                 <x-text-input wire:model="enginePower" id="enginePower " class="block mt-1 w-full" type="number"
-                    name="enginePower" required autofocus autocomplete="enginePower" />
+                    name="enginePower"  autofocus autocomplete="enginePower" />
                 <x-input-error :messages="$errors->get('enginePower')" class="mt-2" />
             </div>
         </div>
@@ -413,7 +433,7 @@
             <div class="w-1/3 flex flex-col justify-between">
                 <x-input-label for="powerMassDistribution" :value="__('Однос силина/маса (само за моторцикли) ( kW/kg )')" />
                 <x-text-input wire:model="powerMassDistribution" id="powerMassDistribution "
-                    class="block mt-1 w-full" type="text" name="powerMassDistribution"  autofocus
+                    class="block mt-1 w-full" type="text" name="powerMassDistribution" autofocus
                     autocomplete="powerMassDistribution" />
                 <x-input-error :messages="$errors->get('powerMassDistribution')" class="mt-2" />
             </div>
@@ -451,7 +471,7 @@
             <div class="w-1/3 flex flex-col justify-between">
                 <x-input-label for="numberOfSeats" :value="__('Број на седишта (за М2 и М3 без возач)')" />
                 <x-text-input wire:model="numberOfSeats" id="numberOfSeats " class="block mt-1 w-full"
-                    type="number" name="numberOfSeats" required autofocus autocomplete="numberOfSeats" />
+                    type="number" name="numberOfSeats"  autofocus autocomplete="numberOfSeats" />
                 <x-input-error :messages="$errors->get('numberOfSeats')" class="mt-2" />
             </div>
         </div>
@@ -463,7 +483,7 @@
             <div class="w-1/3 flex flex-col justify-between">
                 <x-input-label for="numberOfStandingPlaces" :value="__('Број на места за стоење')" />
                 <x-text-input wire:model="numberOfStandingPlaces" id="numberOfStandingPlaces "
-                    class="block mt-1 w-full" type="number" name="numberOfStandingPlaces" required autofocus
+                    class="block mt-1 w-full" type="number" name="numberOfStandingPlaces"  autofocus
                     autocomplete="numberOfStandingPlaces" />
                 <x-input-error :messages="$errors->get('numberOfStandingPlaces')" class="mt-2" />
             </div>
@@ -471,7 +491,7 @@
             <div class="w-1/3 flex flex-col justify-between">
                 <x-input-label for="numberOfLieDownPlaces" :value="__('Број на места за лежење')" />
                 <x-text-input wire:model="numberOfLieDownPlaces" id="numberOfLieDownPlaces "
-                    class="block mt-1 w-full" type="number" name="numberOfLieDownPlaces" required autofocus
+                    class="block mt-1 w-full" type="number" name="numberOfLieDownPlaces"  autofocus
                     autocomplete="numberOfLieDownPlaces" />
                 <x-input-error :messages="$errors->get('numberOfLieDownPlaces')" class="mt-2" />
             </div>
@@ -479,7 +499,7 @@
             <div class="w-1/3 flex flex-col justify-between">
                 <x-input-label for="maxSpeed" :value="__('Максимална брзина ( km/h )')" />
                 <x-text-input wire:model="maxSpeed" id="numberOfSeats " class="block mt-1 w-full" type="number"
-                    name="maxSpeed" required autofocus autocomplete="maxSpeed" />
+                    name="maxSpeed"  autofocus autocomplete="maxSpeed" />
                 <x-input-error :messages="$errors->get('maxSpeed')" class="mt-2" />
             </div>
         </div>
@@ -491,7 +511,7 @@
             <div class="w-1/3 flex flex-col justify-between">
                 <x-input-label for="stationaryNoiseLevel" :value="__('Стационарна бучавост (dB/A)')" />
                 <x-text-input wire:model="stationaryNoiseLevel" id="stationaryNoiseLevel " class="block mt-1 w-full"
-                    type="number" name="stationaryNoiseLevel" required autofocus autocomplete="stationaryNoiseLevel"
+                    type="number" name="stationaryNoiseLevel"  autofocus autocomplete="stationaryNoiseLevel"
                     step="0.1" />
                 <x-input-error :messages="$errors->get('stationaryNoiseLevel')" class="mt-2" />
             </div>
@@ -499,14 +519,14 @@
             <div class="w-1/3 flex flex-col justify-between">
                 <x-input-label for="noiseAtRpm:" :value="__('Бучавост при брзина на вртење:')" />
                 <x-text-input wire:model="noiseAtRpm" id="noiseAtRpm " class="block mt-1 w-full" type="text"
-                    name="noiseAtRpm" required autofocus autocomplete="noiseAtRpm" />
+                    name="noiseAtRpm"  autofocus autocomplete="noiseAtRpm" />
                 <x-input-error :messages="$errors->get('noiseAtRpm')" class="mt-2" />
             </div>
 
             <div class="w-1/3 flex flex-col justify-between">
                 <x-input-label for="co2" :value="__('CO2 (g/km)')" />
                 <x-text-input wire:model="co2" id="co2 " class="block mt-1 w-full" type="number"
-                    name="co2" required autofocus autocomplete="co2" />
+                    name="co2"  autofocus autocomplete="co2" />
                 <x-input-error :messages="$errors->get('co2')" class="mt-2" />
             </div>
         </div>
@@ -530,7 +550,8 @@
 
         <div class="w-full flex flex-col justify-between">
             <x-input-label for="certNoteText" :value="__('Текст од забелешка')" />
-            <textarea wire:model="certNoteText" name="certNoteText" id="certNoteText" rows="12" autocomplete="certNoteText"
+            <textarea wire:model="certNoteText" name="certNoteText" id="certNoteText" rows="12"
+                autocomplete="certNoteText"
                 class="block mt-1 w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"></textarea>
             <x-input-error :messages="$errors->get('certNoteText')" class="mt-2" />
         </div>
@@ -543,14 +564,16 @@
 
             <div class="w-1/2 flex flex-col justify-between">
                 <x-input-label for="modificationReferralNumber" :value="__('Преправка Број на упат')" />
-                <x-text-input wire:model="modificationReferralNumber" id="modificationReferralNumber " class="block mt-1 w-full"
-                    type="text" name="modificationReferralNumber"  autofocus autocomplete="modificationReferralNumber" />
+                <x-text-input wire:model="modificationReferralNumber" id="modificationReferralNumber "
+                    class="block mt-1 w-full" type="text" name="modificationReferralNumber" autofocus
+                    autocomplete="modificationReferralNumber" />
                 <x-input-error :messages="$errors->get('modificationReferralNumber')" class="mt-2" />
             </div>
 
             <div class="w-1/2 flex flex-col justify-between">
                 <x-input-label for="modificationReferralDate" :value="__('Преправка Датум на упат')" />
-                <input wire:model='modificationReferralDate' type="date" name="modificationReferralDate" id="modificationReferralDate"
+                <input wire:model='modificationReferralDate' type="date" name="modificationReferralDate"
+                    id="modificationReferralDate"
                     class="block mt-1 w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
                 <x-input-error :messages="$errors->get('modificationReferralDate')" class="mt-2" />
             </div>

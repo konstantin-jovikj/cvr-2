@@ -77,7 +77,7 @@
                             </span>
                         </td>
                         <td class="px-2 py-1">
-                            @if ($application->approval_number == null || $application->approval_number == '')
+                            @if ($application->has_certificate == null || $application->has_certificate == 0)
                                 <div class="bg-red-600 h-[12px] w-[12px] rounded-full shadow-md"></div>
                             @else
                                 <div class="bg-green-800 h-[12px] w-[12px] rounded-full shadow-md"></div>
@@ -112,16 +112,17 @@
                                         <x-dropdown-link :href="route('application.details', $application->id)" wire:navigate>
                                             {{ __('Детали') }}
                                         </x-dropdown-link>
-                                        <x-dropdown-link :href="route('application.edit', $application->id)" wire:navigate>
-                                            {{ __('Промени Барање') }}
-                                        </x-dropdown-link>
-                                        <x-dropdown-link :href="route('application.images.edit', $application->id)" wire:navigate>
-                                            {{ __('Промени Фотографии') }}
-                                        </x-dropdown-link>
-                                        <x-dropdown-link :href="route('application.documents.edit', $application->id)" wire:navigate>
-                                            {{ __('Промени Документи') }}
-                                        </x-dropdown-link>
-
+                                        @if ($application->has_certificate == null || $application->has_certificate == 0)
+                                            <x-dropdown-link :href="route('application.edit', $application->id)" wire:navigate>
+                                                {{ __('Промени Барање') }}
+                                            </x-dropdown-link>
+                                            <x-dropdown-link :href="route('application.images.edit', $application->id)" wire:navigate>
+                                                {{ __('Промени Фотографии') }}
+                                            </x-dropdown-link>
+                                            <x-dropdown-link :href="route('application.documents.edit', $application->id)" wire:navigate>
+                                                {{ __('Промени Документи') }}
+                                            </x-dropdown-link>
+                                        @endif
 
                                         <x-dropdown-link :href="route('pdf.apptest', $application->id)" target="_blank">
                                             {{ __('Печати') }}
