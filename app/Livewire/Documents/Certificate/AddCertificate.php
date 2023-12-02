@@ -7,7 +7,9 @@ use App\Models\Shape;
 use Livewire\Component;
 use App\Models\Customer;
 use App\Models\Application;
+use App\Models\Color;
 use App\Models\Fuel;
+use App\Models\Note;
 
 class AddCertificate extends Component
 {
@@ -15,6 +17,8 @@ class AddCertificate extends Component
     public $customer;
     public $chassis;
     public $fuels;
+    public $colors;
+    public $notes;
 
     public $certDate; //add
     public $variant; //add
@@ -55,6 +59,17 @@ class AddCertificate extends Component
     public $selectedFuel; //add
     public $engineRevolutions; //add
     public $powerMassDistribution; //add
+    public $selectedColor_1; //add
+    public $selectedColor_2; //add
+    public $numberOfSeats; //add
+    public $numberOfStandingPlaces; //add
+    public $numberOfLieDownPlaces; //add
+    public $maxSpeed; //add
+    public $stationaryNoiseLevel; //add
+    public $noiseAtRpm; //add
+    public $co2; //add
+    public $selectedNote; //add
+    public $certNoteText; //add
 
     public function mount(Application $application, Customer $customer)
     {
@@ -64,12 +79,31 @@ class AddCertificate extends Component
         $this->certDate = date('Y-m-d');
         $this->chassis = Shape::all();
         $this->fuels = Fuel::all();
-
+        $this->colors = Color::all();
+        $this->notes = Note::all();
 
         // dd( $this->vehicleTypes);
     }
     public function render()
     {
         return view('livewire.documents.certificate.add-certificate');
+    }
+
+    public function updatedSelectedNote($note)
+    {
+        if ($note) {
+            $note = Note::find($note);
+            if ($note) {
+                $this->certNoteText = $note->note_text;
+            }
+        } else {
+            $this->certNoteText = null;
+        }
+    }
+
+
+    public function addCertificate()
+    {
+
     }
 }

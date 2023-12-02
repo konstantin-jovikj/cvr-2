@@ -1,8 +1,18 @@
 <div class="flex flex-col justify-center items-center mx-auto w-full sm:max-w-5xl h-auto  mt-6 mb-32">
+
+
+    <div class="bg-white w-full shadow-md overflow-hidden sm:rounded-lg px-6 py-4 mb-2">
+
+        <h2 class=" text-xl font-bold border-b-2 border-sky-600 pb-2"> <span>Барање со деловоден Број : </span>
+            <span class="font-bold text-sky-600"> {{ $application->app_number}}</span> </h2>
+
+
+    </div>
     {{-- Customer Details --}}
     <div class="bg-white w-full shadow-md overflow-hidden sm:rounded-lg px-6 py-4 mb-2">
 
-        <h2 class=" text-xl font-bold border-b-2 border-sky-600 pb-2">{{ $customer->customer_name }}</h2>
+        <h2 class=" text-xl font-bold border-b-2 border-sky-600 pb-2"> <span>Има и Презиме (Назив) на сопственик на возило:</span>
+            <span class="font-bold text-sky-600"> {{ $customer->customer_name }}</span> </h2>
 
         <dl class=" text-gray-900 divide-y divide-gray-200 grid grid-cols-2 divide-x ">
             <div class="flex flex-col p-2">
@@ -265,11 +275,11 @@
                 <x-input-error :messages="$errors->get('axelMassDistibution_5')" class="mt-2" />
             </div>
             <div class="w-1/6 flex flex-col justify-between">
-                <x-input-label for="connectionPointlMassDistibution" :value="__('Распределба на најголема конст. вк. маса на приклучната точка')" />
-                <x-text-input wire:model="connectionPointlMassDistibution" id="connectionPointlMassDistibution "
-                    class="block mt-1 w-full" type="number" name="connectionPointlMassDistibution" autofocus
-                    autocomplete="connectionPointlMassDistibution" />
-                <x-input-error :messages="$errors->get('connectionPointlMassDistibution')" class="mt-2" />
+                <x-input-label for="connectionPointMassDistibution" :value="__('Распределба на најголема конст. вк. маса на приклучната точка')" />
+                <x-text-input wire:model="connectionPointMassDistibution" id="connectionPointMassDistibution "
+                    class="block mt-1 w-full" type="number" name="connectionPointMassDistibution" autofocus
+                    autocomplete="connectionPointMassDistibution" />
+                <x-input-error :messages="$errors->get('connectionPointMassDistibution')" class="mt-2" />
             </div>
 
         </div>
@@ -328,22 +338,24 @@
 
             <div class="w-1/3 flex flex-col justify-between">
                 <x-input-label for="brakedTrailerMaxMass" :value="__('Најголема конструктивна вкупна маса на кочена приколка ( kg )')" />
-                <x-text-input wire:model="brakedTrailerMaxMass" id="brakedTrailerMaxMass " class="block mt-1 w-full" type="number"
-                    name="brakedTrailerMaxMass" autofocus autocomplete="brakedTrailerMaxMass" />
+                <x-text-input wire:model="brakedTrailerMaxMass" id="brakedTrailerMaxMass " class="block mt-1 w-full"
+                    type="number" name="brakedTrailerMaxMass" autofocus autocomplete="brakedTrailerMaxMass" />
                 <x-input-error :messages="$errors->get('brakedTrailerMaxMass')" class="mt-2" />
             </div>
 
             <div class="w-1/3 flex flex-col justify-between">
                 <x-input-label for="unbrakedTrailerMaxMass" :value="__('Најголема конструктивна вкупна маса на некочена приколка ( kg )')" />
-                <x-text-input wire:model="unbrakedTrailerMaxMass" id="unbrakedTrailerMaxMass " class="block mt-1 w-full" type="number"
-                    name="unbrakedTrailerMaxMass" autofocus autocomplete="unbrakedTrailerMaxMass" />
+                <x-text-input wire:model="unbrakedTrailerMaxMass" id="unbrakedTrailerMaxMass "
+                    class="block mt-1 w-full" type="number" name="unbrakedTrailerMaxMass" autofocus
+                    autocomplete="unbrakedTrailerMaxMass" />
                 <x-input-error :messages="$errors->get('unbrakedTrailerMaxMass')" class="mt-2" />
             </div>
 
             <div class="w-1/3 flex flex-col justify-between">
                 <x-input-label for="trailerConnectionPointMaxLoad" :value="__('Најголемо конструктивно оптоварување во приклучокот за приколка ( kg )')" />
-                <x-text-input wire:model="trailerConnectionPointMaxLoad" id="trailerConnectionPointMaxLoad " class="block mt-1 w-full" type="number"
-                    name="trailerConnectionPointMaxLoad" required autofocus autocomplete="trailerConnectionPointMaxLoad" />
+                <x-text-input wire:model="trailerConnectionPointMaxLoad" id="trailerConnectionPointMaxLoad "
+                    class="block mt-1 w-full" type="number" name="trailerConnectionPointMaxLoad" required autofocus
+                    autocomplete="trailerConnectionPointMaxLoad" />
                 <x-input-error :messages="$errors->get('trailerConnectionPointMaxLoad')" class="mt-2" />
             </div>
         </div>
@@ -356,8 +368,8 @@
 
             <div class="w-1/3 flex flex-col justify-between">
                 <x-input-label for="pluginDeviceApprovalMark" :value="__('Ознака за одобрување на приклучниот уред')" />
-                <x-text-input wire:model="brakedTrailerMaxMass" id="brakedTrailerMaxMass " class="block mt-1 w-full" type="text"
-                    name="brakedTrailerMaxMass" autofocus autocomplete="brakedTrailerMaxMass" />
+                <x-text-input wire:model="brakedTrailerMaxMass" id="brakedTrailerMaxMass " class="block mt-1 w-full"
+                    type="text" name="brakedTrailerMaxMass" autofocus autocomplete="brakedTrailerMaxMass" />
                 <x-input-error :messages="$errors->get('brakedTrailerMaxMass')" class="mt-2" />
             </div>
 
@@ -385,26 +397,167 @@
                     class="block mt-1 w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
                     <option value="" disabled selected> -- Одбери Гориво -- </option>
                     @foreach ($fuels as $fuel)
-                        <option value="{{ $fuel->id }}">{{ $fuel->fuel_type}}</option>
+                        <option value="{{ $fuel->id }}">{{ $fuel->fuel_type }}</option>
                     @endforeach
                 </select>
                 <x-input-error :messages="$errors->get('selectedFuel')" class="mt-2" />
             </div>
 
             <div class="w-1/3 flex flex-col justify-between">
-                <x-input-label for="engineRevolutions" :value="__('Број на вртежи ( min-1 ')" />
-                <x-text-input wire:model="engineRevolutions" id="engineRevolutions " class="block mt-1 w-full" type="number"
-                    name="engineRevolutions" autofocus autocomplete="engineRevolutions" />
+                <x-input-label for="engineRevolutions" :value="__('Број на вртежи ( min-1 )')" />
+                <x-text-input wire:model="engineRevolutions" id="engineRevolutions " class="block mt-1 w-full"
+                    type="number" name="engineRevolutions" autofocus autocomplete="engineRevolutions" />
                 <x-input-error :messages="$errors->get('engineRevolutions')" class="mt-2" />
             </div>
 
             <div class="w-1/3 flex flex-col justify-between">
                 <x-input-label for="powerMassDistribution" :value="__('Однос силина/маса (само за моторцикли) ( kW/kg )')" />
-                <x-text-input wire:model="powerMassDistribution" id="powerMassDistribution " class="block mt-1 w-full" type="number"
-                    name="powerMassDistribution" required autofocus autocomplete="powerMassDistribution" />
+                <x-text-input wire:model="powerMassDistribution" id="powerMassDistribution "
+                    class="block mt-1 w-full" type="text" name="powerMassDistribution"  autofocus
+                    autocomplete="powerMassDistribution" />
                 <x-input-error :messages="$errors->get('powerMassDistribution')" class="mt-2" />
             </div>
         </div>
+
+
+        <div class="flex w-full mt-12 gap-4">
+
+            <div class="w-1/3 flex flex-col justify-between">
+                <x-input-label for="selectedColor_1" :value="__('Примарна боја на возилото')" />
+                <select wire:model="selectedColor_1"
+                    class="block mt-1 w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
+                    <option value="" disabled selected> -- Одбери Боја -- </option>
+                    @foreach ($colors as $color)
+                        <option value="{{ $color->id }}">{{ $color->color_code }} - {{ $color->color_name }}
+                        </option>
+                    @endforeach
+                </select>
+                <x-input-error :messages="$errors->get('selectedColor_1')" class="mt-2" />
+            </div>
+
+            <div class="w-1/3 flex flex-col justify-between">
+                <x-input-label for="selectedColor_2" :value="__('Секундарна боја на возилото')" />
+                <select wire:model="selectedColor_2"
+                    class="block mt-1 w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
+                    <option value="" disabled selected> -- Одбери Боја -- </option>
+                    @foreach ($colors as $color)
+                        <option value="{{ $color->id }}">{{ $color->color_code }} - {{ $color->color_name }}
+                        </option>
+                    @endforeach
+                </select>
+                <x-input-error :messages="$errors->get('selectedColor_2')" class="mt-2" />
+            </div>
+
+            <div class="w-1/3 flex flex-col justify-between">
+                <x-input-label for="numberOfSeats" :value="__('Број на седишта (за М2 и М3 без возач)')" />
+                <x-text-input wire:model="numberOfSeats" id="numberOfSeats " class="block mt-1 w-full"
+                    type="number" name="numberOfSeats" required autofocus autocomplete="numberOfSeats" />
+                <x-input-error :messages="$errors->get('numberOfSeats')" class="mt-2" />
+            </div>
+        </div>
+
+
+
+        <div class="flex w-full mt-12 gap-4">
+
+            <div class="w-1/3 flex flex-col justify-between">
+                <x-input-label for="numberOfStandingPlaces" :value="__('Број на места за стоење')" />
+                <x-text-input wire:model="numberOfStandingPlaces" id="numberOfStandingPlaces "
+                    class="block mt-1 w-full" type="number" name="numberOfStandingPlaces" required autofocus
+                    autocomplete="numberOfStandingPlaces" />
+                <x-input-error :messages="$errors->get('numberOfStandingPlaces')" class="mt-2" />
+            </div>
+
+            <div class="w-1/3 flex flex-col justify-between">
+                <x-input-label for="numberOfLieDownPlaces" :value="__('Број на места за лежење')" />
+                <x-text-input wire:model="numberOfLieDownPlaces" id="numberOfLieDownPlaces "
+                    class="block mt-1 w-full" type="number" name="numberOfLieDownPlaces" required autofocus
+                    autocomplete="numberOfLieDownPlaces" />
+                <x-input-error :messages="$errors->get('numberOfLieDownPlaces')" class="mt-2" />
+            </div>
+
+            <div class="w-1/3 flex flex-col justify-between">
+                <x-input-label for="maxSpeed" :value="__('Максимална брзина ( km/h )')" />
+                <x-text-input wire:model="maxSpeed" id="numberOfSeats " class="block mt-1 w-full" type="number"
+                    name="maxSpeed" required autofocus autocomplete="maxSpeed" />
+                <x-input-error :messages="$errors->get('maxSpeed')" class="mt-2" />
+            </div>
+        </div>
+
+
+
+        <div class="flex w-full mt-12 gap-4">
+
+            <div class="w-1/3 flex flex-col justify-between">
+                <x-input-label for="stationaryNoiseLevel" :value="__('Стационарна бучавост (dB/A)')" />
+                <x-text-input wire:model="stationaryNoiseLevel" id="stationaryNoiseLevel " class="block mt-1 w-full"
+                    type="number" name="stationaryNoiseLevel" required autofocus autocomplete="stationaryNoiseLevel"
+                    step="0.1" />
+                <x-input-error :messages="$errors->get('stationaryNoiseLevel')" class="mt-2" />
+            </div>
+
+            <div class="w-1/3 flex flex-col justify-between">
+                <x-input-label for="noiseAtRpm:" :value="__('Бучавост при брзина на вртење:')" />
+                <x-text-input wire:model="noiseAtRpm" id="noiseAtRpm " class="block mt-1 w-full" type="text"
+                    name="noiseAtRpm" required autofocus autocomplete="noiseAtRpm" />
+                <x-input-error :messages="$errors->get('noiseAtRpm')" class="mt-2" />
+            </div>
+
+            <div class="w-1/3 flex flex-col justify-between">
+                <x-input-label for="co2" :value="__('CO2 (g/km)')" />
+                <x-text-input wire:model="co2" id="co2 " class="block mt-1 w-full" type="number"
+                    name="co2" required autofocus autocomplete="co2" />
+                <x-input-error :messages="$errors->get('co2')" class="mt-2" />
+            </div>
+        </div>
+
+
+
+
+        <div class="w-full flex flex-col justify-between mt-12">
+
+            <x-input-label for="selectedNote" :value="__('Избор на текст во забелешка')" />
+            <select wire:model.live="selectedNote"
+                class="block mt-1 w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
+                <option value="" disabled selected> -- Одбери Забелешка -- </option>
+                @foreach ($notes as $note)
+                    <option value="{{ $note->id }}">{{ $note->note_desc }}</option>
+                @endforeach
+            </select>
+            <x-input-error :messages="$errors->get('selectedNote')" class="mt-2" />
+        </div>
+
+
+        <div class="w-full flex flex-col justify-between">
+            <x-input-label for="certNoteText" :value="__('Текст од забелешка')" />
+            <textarea wire:model="certNoteText" name="certNoteText" id="certNoteText" rows="12" autocomplete="certNoteText"
+                class="block mt-1 w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"></textarea>
+            <x-input-error :messages="$errors->get('certNoteText')" class="mt-2" />
+        </div>
+
+
+
+
+
+        <div class="flex w-full mt-12 gap-4">
+
+            <div class="w-1/2 flex flex-col justify-between">
+                <x-input-label for="modificationReferralNumber" :value="__('Преправка Број на упат')" />
+                <x-text-input wire:model="modificationReferralNumber" id="modificationReferralNumber " class="block mt-1 w-full"
+                    type="text" name="modificationReferralNumber"  autofocus autocomplete="modificationReferralNumber" />
+                <x-input-error :messages="$errors->get('modificationReferralNumber')" class="mt-2" />
+            </div>
+
+            <div class="w-1/2 flex flex-col justify-between">
+                <x-input-label for="modificationReferralDate" :value="__('Преправка Датум на упат')" />
+                <input wire:model='modificationReferralDate' type="date" name="modificationReferralDate" id="modificationReferralDate"
+                    class="block mt-1 w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
+                <x-input-error :messages="$errors->get('modificationReferralDate')" class="mt-2" />
+            </div>
+
+        </div>
+
+
 
 
 
