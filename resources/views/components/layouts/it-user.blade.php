@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
@@ -22,8 +21,11 @@
             </div>
         </div>
     </div>
-    <script src="{{asset('custom_js/sideMenu.js')}}" ></script>
+    <script src="{{ asset('custom_js/sideMenu.js') }}"></script>
     @livewireScripts
+
 </body>
+
+
 
 </html>

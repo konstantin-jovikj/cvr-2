@@ -118,6 +118,9 @@ class Application extends Model
         'co2',
         'cert_note_text',
         'has_certificate',
+        'is_in_progress',
+        'modificationReferralNumber',
+        'modificationReferralDate',
 
 
     ];

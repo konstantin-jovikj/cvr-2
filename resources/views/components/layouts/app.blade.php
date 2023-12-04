@@ -23,6 +23,7 @@
     </div>
     <script src="{{asset('custom_js/sideMenu.js')}}" ></script>
     @livewireScripts
+
 </body>
 
 </html>

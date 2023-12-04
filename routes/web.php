@@ -109,9 +109,9 @@ Route::get('/roles', Roles::class)->name('roles');
 Route::get('/role/add', AddRole::class)->name('role.add');
 
 
-Route::get('/superadmin/dashboard',SuperAdminDashboard::class)->name('superadmin.dashboard');
-Route::get('/mvr/superadmin/dashboard',MvrSuperAdminDashboard::class)->name('mvrsuperadmin.dashboard');
-Route::get('/stp/superadmin/dashboard',StpSuperAdminDashboard::class)->name('stpsuperadmin.dashboard');
+Route::get('/superadmin/dashboard', SuperAdminDashboard::class)->name('superadmin.dashboard');
+Route::get('/mvr/superadmin/dashboard', MvrSuperAdminDashboard::class)->name('mvrsuperadmin.dashboard');
+Route::get('/stp/superadmin/dashboard', StpSuperAdminDashboard::class)->name('stpsuperadmin.dashboard');
 
 Route::get('/register/admin/', AdminRegister::class)->name('admin.register');
 Route::get('/admin/{user}/edit', EditAdmin::class)->name('edit.admin');
@@ -124,6 +124,7 @@ Route::get('/it/create', AddIt::class)->name('add.it');
 // SUPERADMIN END
 
 // Basic Data Routes
+
 Route::get('/it/manufacturers/all', ManufacturersTable::class)->name('manufacturers.all');
 Route::get('/it/manufacturers/add', AddManufacturer::class)->name('manufacturer.add');
 Route::get('/it/manufacturers/{manufacturer}/edit', EditManufacturer::class)->name('manufacturer.edit');
@@ -199,11 +200,15 @@ Route::get('/it/application/documents/{application}/edit', EditDocuments::class)
 // CERTIFICATE
 Route::get('/it/certificate/{customer}/all', DossierTable::class)->name('user.dossier');
 
-Route::get('/it/certificate/{application}/{customer}/add', AddCertificate::class)->name('certificate.add');
+
+// Route::middleware('occupied')->group(function () {
+    Route::get('/it/certificate/{application}/{customer}/add', AddCertificate::class)->name('certificate.add');
+// });
+
 
 
 // PDF
 Route::get('it/application/{application}/eo/pdf', [PdfController::class, 'generatePdf'])->name('pdf.apptest');
 
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

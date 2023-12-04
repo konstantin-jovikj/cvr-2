@@ -10,6 +10,7 @@ use App\Models\Application;
 use App\Models\Color;
 use App\Models\Fuel;
 use App\Models\Note;
+use Livewire\Attributes\On;
 
 class AddCertificate extends Component
 {
@@ -44,7 +45,7 @@ class AddCertificate extends Component
     public $axelMassDistibution_3; //add
     public $axelMassDistibution_4; //add
     public $axelMassDistibution_5; //add
-    public $connectionPointlMassDistibution; //add
+    public $connectionPointMassDistibution; //add
     public $maxStructuralAxleLoad_1; //add
     public $maxStructuralAxleLoad_2; //add
     public $maxStructuralAxleLoad_3; //add
@@ -71,9 +72,21 @@ class AddCertificate extends Component
     public $co2; //add
     public $selectedNote; //add
     public $certNoteText; //add
+    public $modificationReferralNumber; //add
+    public $modificationReferralDate; //add
 
     public function mount(Application $application, Customer $customer)
     {
+
+        // if( $application->is_in_progress == 1){
+        //     session()->flash('error', 'Ова барање е зафатено. Некој корисник работи на изработка на потврда.');
+        //     $this->reset();
+        //     return redirect(route('user.dossier', $customer));
+        // } else{
+        //     $application->is_in_progress = 1;
+        //     $application->save();
+        // }
+
         $this->application = $application;
         $this->customer = $customer;
 
@@ -85,6 +98,9 @@ class AddCertificate extends Component
 
         // dd( $this->vehicleTypes);
     }
+
+
+
     public function render()
     {
         return view('livewire.documents.certificate.add-certificate');
@@ -103,10 +119,11 @@ class AddCertificate extends Component
     }
 
 
+
     public function addCertificate()
     {
         $this->application->update([
-            'has_certificate' => '1',
+            'has_certificate' => 1,
             'cert_date' => $this->certDate,
             'variant' => $this->variant,
             'edition' => $this->edition,
@@ -134,7 +151,7 @@ class AddCertificate extends Component
             'axel_mass_distibution_3' => $this->axelMassDistibution_3,
             'axel_mass_distibution_4' => $this->axelMassDistibution_4,
             'axel_mass_distibution_5' => $this->axelMassDistibution_5,
-            'connection_point_mass_distibution' => $this->connectionPointlMassDistibution,
+            'connection_point_mass_distibution' => $this->connectionPointMassDistibution,
             'max_structural_axle_load_1' => $this->maxStructuralAxleLoad_1,
             'max_structural_axle_load_2' => $this->maxStructuralAxleLoad_2,
             'max_structural_axle_load_3' => $this->maxStructuralAxleLoad_3,

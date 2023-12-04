@@ -39,6 +39,9 @@
                     <th class="px-2 py-2 text-xs text-gray-800">
                         Статус
                     </th>
+                    <th>
+
+                    </th>
                     <th class="px-2 py-2 text-xs text-gray-800">
                         Опции
                     </th>
@@ -81,6 +84,13 @@
                                 <div class="bg-red-600 h-[12px] w-[12px] rounded-full shadow-md"></div>
                             @else
                                 <div class="bg-green-800 h-[12px] w-[12px] rounded-full shadow-md"></div>
+                            @endif
+                        </td>
+                        <td class="px-2 py-1">
+                            @if ($application->has_certificate == null || $application->has_certificate == 0)
+                                <span class="text-red-600">Нема потврда</span>
+                            @else
+                            <span class="text-green-600">Потврдата е изработена</span>
                             @endif
                         </td>
 

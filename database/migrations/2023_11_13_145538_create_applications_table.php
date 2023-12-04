@@ -35,7 +35,8 @@ return new class extends Migration
             $table->unsignedBigInteger('correction_id')->nullable();
             $table->unsignedBigInteger('legalisation_id')->nullable();
 
-            $table->string('has_certificate')->nullable();
+            $table->boolean('has_certificate')->nullable();
+            $table->boolean('is_in_progress')->nullable();
             $table->string('app_number')->nullable();
             $table->string('vin_number')->nullable();
             $table->string('engine_type')->nullable();
