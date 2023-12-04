@@ -11,6 +11,8 @@ use App\Models\Color;
 use App\Models\Fuel;
 use App\Models\Note;
 use Livewire\Attributes\On;
+use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Validator;
 
 class AddCertificate extends Component
 {
@@ -122,6 +124,118 @@ class AddCertificate extends Component
 
     public function addCertificate()
     {
+
+        $rules = [
+            'variant' => 'required',
+            'edition' => 'required',
+            'selectedProductionYear' => 'required',
+            'constTotalMass' => 'numeric',
+            'legalTotalMass' => 'numeric',
+            'legalTotalGroupMass' => 'numeric',
+            'vehicleMass' => 'numeric',
+            'vehicleType' => 'required',
+            'selectedFuel' => 'required',
+            'selectedColor_1' => 'required',
+            'selectedColor_2' => '',
+            'selectedNote' => '',
+            'selectedChassis' => 'required',
+            'applicationMarkMKD' => '',
+            'applicationMarkEU' => '',
+            'CocNumber' => '',
+            'numberOfAxles' => 'numeric|digits:1',
+            'allowedPneumatics' => '',
+            'length' => 'numeric',
+            'width' => 'numeric',
+            'height' => 'numeric',
+            'axelMassDistibution_1' => 'numeric',
+            'axelMassDistibution_2' => 'numeric',
+            'axelMassDistibution_3' => 'numeric',
+            'axelMassDistibution_4' => 'numeric',
+            'axelMassDistibution_5' => 'numeric',
+            'connectionPointMassDistibution' => 'numeric',
+            'maxStructuralAxleLoad_1' => 'numeric',
+            'maxStructuralAxleLoad_2' => 'numeric',
+            'maxStructuralAxleLoad_3' => 'numeric',
+            'maxStructuralAxleLoad_4' => 'numeric',
+            'maxStructuralAxleLoad_5' => 'numeric',
+            'maxConnectionPointLoad' => 'numeric',
+            'brakedTrailerMaxMass' => 'numeric',
+            'unbrakedTrailerMaxMass' => 'numeric',
+            'trailerConnectionPointMaxLoad' => 'numeric',
+            'pluginDeviceApprovalMark' => '',
+            'engineVolume' => 'numeric',
+            'enginePower' => 'numeric',
+            'engineRevolutions' => 'numeric',
+            'powerMassDistribution' => 'numeric',
+            'numberOfSeats' => 'numeric',
+            'numberOfStandingPlaces' => 'numeric',
+            'numberOfLieDownPlaces' => 'numeric',
+            'maxSpeed' => 'numeric',
+            'stationaryNoiseLevel' => 'numeric',
+            'noiseAtRpm' => '',
+            'co2' => 'numeric',
+            'numberOfLieDownPlaces' => 'numeric',
+            'certNoteText' => '',
+        ];
+
+        $validator = Validator::make(
+            [
+                'variant' => $this->variant,
+                'edition' => $this->edition,
+                'selectedProductionYear' => $this->selectedProductionYear,
+                'constTotalMass' => $this->constTotalMass,
+                'legalTotalMass' => $this->legalTotalMass,
+                'legalTotalGroupMass' => $this->legalTotalGroupMass,
+                'vehicleMass' => $this->vehicleMass,
+                'vehicleType' => $this->vehicleType,
+                'selectedFuel' => $this->selectedFuel,
+                'selectedColor_1' => $this->selectedColor_1,
+                'selectedColor_2' => $this->selectedColor_2,
+                'selectedNote' => $this->selectedNote,
+                'selectedChassis' => $this->selectedChassis,
+                'applicationMarkMKD' => $this->applicationMarkMKD,
+                'applicationMarkEU' => $this->applicationMarkEU,
+                'CocNumber' => $this->CocNumber,
+                'numberOfAxles' => $this->numberOfAxles,
+                'allowedPneumatics' => $this->allowedPneumatics,
+                'length' => $this->length,
+                'width' => $this->width,
+                'height' => $this->height,
+                'axelMassDistibution_1' => $this->axelMassDistibution_1,
+                'axelMassDistibution_2' => $this->axelMassDistibution_2,
+                'axelMassDistibution_3' => $this->axelMassDistibution_3,
+                'axelMassDistibution_4' => $this->axelMassDistibution_4,
+                'axelMassDistibution_5' => $this->axelMassDistibution_5,
+                'connectionPointMassDistibution' => $this->connectionPointMassDistibution,
+                'maxStructuralAxleLoad_1' => $this->maxStructuralAxleLoad_1,
+                'maxStructuralAxleLoad_2' => $this->maxStructuralAxleLoad_2,
+                'maxStructuralAxleLoad_3' => $this->maxStructuralAxleLoad_3,
+                'maxStructuralAxleLoad_4' => $this->maxStructuralAxleLoad_4,
+                'maxStructuralAxleLoad_5' => $this->maxStructuralAxleLoad_5,
+                'maxConnectionPointLoad' => $this->maxConnectionPointLoad,
+                'brakedTrailerMaxMass' => $this->brakedTrailerMaxMass,
+                'unbrakedTrailerMaxMass' => $this->unbrakedTrailerMaxMass,
+                'trailerConnectionPointMaxLoad' => $this->trailerConnectionPointMaxLoad,
+                'pluginDeviceApprovalMark' => $this->pluginDeviceApprovalMark,
+                'engineVolume' => $this->engineVolume,
+                'enginePower' => $this->enginePower,
+                'engineRevolutions' => $this->engineRevolutions,
+                'powerMassDistribution' => $this->powerMassDistribution,
+                'numberOfSeats' => $this->numberOfSeats,
+                'numberOfStandingPlaces' => $this->numberOfStandingPlaces,
+                'numberOfLieDownPlaces' => $this->numberOfLieDownPlaces,
+                'maxSpeed' => $this->maxSpeed,
+                'stationaryNoiseLevel' => $this->stationaryNoiseLevel,
+                'noiseAtRpm' => $this->noiseAtRpm,
+                'co2' => $this->co2,
+                'numberOfLieDownPlaces' => $this->numberOfLieDownPlaces,
+                'certNoteText' => $this->certNoteText,
+            ],
+            $rules,
+            $this->customMessages()
+        );
+        // dd($rules, $validator);
+        $validator->validate();
         $this->application->update([
             'has_certificate' => 1,
             'cert_date' => $this->certDate,
@@ -179,5 +293,53 @@ class AddCertificate extends Component
         session()->flash('success', 'Потврдата е успешно изработена!');
         $this->reset();
         return redirect(route('applications.all'));
+    }
+
+    public function customMessages()
+    {
+        return [
+            'variant.required' => 'Полето за варијантата е задолжително.',
+            'edition.required' => 'Полето за изданието е задолжително.',
+            'selectedProductionYear.required' => 'Полето за избор на година на производство е задолжително.',
+            'constTotalMass.numeric' => 'Масата за постојана маса треба да биде во нумерички формат.',
+            'legalTotalMass.numeric' => 'Легалната вкупна маса треба да биде во нумерички формат.',
+            'legalTotalGroupMass.numeric' => 'Групната легална вкупна маса треба да биде во нумерички формат.',
+            'vehicleMass.numeric' => 'Масата на возилото треба да биде во нумерички формат.',
+            'vehicleType.required' => 'Полето за типот на возилото е задолжително.',
+            'selectedFuel.required' => 'Полето за избор на гориво е задолжително.',
+            'selectedColor_1.required' => 'Полето за прва боја е задолжително.',
+            'selectedChassis.required' => 'Полето за избор на шасија е задолжително.',
+            'numberOfAxles.numeric' => 'Бројот на осовини треба да биде во нумерички формат.',
+            'numberOfAxles.digits' => 'Бројот на осовини треба да биде една цифра.',
+            'allowedPneumatics' => '',
+            'length.numeric' => 'Должината треба да биде во нумерички формат.',
+            'width.numeric' => 'Ширината треба да биде во нумерички формат.',
+            'height.numeric' => 'Висината треба да биде во нумерички формат.',
+            'axelMassDistibution_1.numeric' => 'Масата на осовина 1 треба да биде во нумерички формат.',
+            'axelMassDistibution_2.numeric' => 'Масата на осовина 2 треба да биде во нумерички формат.',
+            'axelMassDistibution_3.numeric' => 'Масата на осовина 3 треба да биде во нумерички формат.',
+            'axelMassDistibution_4.numeric' => 'Масата на осовина 4 треба да биде во нумерички формат.',
+            'axelMassDistibution_5.numeric' => 'Масата на осовина 5 треба да биде во нумерички формат.',
+            'connectionPointMassDistibution.numeric' => 'Масата на точка на спојување на масата треба да биде во нумерички формат.',
+            'maxStructuralAxleLoad_1.numeric' => 'Максималната структурална маса на осовина 1 треба да биде во нумерички формат.',
+            'maxStructuralAxleLoad_2.numeric' => 'Максималната структурална маса на осовина 2 треба да биде во нумерички формат.',
+            'maxStructuralAxleLoad_3.numeric' => 'Максималната структурална маса на осовина 3 треба да биде во нумерички формат.',
+            'maxStructuralAxleLoad_4.numeric' => 'Максималната структурална маса на осовина 4 треба да биде во нумерички формат.',
+            'maxStructuralAxleLoad_5.numeric' => 'Максималната структурална маса на осовина 5 треба да биде во нумерички формат.',
+            'maxConnectionPointLoad.numeric' => 'Максималната маса на точка на спојување треба да биде во нумерички формат.',
+            'brakedTrailerMaxMass.numeric' => 'Максималната маса на зафатен приколка треба да биде во нумерички формат.',
+            'unbrakedTrailerMaxMass.numeric' => 'Максималната маса на не-зафатен приколка треба да биде во нумерички формат.',
+            'trailerConnectionPointMaxLoad.numeric' => 'Максималната маса на точка на спојување на приколка треба да биде во нумерички формат.',
+            'engineVolume.numeric' => 'Обемот на моторот треба да биде во нумерички формат.',
+            'enginePower.numeric' => 'Моќноста на моторот треба да биде во нумерички формат.',
+            'engineRevolutions.numeric' => 'Обртите на моторот треба да биде во нумерички формат.',
+            'powerMassDistribution.numeric' => 'Дистрибуцијата на масата на моќноста треба да биде во нумерички формат.',
+            'numberOfSeats.numeric' => 'Бројот на седишта треба да биде во нумерички формат.',
+            'numberOfStandingPlaces.numeric' => 'Бројот на места за стоење треба да се во нумерички формат',
+            'stationaryNoiseLevel.numeric' => 'Нивото на бучава треба да е во нумерички формат',
+            'co2.numeric' => 'Нивото на СО2 треба да е во нумерички формат',
+            'numberOfLieDownPlaces.numeric' => 'Бројот на места за лежење треба да се во нумерички формат',
+
+        ];
     }
 }
