@@ -39,7 +39,11 @@ class AddType extends Component
 
     public function render()
     {
-        return view('livewire.basic-data.types.add-type');
+        if (auth()->check() && auth()->user()->role_id == 1) {
+            return view('livewire.basic-data.types.add-type')->layout('components.layouts.superadmin');
+        }else{
+            return view('livewire.basic-data.types.add-type');
+        }
     }
 
 

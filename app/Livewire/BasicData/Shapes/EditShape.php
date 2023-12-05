@@ -5,6 +5,7 @@ namespace App\Livewire\BasicData\Shapes;
 use App\Models\Shape;
 use Livewire\Component;
 use Illuminate\Support\Facades\Validator;
+use Livewire\Attributes\Layout;
 
 class EditShape extends Component
 {
@@ -21,6 +22,7 @@ class EditShape extends Component
         $this->note = $shape->note;
     }
 
+    #[Layout('components.layouts.superadmin')]
     public function render()
     {
         return view('livewire.basic-data.shapes.edit-shape');

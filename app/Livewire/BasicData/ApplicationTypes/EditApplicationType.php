@@ -5,6 +5,7 @@ namespace App\Livewire\BasicData\ApplicationTypes;
 use App\Models\ApplicationType;
 use Livewire\Component;
 use Illuminate\Support\Facades\Validator;
+use Livewire\Attributes\Layout;
 
 class EditApplicationType extends Component
 {
@@ -17,6 +18,8 @@ class EditApplicationType extends Component
         $this->app_type_name = $applicationtype->app_type_name;
     }
 
+
+    #[Layout('components.layouts.superadmin')]
     public function render()
     {
         return view('livewire.basic-data.application-types.edit-application-type');

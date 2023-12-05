@@ -5,6 +5,7 @@ namespace App\Livewire\BasicData\ApplicationPhotos;
 use App\Models\ApplicationType;
 use App\Models\Picture;
 use Livewire\Component;
+use Livewire\Attributes\Layout;
 
 class ManageAppTypePhotos extends Component
 {
@@ -20,6 +21,8 @@ class ManageAppTypePhotos extends Component
         $this->pictures = Picture::all();
     }
 
+
+    #[Layout('components.layouts.superadmin')]
     public function render()
     {
         return view('livewire.basic-data.application-photos.manage-app-type-photos');

@@ -40,6 +40,20 @@ class EditType extends Component
         $this->brands = Brand::where('manufacturer_id', $this->selectedManufacturer)->get();
     }
 
+
+    public function render()
+    {
+        $types = Type::Paginate(15);
+        if (auth()->check() && auth()->user()->role_id == 1) {
+            return view('livewire.basic-data.types.edit-type', compact('types'))->layout('components.layouts.superadmin');
+        }else{
+            return view('livewire.basic-data.types.edit-type', compact('types'));
+        }
+    }
+
+
+
+
     public function updatedSelectedManufacturer($manufacturer)
     {
         $this->brands = Brand::where('manufacturer_id', $this->selectedManufacturer)->get();

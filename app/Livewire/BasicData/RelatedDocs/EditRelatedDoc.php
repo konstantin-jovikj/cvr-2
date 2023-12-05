@@ -5,6 +5,7 @@ namespace App\Livewire\BasicData\RelatedDocs;
 use App\Models\Relateddocuments;
 use Livewire\Component;
 use Illuminate\Support\Facades\Validator;
+use Livewire\Attributes\Layout;
 
 class EditRelatedDoc extends Component
 {
@@ -17,7 +18,7 @@ class EditRelatedDoc extends Component
         $this->desc = $relateddocuments->desc;
     }
 
-
+    #[Layout('components.layouts.superadmin')]
     public function render()
     {
         return view('livewire.basic-data.related-docs.edit-related-doc');

@@ -4,11 +4,12 @@ namespace App\Livewire\BasicData\Notes;
 
 use App\Models\Note;
 use Livewire\Component;
+use Livewire\Attributes\Layout;
 
 class NotesTable extends Component
 {
 
-
+    #[Layout('components.layouts.superadmin')]
     public function render()
     {
         $notes = Note::Paginate(5);

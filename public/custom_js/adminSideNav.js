@@ -10,4 +10,16 @@ function dropdownUser() {
 dropdownUser();
 
 
+function dropdownPodatociSuperAdmin() {
+    const podatociSubmenuSuperAdmin = document.querySelector("#podatociSubmenuSuperAdmin");
+    const podatociArrowSuperAdmin = document.querySelector("#podatociArrowSuperAdmin");
+
+    if (podatociSubmenuSuperAdmin && podatociArrowSuperAdmin) {
+        podatociSubmenuSuperAdmin.classList.toggle("hidden");
+        podatociArrowSuperAdmin.classList.toggle("rotate-90");
+    }
+}
+dropdownPodatociSuperAdmin();
+
+
 

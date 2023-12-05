@@ -21,7 +21,7 @@ class Users extends Component
 
     public function fetchUsers()
     {
-        $this->users = User::all();
+        $this->users = User::where('local_department_id', auth()->user()->local_department_id)->get();
     }
 
 

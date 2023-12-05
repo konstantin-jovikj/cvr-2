@@ -5,13 +5,14 @@ namespace App\Livewire\BasicData\Categories;
 use Livewire\Component;
 use App\Models\Category;
 use Livewire\WithPagination;
+use Livewire\Attributes\Layout;
 
 class CategoriesTable extends Component
 {
 
     use WithPagination;
 
-
+    #[Layout('components.layouts.superadmin')]
     public function render()
     {
         $categories = Category::orderBy('created_at', 'desc')->paginate(10);

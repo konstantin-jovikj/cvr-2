@@ -5,6 +5,7 @@ namespace App\Livewire\BasicData\Pictures;
 use App\Models\Picture;
 use Livewire\Component;
 use Illuminate\Support\Facades\Validator;
+use Livewire\Attributes\Layout;
 
 class EditPicture extends Component
 {
@@ -17,7 +18,7 @@ class EditPicture extends Component
         $this->picture_name = $picture->picture_name;
     }
 
-
+    #[Layout('components.layouts.superadmin')]
     public function render()
     {
         return view('livewire.basic-data.pictures.edit-picture');

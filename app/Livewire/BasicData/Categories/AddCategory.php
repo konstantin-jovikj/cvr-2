@@ -5,6 +5,7 @@ namespace App\Livewire\BasicData\Categories;
 use App\Models\Category;
 use Livewire\Component;
 use Illuminate\Support\Facades\Validator;
+use Livewire\Attributes\Layout;
 
 class AddCategory extends Component
 {
@@ -14,7 +15,7 @@ class AddCategory extends Component
     public $appendix = '';
     public $note = '';
 
-
+    #[Layout('components.layouts.superadmin')]
     public function render()
     {
         return view('livewire.basic-data.categories.add-category');

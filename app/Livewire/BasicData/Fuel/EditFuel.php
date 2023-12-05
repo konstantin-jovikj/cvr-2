@@ -5,6 +5,7 @@ namespace App\Livewire\BasicData\Fuel;
 use App\Models\Fuel;
 use Livewire\Component;
 use Illuminate\Support\Facades\Validator;
+use Livewire\Attributes\Layout;
 
 class EditFuel extends Component
 {
@@ -20,7 +21,7 @@ class EditFuel extends Component
         $this->note = $fuel->note;
     }
 
-
+    #[Layout('components.layouts.superadmin')]
     public function render()
     {
         return view('livewire.basic-data.fuel.edit-fuel');

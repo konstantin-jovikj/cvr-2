@@ -5,6 +5,7 @@ namespace App\Livewire\BasicData\Colors;
 use App\Models\Color;
 use Livewire\Component;
 use Illuminate\Support\Facades\Validator;
+use Livewire\Attributes\Layout;
 
 class EditColor extends Component
 {
@@ -23,7 +24,7 @@ class EditColor extends Component
     }
 
 
-
+    #[Layout('components.layouts.superadmin')]
     public function render()
     {
         return view('livewire.basic-data.colors.edit-color');

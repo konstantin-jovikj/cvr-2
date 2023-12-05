@@ -5,6 +5,7 @@ namespace App\Livewire\BasicData\Fuel;
 use App\Models\Fuel;
 use Livewire\Component;
 use Illuminate\Support\Facades\Validator;
+use Livewire\Attributes\Layout;
 
 class AddFuel extends Component
 {
@@ -12,7 +13,7 @@ class AddFuel extends Component
     public $fuel_type = '';
     public $note = '';
 
-
+    #[Layout('components.layouts.superadmin')]
     public function render()
     {
         return view('livewire.basic-data.fuel.add-fuel');

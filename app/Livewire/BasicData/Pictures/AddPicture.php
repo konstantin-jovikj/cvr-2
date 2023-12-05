@@ -6,13 +6,14 @@ use App\Models\Image;
 use App\Models\Picture;
 use Livewire\Component;
 use Illuminate\Support\Facades\Validator;
+use Livewire\Attributes\Layout;
 
 class AddPicture extends Component
 {
 
     public $picture_name = '';
 
-
+    #[Layout('components.layouts.superadmin')]
     public function render()
     {
         return view('livewire.basic-data.pictures.add-picture');

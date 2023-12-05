@@ -4,9 +4,12 @@ namespace App\Livewire\BasicData\ModificationTypes;
 
 use App\Models\ModificationType;
 use Livewire\Component;
+use Livewire\Attributes\Layout;
 
 class ModificationTable extends Component
 {
+
+    #[Layout('components.layouts.superadmin')]
     public function render()
     {
         $modificationTypes = ModificationType::all();

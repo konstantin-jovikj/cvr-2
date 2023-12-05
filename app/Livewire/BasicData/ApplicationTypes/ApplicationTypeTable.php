@@ -4,9 +4,12 @@ namespace App\Livewire\BasicData\ApplicationTypes;
 
 use App\Models\ApplicationType;
 use Livewire\Component;
+use Livewire\Attributes\Layout;
 
 class ApplicationTypeTable extends Component
 {
+
+    #[Layout('components.layouts.superadmin')]
     public function render()
     {
         $applicationTypes = ApplicationType::all();

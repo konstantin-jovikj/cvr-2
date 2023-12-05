@@ -16,7 +16,11 @@ class TypesTable extends Component
     public function render()
     {
         $types = Type::Paginate(15);
-        return view('livewire.basic-data.types.types-table', compact('types'));
+        if (auth()->check() && auth()->user()->role_id == 1) {
+            return view('livewire.basic-data.types.types-table', compact('types'))->layout('components.layouts.superadmin');
+        }else{
+            return view('livewire.basic-data.types.types-table', compact('types'));
+        }
     }
 
     public function deleteType(Type $type)

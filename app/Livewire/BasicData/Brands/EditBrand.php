@@ -28,7 +28,11 @@ class EditBrand extends Component
 
     public function render()
     {
-        return view('livewire.basic-data.brands.edit-brand');
+        if (auth()->check() && auth()->user()->role_id == 1) {
+            return view('livewire.basic-data.brands.edit-brand')->layout('components.layouts.superadmin');
+        }else{
+            return view('livewire.basic-data.brands.edit-brand');
+        }
     }
 
     public function updateBrand()

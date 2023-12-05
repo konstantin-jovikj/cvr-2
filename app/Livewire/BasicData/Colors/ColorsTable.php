@@ -5,13 +5,14 @@ namespace App\Livewire\BasicData\Colors;
 use App\Models\Color;
 use Livewire\Component;
 use Livewire\WithPagination;
+use Livewire\Attributes\Layout;
 
 class ColorsTable extends Component
 {
     use WithPagination;
 
 
-
+    #[Layout('components.layouts.superadmin')]
     public function render()
     {   $colors = Color::orderBy('created_at', 'desc')->paginate(15);
         return view('livewire.basic-data.colors.colors-table', compact('colors'));

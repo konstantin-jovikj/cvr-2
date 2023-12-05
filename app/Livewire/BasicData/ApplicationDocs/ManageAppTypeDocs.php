@@ -5,6 +5,7 @@ namespace App\Livewire\BasicData\ApplicationDocs;
 use Livewire\Component;
 use App\Models\ApplicationType;
 use App\Models\Relateddocuments;
+use Livewire\Attributes\Layout;
 
 class ManageAppTypeDocs extends Component
 {
@@ -20,7 +21,7 @@ class ManageAppTypeDocs extends Component
         $this->relatedDocuments = Relateddocuments::all();
     }
 
-
+    #[Layout('components.layouts.superadmin')]
     public function render()
     {
         return view('livewire.basic-data.application-docs.manage-app-type-docs');

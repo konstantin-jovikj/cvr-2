@@ -16,7 +16,12 @@ class ManufacturersTable extends Component
     public function render()
     {
         $manufacturers = Manufacturer::Paginate(10);
-        return view('livewire.basic-data.manufacturers.manufacturers-table', compact('manufacturers'));
+        if (auth()->check() && auth()->user()->role_id == 1) {
+
+        return view('livewire.basic-data.manufacturers.manufacturers-table', compact('manufacturers'))->layout('components.layouts.superadmin');
+        }else{
+            return view('livewire.basic-data.manufacturers.manufacturers-table', compact('manufacturers'));
+        }
     }
 
 

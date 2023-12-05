@@ -23,7 +23,11 @@ class AddBrand extends Component
 
     public function render()
     {
-        return view('livewire.basic-data.brands.add-brand');
+        if (auth()->check() && auth()->user()->role_id == 1) {
+            return view('livewire.basic-data.brands.add-brand')->layout('components.layouts.superadmin');
+        } else {
+            return view('livewire.basic-data.brands.add-brand');
+        }
     }
 
     public function addBrand()

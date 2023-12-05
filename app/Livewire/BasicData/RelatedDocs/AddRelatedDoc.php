@@ -5,13 +5,14 @@ namespace App\Livewire\BasicData\RelatedDocs;
 use App\Models\Relateddocuments;
 use Livewire\Component;
 use Illuminate\Support\Facades\Validator;
+use Livewire\Attributes\Layout;
 
 class AddRelatedDoc extends Component
 {
 
     public $desc = '';
 
-
+    #[Layout('components.layouts.superadmin')]
     public function render()
     {
         return view('livewire.basic-data.related-docs.add-related-doc');

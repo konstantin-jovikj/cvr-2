@@ -18,9 +18,9 @@ state([
     'email' => '',
     'password' => '',
     'password_confirmation' => '',
-    'role_id' => 3,
-    'department_id' => '',
-    'local_department_id' => '',
+    'role_id' => 4,
+    'department_id' => auth()->user()->department_id,
+    'local_department_id' => auth()->user()->local_department_id,
 
 ]);
 
@@ -73,8 +73,8 @@ $register = function () {
             </select> --}}
 
 
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
-        </div>
+            {{-- <x-input-error :messages="$errors->get('email')" class="mt-2" />
+        </div> --}}
 
         <!-- Password -->
         <div class="mt-4">

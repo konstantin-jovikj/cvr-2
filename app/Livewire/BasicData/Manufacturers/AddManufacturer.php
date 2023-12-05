@@ -5,10 +5,15 @@ namespace App\Livewire\BasicData\Manufacturers;
 use App\Models\Manufacturer;
 use Livewire\Component;
 use Illuminate\Validation\Rule;
+use Livewire\Attributes\Layout;
+
 
 class AddManufacturer extends Component
 
 {
+
+
+
     public $name = '';
     public $address = '';
     public $note = '';
@@ -16,7 +21,11 @@ class AddManufacturer extends Component
 
     public function render()
     {
-        return view('livewire.basic-data.manufacturers.add-manufacturer');
+        if (auth()->check() && auth()->user()->role_id == 1) {
+        return view('livewire.basic-data.manufacturers.add-manufacturer')->layout('components.layouts.superadmin');
+        }else{
+            return view('livewire.basic-data.manufacturers.add-manufacturer');
+        }
     }
 
     public function addManufacturer()

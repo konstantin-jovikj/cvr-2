@@ -5,6 +5,9 @@ namespace App\Livewire\BasicData\Manufacturers;
 use App\Models\Manufacturer;
 use Livewire\Component;
 use Illuminate\Validation\Rule;
+use Livewire\Attributes\Layout;
+
+
 
 class EditManufacturer extends Component
 {
@@ -22,13 +25,16 @@ class EditManufacturer extends Component
         $this->name = $manufacturer->name;
         $this->address = $manufacturer->address;
         $this->note = $manufacturer->note;
-
     }
 
 
     public function render()
     {
-        return view('livewire.basic-data.manufacturers.edit-manufacturer');
+        if (auth()->check() && auth()->user()->role_id == 1) {
+            return view('livewire.basic-data.manufacturers.edit-manufacturer')->layout('components.layouts.superadmin');
+        } else {
+            return view('livewire.basic-data.manufacturers.edit-manufacturer');
+        }
     }
 
     public function updateManufacturer()

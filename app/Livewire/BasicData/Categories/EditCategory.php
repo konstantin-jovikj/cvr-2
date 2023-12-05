@@ -5,6 +5,7 @@ namespace App\Livewire\BasicData\Categories;
 use App\Models\Category;
 use Livewire\Component;
 use Illuminate\Support\Facades\Validator;
+use Livewire\Attributes\Layout;
 
 class EditCategory extends Component
 {
@@ -24,6 +25,8 @@ class EditCategory extends Component
         $this->note = $category->note;
     }
 
+
+    #[Layout('components.layouts.superadmin')]
     public function render()
     {
         return view('livewire.basic-data.categories.edit-category');

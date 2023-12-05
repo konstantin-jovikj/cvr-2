@@ -5,6 +5,8 @@ namespace App\Livewire\BasicData\Colors;
 use App\Models\Color;
 use Livewire\Component;
 use Illuminate\Support\Facades\Validator;
+use Livewire\Attributes\Layout;
+
 
 class AddColor extends Component
 {
@@ -13,6 +15,8 @@ class AddColor extends Component
     public $color_code = '';
     public $note = '';
 
+
+    #[Layout('components.layouts.superadmin')]
     public function render()
     {
         return view('livewire.basic-data.colors.add-color');

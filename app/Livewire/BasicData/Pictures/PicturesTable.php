@@ -5,9 +5,12 @@ namespace App\Livewire\BasicData\Pictures;
 use App\Models\Image;
 use App\Models\Picture;
 use Livewire\Component;
+use Livewire\Attributes\Layout;
 
 class PicturesTable extends Component
 {
+
+    #[Layout('components.layouts.superadmin')]
     public function render()
     {
         $pictures = Picture::all();

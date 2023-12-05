@@ -4,9 +4,13 @@ namespace App\Livewire\BasicData\Fuel;
 
 use App\Models\Fuel;
 use Livewire\Component;
+use Livewire\Attributes\Layout;
 
 class FuelTable extends Component
 {
+
+
+    #[Layout('components.layouts.superadmin')]
     public function render()
     {
         $fuels = Fuel::all();

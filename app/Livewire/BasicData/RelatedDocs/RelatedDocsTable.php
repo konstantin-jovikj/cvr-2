@@ -4,9 +4,12 @@ namespace App\Livewire\BasicData\RelatedDocs;
 
 use App\Models\Relateddocuments;
 use Livewire\Component;
+use Livewire\Attributes\Layout;
 
 class RelatedDocsTable extends Component
 {
+
+    #[Layout('components.layouts.superadmin')]
     public function render()
     {
         $relatedDocs = Relateddocuments::all();

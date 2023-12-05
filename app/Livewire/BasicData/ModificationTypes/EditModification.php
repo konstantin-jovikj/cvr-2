@@ -5,6 +5,7 @@ namespace App\Livewire\BasicData\ModificationTypes;
 use App\Models\ModificationType;
 use Livewire\Component;
 use Illuminate\Support\Facades\Validator;
+use Livewire\Attributes\Layout;
 
 class EditModification extends Component
 {
@@ -20,6 +21,7 @@ class EditModification extends Component
         $this->modification_name = $modificationtype->modification_name;
     }
 
+    #[Layout('components.layouts.superadmin')]
     public function render()
     {
         return view('livewire.basic-data.modification-types.edit-modification');

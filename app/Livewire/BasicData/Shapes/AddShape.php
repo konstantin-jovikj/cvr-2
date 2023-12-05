@@ -5,6 +5,7 @@ namespace App\Livewire\BasicData\Shapes;
 use App\Models\Shape;
 use Livewire\Component;
 use Illuminate\Support\Facades\Validator;
+use Livewire\Attributes\Layout;
 
 class AddShape extends Component
 {
@@ -14,7 +15,7 @@ class AddShape extends Component
     public $note = '';
     public $shape;
 
-
+    #[Layout('components.layouts.superadmin')]
     public function render()
     {
         return view('livewire.basic-data.shapes.add-shape');

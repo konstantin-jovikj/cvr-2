@@ -15,7 +15,11 @@ class BrandsTable extends Component
     public function render()
     {
         $brands = Brand::Paginate(15);
-        return view('livewire.basic-data.brands.brands-table', compact('brands'));
+        if (auth()->check() && auth()->user()->role_id == 1) {
+            return view('livewire.basic-data.brands.brands-table', compact('brands'))->layout('components.layouts.superadmin');
+        }else{
+            return view('livewire.basic-data.brands.brands-table', compact('brands'));
+        }
     }
 
     public function deleteBrand(Brand $brand)

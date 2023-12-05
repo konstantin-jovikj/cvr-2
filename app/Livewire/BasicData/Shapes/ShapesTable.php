@@ -5,6 +5,7 @@ namespace App\Livewire\BasicData\Shapes;
 use App\Models\Shape;
 use Livewire\Component;
 use Livewire\WithPagination;
+use Livewire\Attributes\Layout;
 
 class ShapesTable extends Component
 {
@@ -12,6 +13,7 @@ class ShapesTable extends Component
     use WithPagination;
 
 
+    #[Layout('components.layouts.superadmin')]
     public function render()
     {
         $shapes = Shape::orderBy('created_at', 'desc')->paginate(15);

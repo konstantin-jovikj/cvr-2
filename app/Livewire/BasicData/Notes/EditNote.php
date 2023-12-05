@@ -5,6 +5,7 @@ namespace App\Livewire\BasicData\Notes;
 use App\Models\Note;
 use Livewire\Component;
 use Illuminate\Support\Facades\Validator;
+use Livewire\Attributes\Layout;
 
 class EditNote extends Component
 {
@@ -22,7 +23,7 @@ class EditNote extends Component
     }
 
 
-
+    #[Layout('components.layouts.superadmin')]
     public function render()
     {
         return view('livewire.basic-data.notes.edit-note');
