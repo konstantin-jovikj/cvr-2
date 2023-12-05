@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>EO_baranje_51684_1129-150218</title>
+    <title>Барање</title>
     <style type="text/css">
         * {
             font-family: "dejavu serif", sans-serif;

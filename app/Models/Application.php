@@ -195,9 +195,19 @@ class Application extends Model
         return $this->belongsTo(Fuel::class);
     }
 
-    public function color()
+    // public function colors()
+    // {
+    //     return $this->belongsTo(Color::class);
+    // }
+
+    public function color1()
     {
-        return $this->belongsTo(Color::class);
+        return $this->belongsTo(Color::class, 'color_1_id');
+    }
+
+    public function color2()
+    {
+        return $this->belongsTo(Color::class, 'color_2_id');
     }
 
     public function shape()

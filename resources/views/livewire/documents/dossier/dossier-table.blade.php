@@ -253,7 +253,7 @@
                                         </x-dropdown-link> --}}
 
 
-                                        <x-dropdown-link :href="route('pdf.apptest', $userApplication->id)" target="_blank">
+                                        <x-dropdown-link :href="route('print.certificate', $userApplication->id)" target="_blank">
                                             {{ __('Печати потврда') }}
                                         </x-dropdown-link>
                                         <x-dropdown-link :href="route('pdf.apptest', $userApplication->id)" target="_blank">

@@ -17,8 +17,13 @@ class Color extends Model
         'note',
     ];
 
-    public function inquiryApplications()
+    // public function Applications()
+    // {
+    //     return $this->hasMany(Application::class);
+    // }
+
+    public function applications()
     {
-        return $this->hasMany(InquiryApplication::class);
+        return $this->hasMany(Application::class, 'color_1_id')->orWhere('color_2_id', $this->id);
     }
 }
