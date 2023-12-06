@@ -7,11 +7,11 @@
         <div>
             <livewire:alerts.alert-message />
         </div>
-        {{-- <div>
-            <a href="{{ route('category.add') }}"
-                class="bg-sky-800 px-4 py-2 rounded-md text-white text-sm hover:bg-sky-400 hover:text-sky-900 transition-all">Додај
-                Нова Категорија</a>
-        </div> --}}
+        <div>
+            <a href="{{ route('application.add', $customer->id) }}"
+                class="bg-sky-800 px-4 py-2 rounded-md text-white text-sm hover:bg-sky-400 hover:text-sky-900 transition-all">Направи
+                ново барање</a>
+        </div>
     </div>
 
     {{-- Details --}}
@@ -207,7 +207,7 @@
                             @if ($userApplication->has_certificate == null || $userApplication->has_certificate == 0)
                                 <span class="text-red-600 text-xs">Нема потврда</span>
                             @else
-                            <span class="text-green-600 text-xs">Потврдата е изработена</span>
+                                <span class="text-green-600 text-xs">Потврдата е изработена</span>
                             @endif
                         </td>
 
@@ -259,12 +259,16 @@
                                         </x-dropdown-link> --}}
 
 
-                                        <x-dropdown-link :href="route('print.certificate', $userApplication->id)" target="_blank">
-                                            {{ __('Печати потврда') }}
-                                        </x-dropdown-link>
-                                        <x-dropdown-link :href="route('pdf.apptest', $userApplication->id)" target="_blank">
-                                            {{ __('Печати барање') }}
-                                        </x-dropdown-link>
+                                        @if ($userApplication->app_type_id != 6)
+                                            @if ($userApplication->has_certificate == 1)
+                                                <x-dropdown-link :href="route('print.certificate', $userApplication->id)" target="_blank">
+                                                    {{ __('Печати потврда') }}
+                                                </x-dropdown-link>
+                                            @endif
+                                            <x-dropdown-link :href="route('pdf.apptest', $userApplication->id)" target="_blank">
+                                                {{ __('Печати барање') }}
+                                            </x-dropdown-link>
+                                        @endif
                                         {{-- <x-dropdown-link :href="route('user.dossier', $userApplication->customer->id)" wire:navigate>
                                             {{ __('Досие') }}
                                         </x-dropdown-link> --}}

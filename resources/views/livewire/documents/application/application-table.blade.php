@@ -90,7 +90,7 @@
                             @if ($application->has_certificate == null || $application->has_certificate == 0)
                                 <span class="text-red-600">Нема потврда</span>
                             @else
-                            <span class="text-green-600">Потврдата е изработена</span>
+                                <span class="text-green-600">Потврдата е изработена</span>
                             @endif
                         </td>
 
@@ -134,18 +134,28 @@
                                             </x-dropdown-link>
                                         @endif
 
-                                        <x-dropdown-link :href="route('pdf.apptest', $application->id)" target="_blank">
-                                            {{ __('Печати') }}
-                                        </x-dropdown-link>
                                         <x-dropdown-link :href="route('user.dossier', $application->customer->id)" wire:navigate>
                                             {{ __('Досие') }}
                                         </x-dropdown-link>
-                                        <x-dropdown-link :href="route('customers.all')" wire:navigate>
-                                            {{ __('Таблица') }}
-                                        </x-dropdown-link>
-                                        <x-dropdown-link :href="route('customers.all')" wire:navigate>
-                                            {{ __('Таблица СТП') }}
-                                        </x-dropdown-link>
+
+
+
+                                        @if ($application->app_type_id != 6)
+                                            <x-dropdown-link :href="route('pdf.apptest', $application->id)" target="_blank">
+                                                {{ __('Печати') }}
+                                            </x-dropdown-link>
+
+
+                                            <x-dropdown-link :href="route('pdf.plate.print', $application->id)" target="_blank">
+                                                {{ __('Таблица') }}
+                                            </x-dropdown-link>
+
+
+                                            <x-dropdown-link :href="route('customers.all')" wire:navigate>
+                                                {{ __('Таблица СТП') }}
+                                            </x-dropdown-link>
+                                        @endif
+
                                         <x-dropdown-link :href="route('customers.all')" wire:navigate>
                                             {{ __('Записник') }}
                                         </x-dropdown-link>

@@ -21,37 +21,12 @@ class PdfController extends Controller
 
             $filename = 'baranje_' . $application->app_number;
 
-            if ($appType == 1){
+            if ($appType != 6){
                 $pdf = PDF::loadView('pdf.pdf-template', compact('application', 'appDocuments'));
                 return $pdf->stream($filename);
             }
-            if ($appType == 2){
-                $pdf = PDF::loadView('pdf.pdf-template', compact('application', 'appDocuments'));
-                return $pdf->stream($filename);
-            }
-            if ($appType == 3){
-                $pdf = PDF::loadView('pdf.pdf-template', compact('application', 'appDocuments'));
-                return $pdf->stream($filename);
-            }
-            if ($appType == 4){
-                $pdf = PDF::loadView('pdf.pdf-template', compact('application', 'appDocuments'));
-                return $pdf->stream($filename);
-            }
-            if ($appType == 5){
-                $pdf = PDF::loadView('pdf.pdf-template', compact('application', 'appDocuments'));
-                return $pdf->stream($filename);
-            }
-            if ($appType == 6){
-                $pdf = PDF::loadView('pdf.pdf-template', compact('application', 'appDocuments'));
-                return $pdf->stream($filename);
-            }
-            if ($appType == 7){
-                $pdf = PDF::loadView('pdf.pdf-template', compact('application', 'appDocuments'));
-                return $pdf->stream($filename);
-            }
-            if ($appType == 8){
-                $pdf = PDF::loadView('pdf.pdf-template', compact('application', 'appDocuments'));
-                return $pdf->stream($filename);
-            }
+
     }
+
+
 }

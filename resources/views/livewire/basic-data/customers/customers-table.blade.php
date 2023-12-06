@@ -79,7 +79,7 @@
                         </td>
 
                         <td class="px-1 py-1 text-center flex gap-1">
-                            <a wire:navigate href="{{ route('mediator.edit', $customer->id) }}"
+                            <a wire:navigate href="{{ route('user.dossier', $customer->id) }}"
                                 class="px-3 py-1 text-xs text-white bg-sky-600 hover:bg-sky-800 rounded-full">Досие</a>
 
                             <a wire:navigate href="{{ route('application.add', $customer->id) }}"

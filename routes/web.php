@@ -53,6 +53,7 @@ use App\Livewire\BasicData\Mediators\MediatorsTable;
 use App\Livewire\BasicData\RelatedDocs\AddRelatedDoc;
 use App\Livewire\Documents\Application\EditDocuments;
 use App\Http\Controllers\Certificate\PrintCertificate;
+use App\Http\Controllers\Plate\PrintPlate;
 use App\Livewire\BasicData\Categories\CategoriesTable;
 use App\Livewire\BasicData\RelatedDocs\EditRelatedDoc;
 use App\Livewire\Documents\Application\AddApplication;
@@ -206,10 +207,14 @@ Route::get('/it/certificate/{customer}/all', DossierTable::class)->name('user.do
     Route::get('/it/certificate/{application}/{customer}/add', AddCertificate::class)->name('certificate.add');
 // });
 
-
+//Print Tablica (Plate)
+Route::get('/it/plate/{application}/pdf', [PrintPlate::class, 'printPlatePdf'])->name('pdf.plate.print');
 
 // PDF
 Route::get('it/application/{application}/eo/pdf', [PdfController::class, 'generatePdf'])->name('pdf.apptest');
+
+
+
 //Print Certificate
 
 Route::get('/it/application/{application}/certificate/pdf', [PrintCertificate::class, 'certificatePrintPdf'])->name('print.certificate');
