@@ -14,26 +14,8 @@
             box-sizing: border-box;
         }
 
-        .logo {
-            height: 40px;
-            width: 49%;
-            display: inline-block;
-            vertical-align: top;
-        }
 
-        .top-right {
-            text-align: right;
-            width: 50%;
-            display: inline-block;
-            vertical-align: top;
-        }
 
-        .top-left {
-            text-align: left;
-            width: 50%;
-            display: inline-block;
-            vertical-align: top;
-        }
 
         p {
             color: black;
@@ -43,30 +25,10 @@
             margin-top: 5px;
         }
 
-        .p-text {
-            color: black;
-            font-size: 9pt;
-            padding: 0;
-            margin: 0;
-            margin-top: 5px;
-        }
-
-        .table-text-small {
-            color: black;
-            font-size: 7pt;
-            padding: 0;
-            margin: 0;
-            margin-top: 2px;
-        }
-
         .font-bold {
             font-weight: bold;
         }
 
-
-        .w-20 {
-            width: 20%;
-        }
 
         .w-25 {
             width: 25%;
@@ -86,15 +48,6 @@
             border: black solid 1px;
         }
 
-        .text-left {
-            text-align: left;
-        }
-
-
-
-        .text-right {
-            text-align: right;
-        }
 
 
         .page-break {
@@ -103,31 +56,19 @@
 
 
 
-        .image-inspection-logo {
+        /* .image-inspection-logo {
             background-image: url('inspekcija_logo.jpg');
             background-position: center;
             background-repeat: no-repeat;
             background-size: contain;
             height: 100px;
             width: 100%
-        }
+        } */
 
         .uppercase {
             text-transform: uppercase;
         }
 
-        .float-left {
-            float: left;
-        }
-
-        .float-right {
-            float: right;
-        }
-
-
-        .w-50p {
-            width: 50px;
-        }
 
         .h-700 {
             height: 700px;
@@ -216,7 +157,9 @@
 <body>
     <div class="w-100 border h-700 relative">
         <div class="w-25 border h-150 d-inline absolute ">
-            <img class="image center-image" src="https://www.amug.com/wp-content/uploads/2016/09/you-logo-here.png" alt="SLIKA">
+            {{-- <img class="image center-image" src="https://www.amug.com/wp-content/uploads/2016/09/you-logo-here.png" alt="SLIKA"> --}}
+            <img class="image center-image" src="{{ public_path('logo/inspekcija_logo.jpg') }}" alt="SLIKA">
+
         </div>
         <div class="w-75 border h-150 d-inline absolute ml-25 container">
             <div class="content">
