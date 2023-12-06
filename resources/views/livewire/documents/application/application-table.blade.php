@@ -49,33 +49,33 @@
             </thead>
             <tbody class="bg-white divide-y divide-gray-300 text-left">
                 @foreach ($applications as $application)
-                    <tr class="whitespace-wrap">
-                        <td class="px-2 py-1 text-xs text-gray-800 ">
-                            {{ $application->app_date }}
+                    <tr class="whitespace-wrap hover:bg-gray-100">
+                        <td class="px-2 py-1 text-sm text-gray-800 ">
+                            {{ date('d.m.Y', strtotime($application->app_date)) }}
                         </td>
                         <td class="px-2 py-1">
-                            <div class="text-xs text-gray-900 font-bold">
+                            <div class="text-sm text-gray-900 font-bold">
                                 {{ $application->app_number }}
                             </div>
                         </td>
                         <td class="px-2 py-1">
-                            <div class="text-xs text-gray-900">
+                            <div class="text-sm  uppercase font-bold text-sky-700">
                                 {{ $application->customer->customer_name }}
                             </div>
                         </td>
                         <td class="px-2 py-1">
-                            <div class="text-xs text-gray-900">
+                            <div class="text-sm text-gray-900">
                                 {{ optional($application->category)->category_name }}
                             </div>
                         </td>
                         <td class="px-2 py-1">
-                            <div class="text-xs text-gray-900">
+                            <div class="text-sm text-red-700 font-bold uppercase">
                                 {{ $application->vin_number }}
                             </div>
                         </td>
 
                         <td class="px-2 py-1">
-                            <span class="text-xs text-green-700 font-bold">
+                            <span class="text-xs text-green-700 ">
                                 {{ $application->note }}
                             </span>
                         </td>

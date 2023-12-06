@@ -81,7 +81,10 @@
             <thead class="bg-sky-100">
                 <tr>
                     <th class="px-2 py-2 text-xs text-gray-800">
-                        Датум
+                        Датум на барање
+                    </th>
+                    <th class="px-2 py-2 text-xs text-gray-800">
+                        Датум на потврда
                     </th>
                     <th class="px-2 py-2 text-xs text-gray-800">
                         Деловоден број
@@ -122,12 +125,15 @@
             </thead>
             <tbody class="bg-white divide-y divide-gray-300 text-left">
                 @foreach ($userApplications as $userApplication)
-                    <tr class="whitespace-wrap">
+                    <tr class="whitespace-wrap hover:bg-gray-100">
                         <td class="px-2 py-1 text-xs text-gray-800 ">
-                            {{ date('d-m-Y', strtotime($userApplication->app_date)) }}
+                            {{ date('d.m.Y', strtotime($userApplication->app_date)) }}
+                        </td>
+                        <td class="px-2 py-1 text-xs text-gray-800 ">
+                            {{ date('d.m.Y', strtotime($userApplication->cert_date)) }}
                         </td>
                         <td class="px-2 py-1">
-                            <div class="text-xs text-gray-900 font-bold">
+                            <div class="text-sm text-gray-900 font-bold">
                                 {{ $userApplication->app_number }}
                             </div>
                         </td>
@@ -199,9 +205,9 @@
                         </td>
                         <td class="px-2 py-1">
                             @if ($userApplication->has_certificate == null || $userApplication->has_certificate == 0)
-                                <span class="text-red-600">Нема потврда</span>
+                                <span class="text-red-600 text-xs">Нема потврда</span>
                             @else
-                            <span class="text-green-600">Потврдата е изработена</span>
+                            <span class="text-green-600 text-xs">Потврдата е изработена</span>
                             @endif
                         </td>
 

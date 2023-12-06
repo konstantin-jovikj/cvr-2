@@ -22,6 +22,14 @@ class ApplicationTable extends Component
             $query->where('local_department_id', $localDeptId);
         })->with('user', 'category')->orderBy('created_at', 'desc')->paginate(10);
 
+        // $applications = Application::whereHas('user', function ($query) use ($localDeptId) {
+        //     $query->where('local_department_id', $localDeptId);
+        // })
+        // ->with('user', 'category')
+        // ->select('id', 'app_date', 'app_number', 'customer_id', 'category_id', 'note', 'has_certificate', 'created_at', 'vin_number')
+        // ->orderBy('created_at', 'desc')
+        // ->paginate(10);
+
         $applications->loadMissing('category');
 
         // dd($applications);
