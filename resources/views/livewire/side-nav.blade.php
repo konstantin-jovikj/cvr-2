@@ -3,7 +3,6 @@
     <div class="text-gray-100 text-xl">
         <div class="p-2.5 mt-1 flex items-center">
             <x-application-logo class="block h-9 w-auto fill-current text-gray-800" />
-            {{-- <h1 class="font-bold text-gray-200 text-[10px] ml-2 uppercase">Централен Регистар на Возила</h1> --}}
         </div>
         <div class="my-2 bg-gray-600 h-[1px]"></div>
     </div>
