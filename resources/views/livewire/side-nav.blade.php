@@ -1,12 +1,15 @@
-<div class="sidebar  top-0 bottom-0 lg:left-0 p-2 w-[300px]  text-center bg-gray-900">
+<div class="sidebar  top-0 bottom-0 lg:left-0 p-2 md:min-w-[230px]  text-center bg-gray-900">
     {{-- LOGO --}}
     <div class="text-gray-100 text-xl">
         <div class="p-2.5 mt-1 flex items-center">
             <x-application-logo class="block h-9 w-auto fill-current text-gray-800" />
-            <h1 class="font-bold text-gray-200 text-[18px] ml-3 uppercase">Централен Регистар на Возила</h1>
+            {{-- <h1 class="font-bold text-gray-200 text-[10px] ml-2 uppercase">Централен Регистар на Возила</h1> --}}
         </div>
         <div class="my-2 bg-gray-600 h-[1px]"></div>
     </div>
+
+
+
 
 
     <div class="py-1 mt-1 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-sky-600 text-white">
@@ -48,7 +51,7 @@
 
         {{-- OSNOVNI PODATOCI --}}
 
-        <div class="py-1 my-1 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-blue-600 text-white"
+        <div class="py-1 my-1 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-sky-600 text-white"
             onclick="dropdownPodatoci()">
             <div class="flex justify-between w-full items-center">
                 <span class="text-[13px] ml-4 text-gray-200 font-bold">Основни Податоци</span>
@@ -72,31 +75,7 @@
                 class="cursor-pointer p-2 hover:bg-sky-600 rounded-md mt-1 bg-gray-800 block">Марка</a>
             <a wire:navigate href="{{ route('types.all') }}"
                 class="cursor-pointer p-2 hover:bg-sky-600 rounded-md mt-1 bg-gray-800 block">Тип</a>
-            {{-- <a wire:navigate href="{{ route('categories.all') }}"
-                class="cursor-pointer p-2 hover:bg-sky-600 rounded-md mt-1 bg-gray-800 block">Категории</a>
-            <a wire:navigate href="{{ route('shapes.all') }}"
-                class="cursor-pointer p-2 hover:bg-sky-600 rounded-md mt-1 bg-gray-800 block">Облик на Каросерија</a>
-            <a wire:navigate href="{{ route('fuel.all') }}"
-                class="cursor-pointer p-2 hover:bg-sky-600 rounded-md mt-1 bg-gray-800 block">Гориво</a>
-            <a wire:navigate href="{{ route('colors.all') }}"
-                class="cursor-pointer p-2 hover:bg-sky-600 rounded-md mt-1 bg-gray-800 block">Боја</a>
-            <a wire:navigate href="{{ route('modifications.all') }}"
-                class="cursor-pointer p-2 hover:bg-sky-600 rounded-md mt-1 bg-gray-800 block">Видови на
-                Преправки/Поправки</a>
-            <a wire:navigate href="#"
-                class="cursor-pointer p-2 hover:bg-sky-600 rounded-md mt-1 bg-gray-800 block">Наод - Табели</a>
-            <a wire:navigate href="{{ route('notes.all') }}"
-                class="cursor-pointer p-2 hover:bg-sky-600 rounded-md mt-1 bg-gray-800 block">Текст во Забелешка</a>
-            <a wire:navigate href="{{ route('pictures.all') }}"
-                class="cursor-pointer p-2 hover:bg-sky-600 rounded-md mt-1 bg-gray-800 block">Прилог фотографии</a>
-            <a wire:navigate href="{{ route('relateddocs.all') }}"
-                class="cursor-pointer p-2 hover:bg-sky-600 rounded-md mt-1 bg-gray-800 block">Прилог Документи</a>
-            <a wire:navigate href="{{ route('applicationtype.all') }}"
-                class="cursor-pointer p-2 hover:bg-sky-600 rounded-md mt-1 bg-gray-800 block">Типови на Барања</a>
-            <a wire:navigate href="{{ route('application_photos') }}"
-                class="cursor-pointer p-2 hover:bg-sky-600 rounded-md mt-1 bg-gray-800 block">Барања - Фотографии</a>
-            <a wire:navigate href="{{ route('application_docs') }}"
-                class="cursor-pointer p-2 hover:bg-sky-600 rounded-md mt-1 bg-gray-800 block">Барања - Документи</a> --}}
+
         </div>
 
         <div class="my-2 bg-gray-600 h-[1px]"></div>

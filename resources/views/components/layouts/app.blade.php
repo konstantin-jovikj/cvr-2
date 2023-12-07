@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>{{ $title ?? 'Page Title' }}</title>
+    <title>{{ $title ?? 'CVR' }}</title>
     {{-- <script src="https://cdn.tailwindcss.com"></script> --}}
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @livewireStyles
@@ -16,6 +16,7 @@
         <livewire:layout.navigation />
         <div class="flex flex-col md:flex-row min-h-screen ">
             <livewire:side-nav />
+            {{-- <livewire:super-admin.super-admin-sidenav /> --}}
             <div class="flex w-full">
                 {{ $slot }}
             </div>

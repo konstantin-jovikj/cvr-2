@@ -18,15 +18,24 @@ class RoleSeeder extends Seeder
         ]);
 
         Role::create([
-            'role_name' => 'Admin'
+            'role_name' => 'Администратор'
         ]);
 
         Role::create([
-            'role_name' => 'User'
+            'role_name' => 'Корисник со Високи овластувања'
         ]);
 
         Role::create([
-            'role_name' => 'Guest'
+            'role_name' => 'Корисник со Средни овластувања'
         ]);
+
+        Role::create([
+            'role_name' => 'Корисник со Основни овластувања'
+        ]);
+
+        Role::create([
+            'role_name' => 'Контролор'
+        ]);
+
     }
 }

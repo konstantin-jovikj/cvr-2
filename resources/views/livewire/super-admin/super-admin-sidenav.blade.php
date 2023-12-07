@@ -1,4 +1,4 @@
-<div class="sidebar  top-0 bottom-0 lg:left-0 p-2 w-[300px] overflow-y-auto text-center bg-gray-900">
+<div class="sidebar  top-0 bottom-0 lg:left-0 p-2 md:min-w-[230px]  text-center bg-gray-900">
     {{-- LOGO --}}
     <div class="text-gray-100 text-xl">
         <div class="p-2.5 mt-1 flex items-center">
@@ -29,7 +29,7 @@
 
     {{-- Sektori --}}
 
-    <div class="py-1 my-1 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-blue-600 text-white"
+    <div class="py-1 my-1 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-sky-600 text-white"
         onclick="dropdownUser()">
         <div class="flex justify-between w-full items-center">
             <span class="text-[13px] ml-4 text-gray-200 font-bold">Сектори</span>
