@@ -12,7 +12,7 @@ class FakeCustomersSeeder extends Seeder
      */
     public function run(): void
     {
-        \App\Models\Customer::factory(1000)->create();
+        \App\Models\Customer::factory(100)->create();
     }
 }
 
