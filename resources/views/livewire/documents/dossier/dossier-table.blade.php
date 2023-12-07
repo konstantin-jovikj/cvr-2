@@ -194,10 +194,8 @@
 
 
                         <td
-                            class="px-2 py-1 text-sm text-center
-                        @if ($userApplication->has_certificate == null || $userApplication->has_certificate == 0) bg-red-100
-                        @else
-                            bg-green-100 @endif">
+                            class="px-2 py-1 text-sm text-center {{$userApplication->has_certificate == null || $userApplication->has_certificate == 0 ? 'bg-red-100' : 'bg-green-100'}} ">
+
                             @if ($userApplication->has_certificate == null || $userApplication->has_certificate == 0)
                                 <span class="text-red-800 font-bold">Нема потврда</span>
                             @else

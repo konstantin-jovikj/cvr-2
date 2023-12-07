@@ -80,10 +80,7 @@
                             </span>
                         </td>
                         <td
-                            class="px-2 py-1 text-sm text-center
-                        @if ($application->has_certificate == null || $application->has_certificate == 0) bg-red-100
-                        @else
-                            bg-green-100 @endif">
+                            class="px-2 py-1 text-sm text-center {{$application->has_certificate == null || $application->has_certificate == 0 ? 'bg-red-100' : 'bg-green-100' }}">
                             @if ($application->has_certificate == null || $application->has_certificate == 0)
                                 <span class="text-red-800 font-bold">Нема потврда</span>
                             @else
