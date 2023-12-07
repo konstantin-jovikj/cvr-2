@@ -36,6 +36,7 @@
                             {{ $role->role_name }}
                         </th>
                         <td class="px-6 py-1 text-sm text-gray-800">
+                            <div class="grid grid-cols-3 gap-1">
                             @foreach ($permissions as $permision)
                                 <div class="flex items-center">
                                     <input wire:click="togglePermission({{ $role->id }}, {{ $permision->id }})"
@@ -48,6 +49,7 @@
                                         class="ml-2 text-sm font-medium text-gray-900 ">{{ $permision->permision_name }}</label>
                                 </div>
                             @endforeach
+                            </div>
                         </td>
                         <td class="px-6 py-4">
                             <button  wire:click='deleteRole({{$role->id}})' type="button"
