@@ -1,13 +1,18 @@
 <div class="w-full mx-auto">
-    <div class="bg-sky-100 container flex  mx-auto my-6 p-6 justify-between">
+    <div class="bg-sky-100 container flex flex-col  mx-auto my-6 p-6 justify-between md:flex-row  items-center">
 
-        <div class="">
+        <div class="border">
             <h2 class="text-xl uppercase font-bold text-sky-700">Сопственици</h2>
+        </div>
+
+        <div class="my-4 p-4 border-2 border-sky-200 rounded-xl">
+            <x-text-input wire:model.live.debounce.300ms="search" id="search" class="block mt-1 w-full rounded-full" type="text" name="search" placeholder="Барај Сопственик" />
+                <span class="text-xs px-2 text-sky-700 font-bold font-sans">Автоматски пребарува по Име и презиме, ЕМБГ, ЕМБС и Број на лична карта</span>
         </div>
         <div>
             <livewire:alerts.alert-message />
         </div>
-        <div>
+        <div class="">
             <a href="{{ route('customer.add') }}" wire:navigate
                 class="bg-sky-800 px-4 py-2 rounded-md text-white text-sm hover:bg-sky-400 hover:text-sky-900 transition-all">Додај
                 Нов Сопственик</a>
