@@ -51,22 +51,22 @@
             <tbody class="bg-white divide-y divide-gray-300 text-left  ">
                 @foreach ($customers as $customer)
                     <tr class="divide-x">
-                        <td class="px-2 py-1 text-xs text-gray-800 ">
+                        <td class="px-2 py-1 text-sm text-gray-800 font-bold">
                             {{ $customer->customer_name }}
                         </td>
-                        <td class="px-2 py-1 text-xs text-gray-800 ">
+                        <td class="px-2 py-1 text-sm text-red-800 font-bold">
                             {{ $customer->embg }}
                         </td>
-                        <td class="px-2 py-1 text-xs text-gray-800 ">
+                        <td class="px-2 py-1 text-sm text-sky-800 font-bold">
                             {{ $customer->embs }}
                         </td>
-                        <td class="px-2 py-1 text-xs text-gray-800 ">
+                        <td class="px-2 py-1 text-sm text-teal-800 font-bold">
                             {{ $customer->id_number }}
                         </td>
                         <td class="px-2 py-1 text-xs text-gray-800 ">
-                            {{ $customer->address }}
+                            {{ $customer->address }}, {{$customer->city->zip}}->{{$customer->city->city_name}}
                         </td>
-                        <td class="px-2 py-1 text-xs text-gray-800 ">
+                        <td class="px-2 py-1 text-sm text-orange-700 font-bold">
                             {{ $customer->phone }}
                         </td>
                         <td class="px-2 py-1 text-xs text-gray-800 ">
@@ -79,7 +79,7 @@
                         </td>
 
                         <td class="px-1 py-1 text-center flex gap-1">
-                            <a wire:navigate href="{{ route('user.dossier', $customer->id) }}"
+                            {{-- <a wire:navigate href="{{ route('user.dossier', $customer->id) }}"
                                 class="px-3 py-1 text-xs text-white bg-sky-600 hover:bg-sky-800 rounded-full">Досие</a>
 
                             <a wire:navigate href="{{ route('application.add', $customer->id) }}"
@@ -90,7 +90,45 @@
 
                             <button wire:click='deleteCustomer({{ $customer->id }})'
                                 wire:confirm="Дали сте сигурени дека сакате да го избришете Сопственикот?"
-                                class="px-3 py-1 text-xs text-white bg-red-600 hover:bg-red-800 rounded-full">Избриши</button>
+                                class="px-3 py-1 text-xs text-white bg-red-600 hover:bg-red-800 rounded-full">Избриши</button> --}}
+
+
+                                <div class="hidden sm:flex sm:items-center sm:ml-6">
+                                    <x-dropdown align="right" width="48">
+                                        <x-slot name="trigger">
+                                            <button
+                                                class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
+                                                <div x-data="{ name: '{{ __('Одбери Опции') }}' }" x-text="name"
+                                                    x-on:profile-updated.window="name = $event.detail.name"></div>
+
+                                                <div class="ml-1">
+                                                    <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg"
+                                                        viewBox="0 0 20 20">
+                                                        <path fill-rule="evenodd"
+                                                            d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                                            clip-rule="evenodd" />
+                                                    </svg>
+                                                </div>
+                                            </button>
+                                        </x-slot>
+
+                                        <x-slot name="content">
+                                            <x-dropdown-link :href="route('user.dossier', $customer->id)" wire:navigate>
+                                                {{ __('Досие') }}
+                                            </x-dropdown-link>
+
+                                            <x-dropdown-link :href="route('application.add', $customer->id)" wire:navigate>
+                                                {{ __('Барање') }}
+                                            </x-dropdown-link>
+                                            <x-dropdown-link :href="route('customer.edit', $customer->id)" wire:navigate>
+                                                {{ __('Измени') }}
+                                            </x-dropdown-link>
+                                            <button wire:click='deleteCustomer({{ $customer->id }})'
+                                                wire:confirm="Дали сте сигурени дека сакате да го избришете Сопственикот?"
+                                                class="block w-full px-4 py-2 text-left text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out">Избриши</button>
+                                        </x-slot>
+                                    </x-dropdown>
+                                </div>
                         </td>
                     </tr>
                 @endforeach

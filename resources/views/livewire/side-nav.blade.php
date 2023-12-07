@@ -1,4 +1,4 @@
-<div class="sidebar  top-0 bottom-0 lg:left-0 p-2 md:min-w-[230px]  text-center bg-gray-900">
+<div class="sidebar  top-0 bottom-0 lg:left-0 p-2 md:min-w-[230px]  text-center bg-gray-900 ">
     {{-- LOGO --}}
     <div class="text-gray-100 text-xl">
         <div class="p-2.5 mt-1 flex items-center">
@@ -48,9 +48,13 @@
             <a wire:navigate class="text-[13px] ml-4 text-gray-200 font-bold" href="{{ route('users') }}">Корисници</a>
         </div>
         <div class="my-2 bg-gray-600 h-[1px]"></div>
+    @endif
 
-        {{-- OSNOVNI PODATOCI --}}
-
+    {{-- OSNOVNI PODATOCI --}}
+    @php
+        $activeRole = auth()->user()->role->role_name;
+    @endphp
+    @if (Gate::allows('погледни-ресурс', $activeRole))
         <div class="py-1 my-1 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-sky-600 text-white"
             onclick="dropdownPodatoci()">
             <div class="flex justify-between w-full items-center">
@@ -80,6 +84,5 @@
 
         <div class="my-2 bg-gray-600 h-[1px]"></div>
     @endif
-
 
 </div>

@@ -51,5 +51,11 @@ class DatabaseSeeder extends Seeder
         $this->call([ModifiedOrRepairedSeeder::class]);
         $this->call([CorrectionSeeder::class]);
         $this->call([LegalisationSeeder::class]);
+
+
+            //ONLY FOR TESTING
+        $this->call([FakeCustomersSeeder::class]);
+
+          // \App\Models\User::factory(10)->create();
     }
 }

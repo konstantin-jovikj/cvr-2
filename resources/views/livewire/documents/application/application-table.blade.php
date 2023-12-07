@@ -39,9 +39,9 @@
                     <th class="px-2 py-2 text-xs text-gray-800">
                         Статус
                     </th>
-                    <th>
+                    {{-- <th>
 
-                    </th>
+                    </th> --}}
                     <th class="px-2 py-2 text-xs text-gray-800">
                         Опции
                     </th>
@@ -49,7 +49,7 @@
             </thead>
             <tbody class="bg-white divide-y divide-gray-300 text-left">
                 @foreach ($applications as $application)
-                    <tr class="whitespace-wrap hover:bg-gray-100">
+                    <tr class="whitespace-wrap hover:bg-gray-100 divide-x">
                         <td class="px-2 py-1 text-sm text-gray-800 ">
                             {{ date('d.m.Y', strtotime($application->app_date)) }}
                         </td>
@@ -79,18 +79,15 @@
                                 {{ $application->note }}
                             </span>
                         </td>
-                        <td class="px-2 py-1">
+                        <td
+                            class="px-2 py-1 text-sm text-center
+                        @if ($application->has_certificate == null || $application->has_certificate == 0) bg-red-100
+                        @else
+                            bg-green-100 @endif">
                             @if ($application->has_certificate == null || $application->has_certificate == 0)
-                                <div class="bg-red-600 h-[12px] w-[12px] rounded-full shadow-md"></div>
+                                <span class="text-red-800 font-bold">Нема потврда</span>
                             @else
-                                <div class="bg-green-800 h-[12px] w-[12px] rounded-full shadow-md"></div>
-                            @endif
-                        </td>
-                        <td class="px-2 py-1">
-                            @if ($application->has_certificate == null || $application->has_certificate == 0)
-                                <span class="text-red-600">Нема потврда</span>
-                            @else
-                                <span class="text-green-600">Потврдата е изработена</span>
+                                <span class="text-green-800 font-bold">Потврдата е изработена</span>
                             @endif
                         </td>
 

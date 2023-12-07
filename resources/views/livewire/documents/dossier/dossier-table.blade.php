@@ -115,9 +115,6 @@
                     <th class="px-2 py-2 text-xs text-gray-800">
                         Статус
                     </th>
-                    <th>
-
-                    </th>
                     <th class="px-2 py-2 text-xs text-gray-800">
                         Опции
                     </th>
@@ -196,18 +193,15 @@
                         </td>
 
 
-                        <td class="px-2 py-1">
+                        <td
+                            class="px-2 py-1 text-sm text-center
+                        @if ($userApplication->has_certificate == null || $userApplication->has_certificate == 0) bg-red-100
+                        @else
+                            bg-green-100 @endif">
                             @if ($userApplication->has_certificate == null || $userApplication->has_certificate == 0)
-                                <div class="bg-red-600 h-[12px] w-[12px] rounded-full shadow-md"></div>
+                                <span class="text-red-800 font-bold">Нема потврда</span>
                             @else
-                                <div class="bg-green-800 h-[12px] w-[12px] rounded-full shadow-md"></div>
-                            @endif
-                        </td>
-                        <td class="px-2 py-1">
-                            @if ($userApplication->has_certificate == null || $userApplication->has_certificate == 0)
-                                <span class="text-red-600 text-xs">Нема потврда</span>
-                            @else
-                                <span class="text-green-600 text-xs">Потврдата е изработена</span>
+                                <span class="text-green-800 font-bold">Потврдата е изработена</span>
                             @endif
                         </td>
 

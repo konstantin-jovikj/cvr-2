@@ -15,9 +15,9 @@
     </div>
     <div class="container flex justify-center mx-auto">
 
-        <table class="w-full divide-y divide-gray-300 shadow ">
+        <table class="w-full divide-y divide-gray-300 shadow">
             <thead class="bg-sky-100">
-                <tr>
+                <tr class="divide-x">
                     <th class="px-6 py-2 text-xs text-gray-800">
                         Име и Презиме
                     </th>
@@ -38,7 +38,7 @@
             </thead>
             <tbody class="bg-white divide-y divide-gray-300 text-left">
                 @foreach ($mediators as $mediator)
-                    <tr class="whitespace-wrap">
+                    <tr class="whitespace-wrap divide-x">
                         <td class="px-6 py-1 text-sm text-gray-800 ">
                             {{ $mediator->mediator_name }}
                         </td>
