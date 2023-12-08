@@ -14,12 +14,12 @@ return new class extends Migration
         Schema::create('customers', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('local_department_id');
-            $table->unsignedBigInteger('customer_type_id')->default(1);
+            $table->unsignedBigInteger('customer_type_id')->default(1)->nullable(); //remove default ,add nullable
             $table->unsignedBigInteger('city_id');
             $table->string('customer_name')->nullable();
-            $table->string('embg')->unique()->nullable();
-            $table->string('embs')->unique()->nullable();
-            $table->string('id_number')->unique()->nullable();
+            $table->string('embg')->nullable(); //add unique before nullable
+            $table->string('embs')->nullable(); //add unique before nullable
+            $table->string('id_number')->nullable(); //add unique before nullable
             $table->string('address')->nullable();
             $table->string('phone')->nullable();
             $table->decimal('discount', 5, 2)->default(0.00);
