@@ -55,6 +55,7 @@ class DatabaseSeeder extends Seeder
 
             //ONLY FOR TESTING
         $this->call([FakeCustomersSeeder::class]);
+        // $this->call([FakeApplicationSeeder::class]);
 
           // \App\Models\User::factory(10)->create();
     }
