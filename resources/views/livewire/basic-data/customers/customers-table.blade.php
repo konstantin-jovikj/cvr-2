@@ -1,5 +1,5 @@
 <div class="w-full mx-auto">
-    <div class="bg-sky-100 container flex flex-col  mx-auto my-6 p-6 justify-between md:flex-row  items-center">
+    <div class="bg-sky-100 container flex flex-col  mx-auto my-6 p-6 justify-between md:flex-row  items-center shadow-xl">
 
         <div class="border">
             <h2 class="text-xl uppercase font-bold text-sky-700">Сопственици</h2>
@@ -18,7 +18,7 @@
                 Нов Сопственик</a>
         </div>
     </div>
-    <div class="container flex justify-center mx-auto">
+    <div class="container flex justify-center mx-auto shadow-xl">
 
         <table class="w-full divide-y divide-gray-300 shadow ">
             <thead class="bg-sky-100">

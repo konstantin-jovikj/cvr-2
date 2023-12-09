@@ -1,5 +1,5 @@
 <div class="w-full mx-auto">
-    <div class="bg-sky-100 container flex flex-col  mx-auto my-6 p-6 justify-between md:flex-row  items-center shadow-xl">
+    <div class="bg-sky-100 container flex flex-col  mx-auto my-2 px-6 justify-between md:flex-row  items-center shadow-xl">
 
         <div class="">
             <h2 class="text-xl uppercase font-bold text-sky-700">Барања</h2>
@@ -14,24 +14,25 @@
 
     </div>
 
-    <div class="bg-sky-100 container flex flex-col  mx-auto my-6 p-6 justify-center md:flex-row  items-center gap-8 shadow-xl">
-        <div class="">
-            <h2 class="text-xl uppercase font-bold text-sky-700">Филтер</h2>
+    <div class="bg-zinc-300 container flex flex-col  mx-auto my-6 px-6 pt-1 pb-3 justify-center md:flex-row  items-center gap-8 shadow-xl">
+        <div class="pt-6">
+            <h2 class="text-sm font-bold uppercase text-gray-700">Филтрирај по Датум: </h2>
         </div>
 
         <div class="w-1/4">
-            <x-input-label for="startDate" :value="__('Почетен Датум')" />
+            <x-input-label for="startDate" :value="__('Почетен Датум')" class="text-center"/>
             <input wire:model.live='startDate' type="date" name="startDate" id="startDate"
                 class="block mt-1 w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
-                <x-input-error :messages="$errors->get('startDate')" class="mt-2" />
         </div>
 
+
         <div class="w-1/4">
-            <x-input-label for="endDate" :value="__('Краен Датум')" />
+            <x-input-label for="endDate" :value="__('Краен Датум')" class="text-center"/>
             <input wire:model.live='endDate' type="date" name="endDate" id="endDate"
                 class="block mt-1 w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
-                <x-input-error :messages="$errors->get('endDate')" class="mt-2" />
         </div>
+
+
     </div>
     <div class="container flex justify-center mx-auto shadow-xl">
 

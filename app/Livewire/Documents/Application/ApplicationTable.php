@@ -49,4 +49,5 @@ class ApplicationTable extends Component
 
         return view('livewire.documents.application.application-table', compact('applications'));
     }
+
 }
