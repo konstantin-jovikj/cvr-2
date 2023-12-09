@@ -53,7 +53,7 @@ return new class extends Migration
 
             // Certificate fields
 
-            $table->dateTime('cert_date')->default(now())->nullable();
+            $table->dateTime('cert_date')->nullable();
             $table->string('variant')->nullable();
             $table->string('edition')->nullable();
             $table->unsignedInteger('selected_production_year')->nullable()->digits(4);

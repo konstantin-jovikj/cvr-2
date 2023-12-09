@@ -127,7 +127,11 @@
                             {{ date('d.m.Y', strtotime($userApplication->app_date)) }}
                         </td>
                         <td class="px-2 py-1 text-xs text-gray-800 ">
-                            {{ date('d.m.Y', strtotime($userApplication->cert_date)) }}
+                            @if ($userApplication->cert_date != null)
+                                {{ date('d.m.Y', strtotime($userApplication->cert_date)) }}
+                            @else
+                                /
+                            @endif
                         </td>
                         <td class="px-2 py-1">
                             <div class="text-sm text-gray-900 font-bold">

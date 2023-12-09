@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Documents\Application;
 
+use Carbon\Carbon;
 use App\Models\User;
 use Livewire\Component;
 use App\Models\Application;
@@ -13,28 +14,39 @@ class ApplicationTable extends Component
 
     use WithPagination;
 
+    public $search = '';
+    public $startDate = '';
+    public $endDate = '';
 
     public function render()
     {
         $localDeptId = auth()->user()->local_department_id;
+        $searchTerm = '%' . trim($this->search) . '%';
 
         $applications = Application::whereHas('user', function ($query) use ($localDeptId) {
             $query->where('local_department_id', $localDeptId);
-        })->with('user', 'category')->orderBy('created_at', 'desc')->paginate(10);
+        })
+            ->when($searchTerm, function ($query) use ($searchTerm) {
+                $query->where(function ($query) use ($searchTerm) {
+                    $query->where('app_number', 'LIKE', $searchTerm)
+                        ->orWhere('vin_number', 'LIKE', $searchTerm)
+                        ->orWhereHas('customer', function ($query) use ($searchTerm) {
+                            $query->where('customer_name', 'LIKE', $searchTerm);
+                        });
+                });
+            })
+            ->when($this->startDate && $this->endDate, function ($query) {
+                return $query->whereBetween('app_date', [
+                    Carbon::parse($this->startDate)->startOfDay(),
+                    Carbon::parse($this->endDate)->endOfDay(),
+                ]);
+            })
+            ->with('user', 'category', 'customer')
+            ->orderBy('app_date', 'desc')
+            ->paginate(10);
 
-        // $applications = Application::whereHas('user', function ($query) use ($localDeptId) {
-        //     $query->where('local_department_id', $localDeptId);
-        // })
-        // ->with('user', 'category')
-        // ->select('id', 'app_date', 'app_number', 'customer_id', 'category_id', 'note', 'has_certificate', 'created_at', 'vin_number')
-        // ->orderBy('created_at', 'desc')
-        // ->paginate(10);
 
-        $applications->loadMissing('category');
-
-        // dd($applications);
 
         return view('livewire.documents.application.application-table', compact('applications'));
     }
-
 }

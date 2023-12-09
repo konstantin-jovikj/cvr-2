@@ -1,19 +1,39 @@
 <div class="w-full mx-auto">
-    <div class="bg-sky-100 container flex  mx-auto my-6 p-6 justify-between">
+    <div class="bg-sky-100 container flex flex-col  mx-auto my-6 p-6 justify-between md:flex-row  items-center shadow-xl">
 
         <div class="">
             <h2 class="text-xl uppercase font-bold text-sky-700">Барања</h2>
         </div>
+        <div class="my-4 p-4 border-2 border-sky-200 rounded-xl w-1/3">
+            <x-text-input wire:model.live.debounce.300ms="search" id="search" class="block mt-1 w-full rounded-full" type="text" name="search" placeholder="Пребарувај ..." />
+                <span class="text-xs px-2 text-sky-700 font-bold font-sans">Автоматски пребарува по Име и презиме, број на шасина и деловоден број</span>
+        </div>
         <div>
             <livewire:alerts.alert-message />
         </div>
-        {{-- <div>
-            <a href="{{ route('category.add') }}"
-                class="bg-sky-800 px-4 py-2 rounded-md text-white text-sm hover:bg-sky-400 hover:text-sky-900 transition-all">Додај
-                Нова Категорија</a>
-        </div> --}}
+
     </div>
-    <div class="container flex justify-center mx-auto">
+
+    <div class="bg-sky-100 container flex flex-col  mx-auto my-6 p-6 justify-center md:flex-row  items-center gap-8 shadow-xl">
+        <div class="">
+            <h2 class="text-xl uppercase font-bold text-sky-700">Филтер</h2>
+        </div>
+
+        <div class="w-1/4">
+            <x-input-label for="startDate" :value="__('Почетен Датум')" />
+            <input wire:model.live='startDate' type="date" name="startDate" id="startDate"
+                class="block mt-1 w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
+                <x-input-error :messages="$errors->get('startDate')" class="mt-2" />
+        </div>
+
+        <div class="w-1/4">
+            <x-input-label for="endDate" :value="__('Краен Датум')" />
+            <input wire:model.live='endDate' type="date" name="endDate" id="endDate"
+                class="block mt-1 w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
+                <x-input-error :messages="$errors->get('endDate')" class="mt-2" />
+        </div>
+    </div>
+    <div class="container flex justify-center mx-auto shadow-xl">
 
         <table class="w-full divide-y divide-gray-300 shadow ">
             <thead class="bg-sky-100">
