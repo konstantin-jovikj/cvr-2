@@ -42,7 +42,7 @@ class ApplicationTable extends Component
                 ]);
             })
             ->with('user', 'category', 'customer')
-            ->orderBy('app_date', 'desc')
+            ->orderBy('created_at', 'desc')
             ->paginate(10);
 
 
