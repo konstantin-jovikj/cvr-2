@@ -7,6 +7,7 @@
 
     <title>{{ $title ?? 'CVR' }}</title>
     {{-- <script src="https://cdn.tailwindcss.com"></script> --}}
+    <link rel="stylesheet" href="{{asset('custom_css/sidenav.css')}}">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @livewireStyles
 </head>
