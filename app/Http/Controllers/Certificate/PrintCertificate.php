@@ -20,3 +20,23 @@ class PrintCertificate extends Controller
         return $pdf->stream($fileName);
     }
 }
+
+// public function certificatePrintPdf(Application $application)
+// {
+//     $appType = $application->app_type_id;
+//     $appId = $application->id;
+
+//     //sanitize app_number
+
+//     $appNumber = str_replace('/', '_', $application->app_number);
+
+
+//     $pdf = PDF::loadView('pdf.pdf-certificate', compact('application'));
+//     $fileName = 'potvrda_' . $appNumber;
+
+//     $pdfContent = $pdf->output();
+
+//     Storage::put('public/' . $fileName . '.pdf', $pdfContent);
+//     // return $pdf->stream($fileName);
+
+// }
